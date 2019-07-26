@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="15" viewBox="0 0 8 15">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="8" height="15" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="collapse" clip-path="url(#clip-path)">
+    <path id="lineart" d="M5.757,12.945,0,6.473,5.757,0" transform="translate(1.089 1.018)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+</svg>
