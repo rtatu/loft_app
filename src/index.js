@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Sidebar from './component/sidebar'
 
 class App extends React.Component {
     render(){
         return(
-            <h1>Loft App at {process.env.NODE_ENV}</h1>
+            <React.Fragment>
+                <Sidebar />
+            </React.Fragment>
         )
     }
 }

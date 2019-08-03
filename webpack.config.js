@@ -20,7 +20,9 @@ module.exports = {
         filename : 'bundle.js'
     },
     devServer : {
-        port : 3000
+        port : 3000,
+        contentBase : './',
+        hot : true
     },
     module : {
         rules : [
@@ -30,17 +32,27 @@ module.exports = {
                 use : ['babel-loader']
             },
              {
-                 test : /\.css$/,
+                 test : /\.(css|sass|scss)$/,
                  exclude : /node_modules/,
-                 use : ['style-loader', 'css-loader']
-             }
+                 use : ['style-loader', 'css-loader', 'sass-loader']
+             },
+             {
+                test: /\.(png|jpe?g|svg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {},
+                  },
+                ],
+              },
         ]
     },
     plugins : [
         new HtmlWebpackPlugin({
             template : 'public/index.html'
         }),
-        new webpack.DefinePlugin(envKeys)
+        new webpack.DefinePlugin(envKeys),
+        new webpack.HotModuleReplacementPlugin()
     ],
-    target : "electron-main"
+    target : "web"
 };
