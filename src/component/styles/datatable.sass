@@ -1,0 +1,106 @@
+// theme
+$primary-color-hex : #131D4A // rgb -> (19,29,74)
+$secondary-color-hex : #8991A2 // rgb -> (137, 145, 162)
+
+// css-resets
+*
+    margin: 0
+    padding: 0
+
+html,body
+    width: 100%
+    height: 100%
+
+#root
+    width : 100%
+    height: 100%
+
+.datatable
+    border: 1px solid rgba(112,112,112,0.19)
+    margin: 10px
+    height: 100%
+    padding-bottom: 40px
+    overflow-x: auto
+    overflow-y: hidden
+    width: 100%
+    margin: 0 auto
+    box-sizing: border-box
+
+.dthead, .dtbody
+    ul
+        display: flex
+        list-style-type: none
+        user-select: none
+        background: white
+
+        li
+            flex-basis: auto
+            overflow: hidden
+            height: 40px
+            line-height: 40px
+            padding-left: 10px
+            font-family: "Source Sans Pro"
+            font-size: 12px
+            border-bottom: 1px solid rgba(112,112,112,0.19)
+            text-overflow: ellipsis
+
+        &:hover
+            background: #EFF3FE
+
+.dthead
+    ul
+        background: #EFF3FE
+        color: $primary-color-hex
+
+        li
+            font-weight: 500
+            height: 40px
+            line-height: 40px
+            font-size: 13px
+            position: relative
+            z-index: 1
+
+            &::after
+                position: absolute
+                height: 100%
+                content: ''
+                width: 2px
+                background: rgba(112,112,112,0.19)
+                right: 0px
+                top: 0
+                cursor: ew-resize
+
+.dtbody
+    max-height: 100%
+    height: 100%
+    overflow-y: scroll
+    width: 100%
+    overflow-x: hidden
+
+    li
+        background: white
+
+// scrollbars
+
+// customize scrollbar
+.dtbody::-webkit-scrollbar
+    width: 3px
+    height: 3px
+.dtbody::-webkit-scrollbar-track
+    background : white
+.dtbody::-webkit-scrollbar-thumb
+    background : $primary-color-hex
+.dtbody::-webkit-scrollbar-thumb:hover
+    background : $secondary-color-hex
+
+.datatable::-webkit-scrollbar
+    width: 3px
+    height: 3px
+.datatable::-webkit-scrollbar-track
+    background : white
+.datatable::-webkit-scrollbar-thumb
+    background : $primary-color-hex
+.datatable::-webkit-scrollbar-thumb:hover
+    background : $secondary-color-hex
+
+

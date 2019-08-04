@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './component/sidebar'
+import DatatableJSX from './component/data_table'
 
 class App extends React.Component {
     render(){
         return(
             <React.Fragment>
-                <Sidebar />
+                <DatatableJSX />
             </React.Fragment>
         )
     }
