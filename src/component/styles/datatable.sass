@@ -17,14 +17,15 @@ html,body
 
 .datatable
     border: 1px solid rgba(112,112,112,0.19)
-    margin: 10px
     height: 100%
-    padding-bottom: 40px
+    padding-bottom: 52px
     overflow-x: auto
     overflow-y: hidden
-    width: 100%
-    margin: 0 auto
+    width: 80%
+    margin: 0px auto
     box-sizing: border-box
+    box-shadow: 0px -1px 2px -1px rgba(0,0,0,0.12)
+
 
 .dthead, .dtbody
     ul
@@ -36,39 +37,45 @@ html,body
         li
             flex-basis: auto
             overflow: hidden
-            height: 40px
-            line-height: 40px
-            padding-left: 10px
+            height: 52px
+            line-height: 52px
+            box-sizing: border-box
+            padding-left: 16px
+            padding-right: 5px
             font-family: "Source Sans Pro"
-            font-size: 12px
+            font-size: 14px
             border-bottom: 1px solid rgba(112,112,112,0.19)
+            // border-right: 1px solid rgba(112,112,112,0.19)
+
             text-overflow: ellipsis
 
-        &:hover
-            background: #EFF3FE
+        li:first-child
+            padding-right: 16px
+            // border-right: 1px solid rgba(112,112,112,0.19)
+
+
+        // &:hover
+        //     background: #EFF3FE
 
 .dthead
     ul
-        background: #EFF3FE
+        background: white
+        box-shadow: 0px -1px 10px 0px rgba(0,0,0,0.12)
         color: $primary-color-hex
+        z-index: 2
+        position: relative
 
         li
             font-weight: 500
-            height: 40px
-            line-height: 40px
-            font-size: 13px
+            height: 56px
+            line-height: 56px
+            font-size: 14px
             position: relative
             z-index: 1
+            box-sizing: border-box
+            cursor: pointer
 
-            &::after
-                position: absolute
-                height: 100%
-                content: ''
-                width: 2px
-                background: rgba(112,112,112,0.19)
-                right: 0px
-                top: 0
-                cursor: ew-resize
+
 
 .dtbody
     max-height: 100%
@@ -79,6 +86,21 @@ html,body
 
     li
         background: white
+
+
+
+// resize-line
+
+.resize-line
+    width: 5px
+    height: 100%
+    position: absolute
+    background: rgba(0,0,0,0.14)
+    right: 0
+    cursor: ew-resize
+    user-select: none
+
+
 
 // scrollbars
 

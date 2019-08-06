@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DatatableJSX from './component/data_table'
+import GeneralForm from './component/form.js';
+
 
 class App extends React.Component {
     render(){
         return(
             <React.Fragment>
-                <DatatableJSX />
+                <GeneralForm />
             </React.Fragment>
         )
     }
