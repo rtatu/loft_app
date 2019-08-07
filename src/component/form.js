@@ -160,7 +160,7 @@ const GeneralForm = () =>
             </div>
             {
                 keys.map((item, index) =>
-                    <div key={index} className="form-section">
+                    <div key={index} className={(index == 0) ? "form-section" : "form-section hide"}>
                         {
                             data[item].map( (nested_item, nested_index) =>
                             <div key={nested_index} className="field">
