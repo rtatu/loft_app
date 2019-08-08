@@ -93,6 +93,24 @@ html,body
             border-top: 1px solid rgba(230,230,230,0.39)
             border-bottom: 1px solid rgba(230,230,230,0.39)
             border-right: 1px solid rgba(230,230,230,0.39)
+        
+        &:focus + .errorMessage
+            display: none
+
+        &:focus + .select-down
+            background: white
+            transform: rotate(180deg)
+            transform-origin: center center
+
+    .errorMessage
+        position: absolute
+        font-size: 12px
+        font-family: 'Source Sans Pro'
+        top: 7px
+        right: 15px
+        color: #FF2670
+
+
 
     label
         position: absolute
@@ -104,5 +122,98 @@ html,body
         color: rgba(80,86,101,0.36)
 
 
+.form-action
+    margin-top: 50px
+    box-sizing: border-box
+    display: flex
+    height: 40px
+
+    button
+        -webkit-appearance: none
+        background: none
+        border: none
+        font-family: "Source Sans Pro"
+        font-weight: 500
+        width: 160px
+        border-radius: 2px
+
+        &:hover
+            cursor: pointer
+
+
+    .discard
+        color: #D3685C
+        margin-left: auto
+        margin-right: 20px
+        background: rgba(204,104,92,0.2)
+
+        &:hover
+            background: rgba(204, 104, 92, 0.3)
+        
+        &:focus
+            outline: none
+            border: 1px solid #D3685C
+    
+    .save
+        color: rgba(89, 136, 255, 1)
+        background: rgba(89, 136, 255, 0.2)
+
+        &:hover
+            background: rgba(89, 136, 255, 0.3)
+
+        &:focus
+            outline: none
+            border: 1px solid rgba(89, 136, 255, 1)
+
+
+.select
+    box-sizing: border-box
+    list-style-type: none
+    font-family: "Source Sans Pro"
+    font-size: 12px
+    font-weight: 550
+    position: absolute
+    background: white
+    width: 100%
+    top: 110%
+    z-index: 1
+    max-height: 300px
+    color: #030411
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.06)
+    border-radius: 2px
+    user-select: none
+
+    li
+        height: 50px
+        padding-left: 15px
+        line-height: 50px
+        border-bottom: 1px solid rgba(230,230,230,0.60)
+        border-radius: 2px
+
+
+        &:hover
+            cursor: pointer
+            background: rgba(89,136,255,0.02)
+
+.select-down
+    width: 20px
+    height: 20px
+    position: absolute
+    top: 20px
+    right: 15px
+    background: #F6F7F9
+    user-select: none
+    // height: 90%
+    transition: transform 0.2s
+    
+    &:hover
+        cursor: pointer
 .hide
     display: none
+
+input.error
+    background: white
+    border-left: 3px solid #FF2670
+    border-top: 1px solid rgba(230,230,230,0.39)
+    border-bottom: 1px solid rgba(230,230,230,0.39)
+    border-right: 1px solid rgba(230,230,230,0.39)

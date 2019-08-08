@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/form.sass'
+import Select from './FormFields/Select';
 
 const data = {
     "General" : [
@@ -163,16 +164,24 @@ const GeneralForm = () =>
                     <div key={index} className={(index == 0) ? "form-section" : "form-section hide"}>
                         {
                             data[item].map( (nested_item, nested_index) =>
-                            <div key={nested_index} className="field">
-                                <label>
-                                    {nested_item.label}
-                                </label>
-                                <input type={nested_item.type}/>
-                            </div>
+                                (nested_index != 0) ?
+                                    <div key={nested_index} className="field">
+                                        <label>
+                                            {nested_item.label}
+                                        </label>
+                                        <input type={nested_item.type} />
+                                    </div>
+                                :
+                                <Select key={nested_index} label={nested_item.label}/> 
                         )}
                     </div>
                 )
             }
+
+            <div className="form-action">
+                <button className="discard">Discard Changes</button>
+                <button className="save">Save</button>
+            </div>
         </form>
     </div>
 

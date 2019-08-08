@@ -2,7 +2,7 @@ import React from 'react';
 import DataSet from './../../static/MOCK.json';
 import './styles/datatable.sass';
 import Proptypes from 'prop-types'
-import colResize from './resize.js';
+// import colResize from './resize.js';
 
 let Data = DataSet.slice(0)
 

@@ -18,10 +18,11 @@ colResize.prototype.addEvent = function(){
 colResize.prototype.removeEvent = function(){
     for (let element of this.elements) {
         element.removeEventListener('mousedown')
-        element.removeEventListener('mouseup')
 
     }
     document.removeEventListener('mousemove', this.dragStart, false)
+    document.removeEventListener('mouseup', this.dragEnd, false)
+
 
 }
 
