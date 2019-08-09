@@ -1,3 +1,8 @@
+// theme
+$primary-color-hex : #131D4A // rgb -> (19,29,74)
+$secondary-color-hex : #8991A2 // rgb -> (137, 145, 162)
+
+
 *
     margin: 0
     padding: 0
@@ -72,10 +77,11 @@ html,body
 .field
     box-sizing: border-box
     position: relative
+    height: 60px
 
-    input
+    input, textarea
         box-sizing: border-box
-        height: 60px
+        height: 100%
         width: 100%
         outline: none
         border: none
@@ -93,7 +99,7 @@ html,body
             border-top: 1px solid rgba(230,230,230,0.39)
             border-bottom: 1px solid rgba(230,230,230,0.39)
             border-right: 1px solid rgba(230,230,230,0.39)
-        
+
         &:focus + .errorMessage
             display: none
 
@@ -101,6 +107,10 @@ html,body
             background: white
             transform: rotate(180deg)
             transform-origin: center center
+
+    textarea
+        resize: none
+        padding-top: 27px
 
     .errorMessage
         position: absolute
@@ -110,8 +120,6 @@ html,body
         right: 15px
         color: #FF2670
 
-
-
     label
         position: absolute
         font-size: 12px
@@ -120,6 +128,15 @@ html,body
         left: 15px
         font-weight: 500
         color: rgba(80,86,101,0.36)
+
+    input[type=date]::-webkit-inner-spin-button
+        -webkit-appearance: none;
+        display: none;
+
+
+.textarea
+    grid-column-start: 1
+    grid-column-end: 3
 
 
 .form-action
@@ -149,11 +166,11 @@ html,body
 
         &:hover
             background: rgba(204, 104, 92, 0.3)
-        
+
         &:focus
             outline: none
             border: 1px solid #D3685C
-    
+
     .save
         color: rgba(89, 136, 255, 1)
         background: rgba(89, 136, 255, 0.2)
@@ -178,9 +195,9 @@ html,body
     top: 110%
     z-index: 1
     max-height: 300px
-    overflow: scroll
+    overflow-y: scroll
     color: #030411
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.06)
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.09)
     border-radius: 2px
     user-select: none
 
@@ -194,8 +211,8 @@ html,body
 
         &:hover
             cursor: pointer
-            background: rgba(89,136,255,0.02)
-        
+            background: rgba(89,136,255,0.06)
+
         &.selected
             background: rgba(89,136,255,0.1)
 
@@ -209,7 +226,7 @@ html,body
     user-select: none
     // height: 90%
     transition: transform 0.2s
-    
+
     &:hover
         cursor: pointer
 .hide
@@ -221,3 +238,14 @@ input.error
     border-top: 1px solid rgba(230,230,230,0.39)
     border-bottom: 1px solid rgba(230,230,230,0.39)
     border-right: 1px solid rgba(230,230,230,0.39)
+
+
+
+.select::-webkit-scrollbar
+    width: 3px
+.select::-webkit-scrollbar-track
+    background : white
+.select::-webkit-scrollbar-thumb
+    background : $primary-color-hex
+.select::-webkit-scrollbar-thumb:hover
+    background : $secondary-color-hex

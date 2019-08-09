@@ -161,7 +161,7 @@ class Select extends React.Component{
         if(!this.state.show){
             this.input.current.focus()
         }else{
-            this.input.current.blur()    
+            this.input.current.blur()
         }
 
     }
@@ -175,37 +175,74 @@ class Select extends React.Component{
         this.setState({show : false, select : -1})
     }
 
-    handleSuggestions = (e) => {
+    handleSuggestions = ( value ) => {
 
-        e.preventDefault()
+        let d = [...data]
+        let regex = new RegExp(`^${value}`, 'i');
+        let suggestions = d.sort().filter( v => regex.test(v));
 
-        this.setState({value : e.target.innerText})
+
+        this.setState({value ,suggestions, select : 0})
 
     }
 
+    handleOptionClick = (e) => {
+        e.preventDefault()
+        this.setState({value : e.target.innerText})
+    }
+
     handleChange = (e) => {
-        this.setState({value : e.target.value})
+
+        // search from suggestion
+        let inputText = e.target.value
+
+        if(inputText != ""){
+            this.handleSuggestions(inputText)
+        } else {
+            this.setState({value : "", select : -1, suggestions : data})
+        }
+
     }
 
     onKeyDown = (e) => {
 
-        if(e.keyCode == 40 && this.state.select + 1 < this.state.suggestions.length) {
+        if(e.keyCode == 40 && this.state.select + 1 < this.state.suggestions.length) { // if down key is pressed
 
                 this.setState({select : this.state.select + 1}, () => {
+                    this.setState({value : this.selected.current.innerText});
                     this.selected.current.scrollIntoView({block : 'nearest'});
                 })
-                
-            
-        } else if (e.keyCode == 38 && this.state.select - 1 >= 0) {
+        }
+
+        if (e.keyCode == 38 && this.state.select - 1 >= 0) { // if up key is pressed
             this.setState({select : this.state.select - 1}, () => {
+                this.setState({value : this.selected.current.innerText});
                 this.selected.current.scrollIntoView({block : 'nearest'});
             })
-        } else if (e.keyCode == 13) {
+        }
+
+        if (e.keyCode == 13) { // if enter is pressed
             if(this.selected.current !== null && this.selected.current !== undefined) {
                 this.setState({value : this.selected.current.innerText}, () => this.input.current.blur())
             }
         }
 
+        if(e.keyCode == 27) { // if esc key is pressed
+            this.input.current.blur()
+        }
+
+        if(e.keyCode == 9) { // if tab is pressed
+            if(this.selected.current !== null && this.selected.current !== undefined) {
+                this.setState({value : this.selected.current.innerText})
+            } else if(this.state.suggestions.length == 0) {
+                this.setState({value : "", suggestions : data})
+            }
+        }
+
+    }
+
+    pushChange = (value) => {
+        return "value"
     }
 
 
@@ -215,18 +252,19 @@ class Select extends React.Component{
                 <label>
                     {this.props.label}
                 </label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     ref={this.input}
                     onBlur={this.onInputBlur}
                     onFocus={this.onInputFocus}
                     value = {this.state.value}
                     onChange = {this.handleChange}
                     onKeyDown = {this.onKeyDown}
+                    // put readOnly if use defaultSelect
                 />
-                <img 
-                    src={down} 
-                    className="select-down" 
+                <img
+                    src={down}
+                    className="select-down"
                     onMouseDown={this.onDownClick}
                     ref={this.dropDown}
                 />
@@ -235,11 +273,11 @@ class Select extends React.Component{
                     ?
                     <ul className="select" ref={this.list}>
                         {
-                            this.state.suggestions.map( (value, index) => 
-                                <li 
+                            this.state.suggestions.map( (value, index) =>
+                                <li
                                     key={index}
-                                    ref={(index == this.state.select) ? this.selected : null} 
-                                    onMouseDown={this.handleSuggestions}
+                                    ref={(index == this.state.select) ? this.selected : null}
+                                    onMouseDown={this.handleOptionClick}
                                     className={(index == this.state.select) ? "selected" : null}
                                 >
                                     {value}
@@ -247,9 +285,9 @@ class Select extends React.Component{
                             )
                         }
                     </ul>
-                    : 
+                    :
                     null
-                    
+
                 }
             </div>
         )

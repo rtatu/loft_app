@@ -1,6 +1,9 @@
 import React from 'react';
 import './styles/form.sass'
 import Select from './FormFields/Select';
+import Text from './FormFields/Text';
+import Textarea from './FormFields/TextArea';
+import Date from './FormFields/Date';
 
 const data = {
     "General" : [
@@ -172,7 +175,10 @@ const GeneralForm = () =>
                                         <input type={nested_item.type} />
                                     </div>
                                 :
-                                <Select key={nested_index} label={nested_item.label}/> 
+                                <Select key={nested_index} label={nested_item.label}/>
+                                // <Text key={nested_index} label={nested_item.label}/>
+                                // <Date label={nested_item.label} key={nested_index}/>
+
                         )}
                     </div>
                 )
