@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="send" transform="translate(-1141 -734)">
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="20" cy="20" r="20" transform="translate(1141 734)" fill="#507df0"/>
+    <g id="paper-plane" transform="translate(1151 744)">
+      <g id="Group_60" data-name="Group 60" transform="translate(0 0)">
+        <g id="Group_59" data-name="Group 59" transform="translate(0 0)">
+          <path id="Path_304" data-name="Path 304" d="M19.805.082A.453.453,0,0,0,19.32.06L.229,10.969a.454.454,0,0,0,.082.826l5.7,1.9L8.21,19.7a.455.455,0,0,0,.427.3.415.415,0,0,0,.052,0,.448.448,0,0,0,.3-.172l3.238-4.059,4.448,1.483a.446.446,0,0,0,.144.024.455.455,0,0,0,.448-.38L19.994.529A.454.454,0,0,0,19.805.082ZM8.911,14.033a.455.455,0,0,0-.086.216l-.411,3.366L6.892,13.453l8.89-8.685Z" transform="translate(0 0)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

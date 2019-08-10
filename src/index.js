@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GeneralForm from './component/form.js';
+import Notes from './component/notes.js';
 
 
 class App extends React.Component {
     render(){
         return(
             <React.Fragment>
-                <GeneralForm />
+                <Notes />
             </React.Fragment>
         )
     }
