@@ -1,10 +1,10 @@
-import React from 'react';
-import DataSet from './../../static/MOCK.json';
-import './styles/datatable.sass';
-import Proptypes from 'prop-types'
-// import colResize from './resize.js';
+import React from 'react'
+import DataSet from './../../static/MOCK_DATA.json'
+import './datatable.sass'
+import colResize from '../resize.js'
+import DtConfig from './datatable_config'
 
-let Data = DataSet.slice(0)
+let Data = DataSet
 
 
 /**
@@ -43,7 +43,7 @@ const DatatableJSX = (props ) =>
                             style={(props.styles[`col-${index}`]) ? props.styles[`col-${index}`] : {}}
                         >
                             <span>{item}</span>
-                            <span className="resize-line" draggable={true} data-col={index}></span>
+                            {/* <span className="resize-line" draggable={true} data-col={index}></span> */}
                         </li>
                     )
                 }
@@ -178,18 +178,13 @@ class DatatableContainer extends React.Component {
 
     render(){
         return (
-            <DatatableJSX styles={this.state.styles}/>
+            <div className="dt_container">
+                <DtConfig name="Terminal"/>
+                <DatatableJSX styles={this.state.styles}/>
+            </div>
         )
     }
 }
 
-
-// propTypes
-
-DatatableContainer.propTypes = {
-    data : Proptypes.array.isRequired,
-    width : Proptypes.number,
-    height : Proptypes.number
-}
 
 export default DatatableContainer;

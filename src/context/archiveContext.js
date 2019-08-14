@@ -14,9 +14,21 @@ class ArchiveProvider extends React.Component {
     constructor(props){
         super(props)
 
-        console.log(props)
+        this.state = {
+            datastore : {
+                lists : {
+                    vendors : [],
+                    trucks : [],
+                    trailer : [],
+                    container : [],
+                    chasis : [],
+                    class : [],
+                    location : [],
+                    customers : [],
 
-        this.state = {...this.props.yolo}
+                }
+            }
+        }
 
     }
 
@@ -50,19 +62,6 @@ class ArchiveProvider extends React.Component {
         console.log("updated")
     }
 
-
-    changeSomething = () => {
-        
-        this.setState({datastore : {
-            list : {
-                vendor : {
-
-                }
-            }
-        }})
-    }
-
-
     render(){
         return(
             <ArchiveContext.Provider
@@ -71,7 +70,6 @@ class ArchiveProvider extends React.Component {
                     addToStore : this.addToStore,
                     removefromStore : this.removefromStore,
                     updateInStore : this.updateInStore,
-                    changeSomething : this.changeSomething
                 }}
             >
                 {

@@ -1,0 +1,56 @@
+@import '../../static/theme.sass'
+
+.dtnavs
+    // outline: 1px solid red
+    margin-top: 10px
+    padding: 0px 10px
+    box-sizing: border-box
+    width: 100%
+    max-width: 100%
+    overflow-x: auto
+    height: 30px
+    min-height: 30px
+
+    ul
+        list-style-type: none
+        display: flex
+        font-family: "Source Sans Pro"
+        font-size: 12px
+
+        li a
+            min-width: 120px
+            height: 30px
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 2px
+            border-top-right-radius: 25px
+            user-select: none
+            color: $second-primary-color-hex
+            background: #CEDBFB
+            box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.12)
+            margin-left: -5px
+            position: relative
+            padding: 0px 10px
+            text-decoration: none
+
+            &.dtn-active
+                background: $second-primary-color-hex
+                color: white
+                z-index: 100
+        
+        li:first-child
+            a
+                margin-left: 0
+
+
+        
+// scrollbar
+.dtnavs::-webkit-scrollbar
+    height: 0px
+.dtnavs::-webkit-scrollbar-track
+    background : white
+.dtnavs::-webkit-scrollbar-thumb
+    background : $primary-color-hex
+.dtnavs::-webkit-scrollbar-thumb:hover
+    background : $secondary-color-hex

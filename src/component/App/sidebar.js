@@ -1,5 +1,6 @@
 import React from 'react';
-import './styles/sidebar.sass'
+import './sidebar.sass'
+import {NavLink} from 'react-router-dom'
 
 
 String.prototype.image_format = function(){
@@ -72,17 +73,24 @@ const SidebarJSX = () =>
         </div>
         <div className="sidebar_navs">
             <ul>
-                <li><img src={images['Dashboard']}/><span className="sidebar_hide">Dashboard</span></li>
+                <li>
+                    <NavLink to="#">
+                        <img src={images['Dashboard']}/><span className="sidebar_hide">Dashboard</span>
+                    </NavLink>
+                </li>
             </ul>
             {
                 nav_bar.map( (item, index) =>
                     <ul key={index}>
                         <span className="nav_head sidebar_hide"  >{Object.keys(item)[0]}</span>
                         {
-                            item[Object.keys(item)[0]].map( (nested_item, index) =>
-                                <li key={index}>
-                                    <img src={images[nested_item]}/>
-                                    <span className="sidebar_hide">{nested_item}</span>
+                            item[Object.keys(item)[0]].map( (nested_item, nested_index) =>
+                                <li key={nested_index}>
+                                     {/* change this to navlinks */}
+                                    <NavLink  activeClassName="active" to={`/${index}/${nested_index}`}>
+                                        <img src={images[nested_item]}/>
+                                        <span className="sidebar_hide">{nested_item}</span>
+                                    </NavLink>
                                 </li>
                             )
                         }
@@ -96,12 +104,16 @@ const SidebarJSX = () =>
                     <span className="sidebar_hide">Collapse Panel</span>
                 </li>
                 <li className="base_options">
-                    <img src={images["Setting"]} />
-                    <span className="sidebar_hide">Setting</span>
+                    <NavLink to="#">
+                        <img src={images["Setting"]} />
+                        <span className="sidebar_hide">Setting</span>
+                    </NavLink>
                 </li>
                 <li>
-                    <img src={images["Logout"]} />
-                    <span className="sidebar_hide">Log Out</span>
+                    <NavLink to="#">
+                        <img src={images["Logout"]} />
+                        <span className="sidebar_hide">Log Out</span>
+                    </NavLink>
                 </li>
             </ul>
 

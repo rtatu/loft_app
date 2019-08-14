@@ -1,28 +1,14 @@
-// theme
-$primary-color-hex : #131D4A // rgb -> (19,29,74)
-$secondary-color-hex : #8991A2 // rgb -> (137, 145, 162)
-
-// css-resets
-*
-    margin: 0
-    padding: 0
-
-html,body
-    width: 100%
-    height: 100%
-
-#root
-    width : 100%
-    height: 100%
+@import '../../static/theme.sass'
 
 .sidebar
     width: 230px
+    min-width: 230px
     height: 100%
     display: flex
     flex-direction: column
     max-height: 100%
     background: $primary-color-hex
-    font-family : 'Source Sans Pro'
+    font-family: 'Source Sans Pro'
     user-select: none
 
 
@@ -32,10 +18,10 @@ html,body
     background: #091344
     line-height: 60px
     h1
-        color : white
+        color: white
 
 .sidebar_navs
-    color : white
+    color: white
     padding: 1px
     height: 100%
     flex: 1
@@ -51,7 +37,7 @@ html,body
         margin-bottom: 10px
         box-sizing: border-box
 
-        li
+        li > a
             font-size: 12px
             display: flex
             height: 35px
@@ -59,6 +45,7 @@ html,body
             color: white
             padding-left: 20px
             font-weight: 400
+            text-decoration: none
 
         img
             width: 18px
@@ -66,9 +53,14 @@ html,body
         span
             margin-left: 10px
 
-        li:hover
+        li a:hover
             background: rgba(51,74,120,0.15)
-        li.clicked
+
+        li a:active
+            background: rgba(51,74,120,0.15)
+            border-left: 3px solid #507DF0
+        
+        li a.active
             background: rgba(51,74,120,0.15)
             border-left: 3px solid #507DF0
 
@@ -93,6 +85,15 @@ html,body
             margin-top: auto
             margin-bottom: 5px
 
+#collapse
+    font-size: 12px
+    display: flex
+    height: 35px
+    align-items: center
+    color: white
+    padding-left: 20px
+    font-weight: 400
+    text-decoration: none
 
 // customize scrollbar
 .sidebar_navs::-webkit-scrollbar

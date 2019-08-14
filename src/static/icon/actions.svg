@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+  <defs>
+    <filter id="Rectangle_1472" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_39" data-name="Group 39" transform="translate(-1721 -89)">
+    <g transform="matrix(1, 0, 0, 1, 1721, 89)" filter="url(#Rectangle_1472)">
+      <g id="Rectangle_1472-2" data-name="Rectangle 1472" transform="translate(9 6)" fill="rgba(80,144,240,0.04)" stroke="#507df0" stroke-width="1">
+        <rect width="40" height="40" rx="1" stroke="none"/>
+        <rect x="0.5" y="0.5" width="39" height="39" rx="0.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Group_38" data-name="Group 38" transform="translate(-67)">
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="3" cy="3" r="3" transform="translate(1810 112) rotate(90)" fill="#507df0"/>
+      <circle id="Ellipse_3-2" data-name="Ellipse 3" cx="3" cy="3" r="3" transform="translate(1820 112) rotate(90)" fill="#507df0"/>
+      <circle id="Ellipse_3-3" data-name="Ellipse 3" cx="3" cy="3" r="3" transform="translate(1830 112) rotate(90)" fill="#507df0"/>
+    </g>
+  </g>
+</svg>
