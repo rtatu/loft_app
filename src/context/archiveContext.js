@@ -1,5 +1,10 @@
 import React from 'react'
+import fetchList  from '../utils/api_funtions';
 
+
+// fetchArchiveData().then(res => console.log(res))
+
+fetchList().then(res => console.log(res))
 
 // creating context
 const ArchiveContext = React.createContext();

@@ -3,6 +3,7 @@ import './sidebar.sass'
 import {NavLink} from 'react-router-dom'
 
 
+
 String.prototype.image_format = function(){
     let arr = this.split('_')
 
@@ -87,7 +88,12 @@ const SidebarJSX = () =>
                             item[Object.keys(item)[0]].map( (nested_item, nested_index) =>
                                 <li key={nested_index}>
                                      {/* change this to navlinks */}
-                                    <NavLink  activeClassName="active" to={`/${index}/${nested_index}`}>
+                                    <NavLink  
+                                        activeClassName="active" 
+                                        to={`/${index}/${nested_index}`}
+                                        activeStyle={{background:100}} 
+                                    >
+
                                         <img src={images[nested_item]}/>
                                         <span className="sidebar_hide">{nested_item}</span>
                                     </NavLink>

@@ -4,24 +4,34 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const { ipcMain } = require("electron");
+const events = require('./electron/events')
 
 
-let mainWindow;
+console.log(path.join(app.getAppPath(), 'src/preload.js'))
+
+
+let window = {
+    mainWindow : null,
+    formWindow : null
+}
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({
+    window.mainWindow = new BrowserWindow({
         width : 1366,
         height : 768,
-        preload: path.join(app.getAppPath(), 'bundle.js')
+        webPreferences : {
+            preload: path.join(app.getAppPath(), 'src/preload.js'),
+            contextIsolation: true
+        }
     });
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000/');
+    window.mainWindow.loadURL('http://localhost:8000/');
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
-        mainWindow = null
+    window.mainWindow.on('closed', function () {
+        window.mainWindow = null
     })
 }
 
@@ -37,7 +47,8 @@ app.on('window-all-closed', function () {
 
 // osx
 app.on('activate', function () {
-    if (mainWindow === null) {
+    if (window.mainWindow === null) {
         createWindow()
     }
 });
+
