@@ -5,31 +5,6 @@ import React from 'react';
 import DtConfig from './datatable_config';
 import { ArchiveContext } from '../../context/archiveContext';
 
-Array.prototype.cameltoLabel = function(){
-    let regExp = /[A-Z]/g
-    
-    let tempArray = []
-
-    for (let item of this){
-        let pushData = []
-        let tempString = item;
-        let match;
-        while( (match = regExp.exec(item))!=null) {
-            let splittedString = tempString.split(match[0])[0]
-
-            pushData.push(splittedString.charAt(0).toLocaleUpperCase() + splittedString.slice(1))
-
-            tempString = tempString.slice(splittedString.length)
-
-        }
-
-        pushData.push(tempString.charAt(0).toLocaleUpperCase() + tempString.slice(1))
-
-        tempArray.push(pushData.join(' '))
-    }
-
-    return tempArray
-}
 
 const style = {
     width:'100%',
@@ -48,10 +23,11 @@ Array.prototype.toUppperCase = function(){
     return tempArray
 }
 
-const Datatable = (props) => 
+const Datatable = (props) =>
     <ArchiveContext.Consumer>
         {
             context =>  {
+                console.log(props.location)
                 let navigateData;
                 if(context.datastore[props.navigate]) {
                     navigateData = context.datastore[props.navigate].data
@@ -66,16 +42,16 @@ const Datatable = (props) =>
                     <div style={style}>
                         <Header />
                         {
-                        (navigateData) ? 
+                        (navigateData) ?
                         <React.Fragment>
-                            <DtNavs 
-                                data={Object.keys(navigateData).toUppperCase()} 
+                            <DtNavs
+                                data={Object.keys(navigateData).toUppperCase()}
                                 baseLink={`/database-maintenance/${props.navigate}`}
                                 key={props.navigate}
                             />
                         {
                          (data) ?
-                         <DatatableContainer 
+                         <DatatableContainer
                             data={data}
                             tableName={props.tableName}
                             key={props.tableName}
@@ -84,7 +60,7 @@ const Datatable = (props) =>
                         />
                         : null
                         }
-                            
+
                         </React.Fragment>
                         : null
                         }

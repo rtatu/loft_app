@@ -28,7 +28,7 @@ Array.prototype.toObj = function(keyName){
 
 class ArchiveProvider extends React.Component {
     // define the state
-   
+
 
     constructor(props){
         super(props)
@@ -56,19 +56,21 @@ class ArchiveProvider extends React.Component {
 
     componentDidMount(){
         // fetch all the lists
-        
+
+        // return 0
+
         fetchList().then(
-            res => this.filterData(res) 
+            res => this.filterData(res)
         ).then(
             data => {
                 let tempState = {...this.state}
-                
+
                 for (let key of Object.keys(tempState.datastore.lists.data)) {
                     tempState.datastore.lists.data[key] = data[key]
                 }
 
                 tempState.datastore.lists.fetching = false
-                
+
                 this.setState({...tempState}, () => console.log(this.state))
             }
         )
@@ -80,11 +82,11 @@ class ArchiveProvider extends React.Component {
         let keys = Object.keys(data_array)
 
         let filteredData = {}
-        
+
         for (let key of keys) {
             filteredData[key] = data_array[key].data ? data_array[key].data.toObj('id') : {}
         }
-        
+
         return filteredData
     }
 
