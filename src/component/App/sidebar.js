@@ -1,6 +1,7 @@
 import React from 'react';
 import './sidebar.sass'
 import {NavLink} from 'react-router-dom'
+import {nav_bar} from './navbar_data';
 
 
 
@@ -41,32 +42,7 @@ function importAll(r) {
 
 const images = importAll(require.context('./../../static/icon/svg/', false, /\.(png|jpe?g|svg)$/));
 
-const nav_bar = [
-    {
-        LOGISITCS : [
-            'Order Entry',
-            'Planner',
-            'Dispatch Board'
-        ]
-    },
-    {
-        ACCOUNTING : [
-            'Taxes',
-            'IFTA',
-            'AR/PR',
-            'Driver Payroll'
-        ]
-    },
-    {
-        SERVICES : [
-            'Purchase Order',
-            'Maintenance',
-            'Quotation',
-            'Vendor Management',
-            'Database Maintenance'
-        ]
-    }
-]
+
 const SidebarJSX = () =>
     <div className="sidebar">
         <div className="sidebar_logo sidebar_hide">
@@ -90,12 +66,13 @@ const SidebarJSX = () =>
                                      {/* change this to navlinks */}
                                     <NavLink  
                                         activeClassName="active" 
-                                        to={`/${index}/${nested_index}`}
+                                        to={`${nested_item.path}`}
                                         activeStyle={{background:100}} 
+                                        onClick={(nested_item.event) ? nested_item.event : null}
                                     >
 
-                                        <img src={images[nested_item]}/>
-                                        <span className="sidebar_hide">{nested_item}</span>
+                                        <img src={images[nested_item.label]}/>
+                                        <span className="sidebar_hide">{nested_item.label}</span>
                                     </NavLink>
                                 </li>
                             )

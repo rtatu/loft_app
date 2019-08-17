@@ -1,5 +1,8 @@
 import React from 'react';
 import Collapse from './../../static/icon/svg/collapse.svg';
+import './sidebar.sass'
+import {NavLink} from 'react-router-dom'
+import {archiveNav} from './navbar_data'
 
 function importAllImages(r) {
     let image_obj = r.keys().map(r);
@@ -14,25 +17,11 @@ const sidebarImages = importAllImages(require.context(
     /\.(png|jpe?g|svg)$/
 ))
 
-const archiveNav = [
-    'Customers',
-    'Prospects',
-    'Shippers/Consignees',
-    'OutSide Carriers',
-    'Misc. Vendors',
-    'Customs Broker',
-    'Standard Charges',
-    'Jurisdictions',
-    'Resources',
-    'Payroll Schedules',
-    'Standard Templates',
-    'Lists',
-    'Comissions',
-    'Master Orders',
-    'Travel Times'
-]
 
-const SidebarJSX = () =>
+
+
+
+const ArchiveSidebarJSX = () =>
     <div className="sidebar">
         <div className="sidebar_logo sidebar_hide">
             <h1>Logo</h1>
@@ -41,10 +30,12 @@ const SidebarJSX = () =>
             <ul style={{marginTop : "10px"}}>
                 <span className="archive_nav_head sidebar_hide"  >DATA MAINTENANCE</span>
                 {
-                    archiveNav.map( (nested_item, index) =>
+                    archiveNav.map( (item, index) =>
                         <li key={index}>
-                            <img src={sidebarImages[index]} style={{width : "10px"}}/>
-                            <span className="sidebar_hide">{nested_item}</span>
+                            <NavLink activeClassName="active" to={`${item.path}`}>
+                                <img src={sidebarImages[index]} style={{width : "10px"}}/>
+                                <span className="sidebar_hide">{item.label}</span>
+                            </NavLink>
                         </li>
                     )
                 }
@@ -59,4 +50,4 @@ const SidebarJSX = () =>
         </div>
     </div>
 
-export default SidebarJSX
+export default ArchiveSidebarJSX

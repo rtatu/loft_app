@@ -3,6 +3,7 @@ import DataSet from './../../static/MOCK_DATA.json'
 import './datatable.sass'
 import colResize from '../resize.js'
 import DtConfig from './datatable_config'
+import Empty from '../Empty/empty.js';
 
 let Data = DataSet
 
@@ -37,7 +38,7 @@ const DatatableJSX = (props ) =>
                     <input type="checkbox"/>
                 </li> */}
                 {
-                    datatable_head.map( (item, index) =>
+                    props.datatable_head.map( (item, index) =>
                         <li key={index}
                             className={`dtd col-${index}`}
                             style={(props.styles[`col-${index}`]) ? props.styles[`col-${index}`] : {}}
@@ -52,13 +53,13 @@ const DatatableJSX = (props ) =>
 
         <div className="dtbody">
             {
-                Data.map( (item, index) =>
+                props.data.map( (item, index) =>
                     <ul key={index} className="dtr">
                         {/* <li>
                             <input type="checkbox"/>
                         </li> */}
                         {
-                            keys.map( (nested_item, nested_index) =>
+                            Object.keys(props.data[0]).map( (nested_item, nested_index) =>
                                 <li key={nested_index}
                                     className={`dtd col-${nested_index}`}
                                     style={(props.styles[`col-${nested_index}`]) ? props.styles[`col-${nested_index}`] : {}}
@@ -86,68 +87,73 @@ class DatatableContainer extends React.Component {
 
     componentDidMount() {
 
-        let coloumns = []
-
-        // get all the coloumns
-
-        for ( let i = 0; i < datatable_head.length; i++) {
-            coloumns.push(document.getElementsByClassName(`col-${i}`))
-        }
-
-        // calculate autoWidth given by browser
-        let colWidth = []
-
-        // for every coloumn of columns get the maximum width
-        for ( let coloumn of coloumns) {
-            let width = 0
-            for ( let cell of coloumn) {
-                if(cell.offsetWidth  > width) {
-                    width = cell.offsetWidth
+        if(this.props.data) {
+            
+            let coloumns = []
+    
+            // get all the coloumns
+    
+            for ( let i = 0; i < datatable_head.length; i++) {
+                coloumns.push(document.getElementsByClassName(`col-${i}`))
+            }
+    
+            // calculate autoWidth given by browser
+            let colWidth = []
+    
+            // for every coloumn of columns get the maximum width
+            for ( let coloumn of coloumns) {
+                let width = 0
+                for ( let cell of coloumn) {
+                    if(cell.offsetWidth  > width) {
+                        width = cell.offsetWidth
+                    }
                 }
+                colWidth.push(parseInt(width))
             }
-            colWidth.push(parseInt(width))
-        }
-
-        // create styles used by calculated width
-        /**
-         * set the flex basis
-         * set the min width
-         * and flex property
-         */
-        let ind = 0
-        let style = {}
-        let flexValues = colWidth.getFlex()
-        for ( let col of colWidth) {
-            style[`col-${ind}`] = {
-                flexBasis: `${col}px`,
-                minWidth : `${col + 16}px`,
-                flex: flexValues[ind]
+    
+            // create styles used by calculated width
+            /**
+             * set the flex basis
+             * set the min width
+             * and flex property
+             */
+            let ind = 0
+            let style = {}
+            let flexValues = colWidth.getFlex()
+            for ( let col of colWidth) {
+                style[`col-${ind}`] = {
+                    flexBasis: `${col}px`,
+                    minWidth : `${col + 16}px`,
+                    flex: flexValues[ind]
+                }
+                ind++
             }
-            ind++
+    
+            this.setState({styles : {...style}})
+    
+            let thead = document.getElementsByClassName('dthead')[0]
+            let tbody = document.getElementsByClassName('dtbody')[0]
+    
+            thead.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
+    
+            tbody.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
+    
+            // console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
+    
+    
+            // add event listener for resize
+            this.colResize = new colResize('resize-line', this.pushStyles);
+            this.colResize.addEvent()
         }
-
-        this.setState({styles : {...style}})
-
-        let thead = document.getElementsByClassName('dthead')[0]
-        let tbody = document.getElementsByClassName('dtbody')[0]
-
-        thead.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
-
-        tbody.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
-
-        console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
-
-
-        // add event listener for resize
-        this.colResize = new colResize('resize-line', this.pushStyles);
-        this.colResize.addEvent()
 
     }
 
     componentWillUnmount() {
 
         // remove event listener
-        this.colResize.removeEvent()
+        if(this.colResize){
+            this.colResize.removeEvent()
+        }
 
 
     }
@@ -169,7 +175,7 @@ class DatatableContainer extends React.Component {
 
         tbody.style.minWidth = `${tbody.offsetWidth + diffX}px`
 
-        console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
+        // console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
         this.setState({styles})
 
     }
@@ -179,8 +185,19 @@ class DatatableContainer extends React.Component {
     render(){
         return (
             <div className="dt_container">
-                <DtConfig name="Terminal"/>
-                <DatatableJSX styles={this.state.styles}/>
+                {
+                    this.props.data ? 
+                        <React.Fragment>
+                            <DtConfig name={this.props.tableName}/>
+                            <DatatableJSX 
+                                styles={this.state.styles}
+                                datatable_head = {(this.props.header == null) ? [] : this.props.header}
+                                data = {this.props.data}
+                            />
+                        </React.Fragment>
+                    :
+                        <Empty link="Terminal"/>
+                }
             </div>
         )
     }

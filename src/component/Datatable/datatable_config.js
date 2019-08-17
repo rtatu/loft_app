@@ -23,7 +23,7 @@ const DtConfig = (props) =>
             </div>
         </div>
         <div className="dtconfig-actions">
-            <button>Add New {props.name}</button>
+            <button>Add New {props.name.charAt(0).toLocaleUpperCase() + props.name.slice(1)}</button>
             <div>
                 <img src={action}/>
             </div>

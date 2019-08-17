@@ -28,7 +28,6 @@ colResize.prototype.removeEvent = function(){
 
 colResize.prototype.dragEvent = function(e){
     e.stopPropagation()
-    console.log('start')
     // set resizing to colresize line's parent
     e.preventDefault()
     this.resizing = e.target.parentElement
@@ -40,7 +39,6 @@ colResize.prototype.dragEvent = function(e){
 
 colResize.prototype.dragStart = function(e){
     e.stopPropagation()
-    console.log('middle')
     if(this.resizing) {
 
         let diffX = e.pageX - this.pageX
@@ -57,7 +55,6 @@ colResize.prototype.dragStart = function(e){
 }
 
 colResize.prototype.dragEnd = function(e){
-    console.log('end')
     e.stopPropagation()
     this.resizing = undefined
     this.pageX = undefined

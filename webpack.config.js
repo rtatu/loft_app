@@ -22,7 +22,8 @@ module.exports = {
     devServer : {
         port : 8000,
         contentBase : './',
-        hot : true
+        hot : true,
+        historyApiFallback: true
     },
     module : {
         rules : [

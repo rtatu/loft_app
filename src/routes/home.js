@@ -4,18 +4,12 @@ import App from '../component/App';
 import Datatable from '../component/Datatable';
 // import Loading from '../static/truck_loading.gif';
 
-const Home = () => 
-    <Route 
-        path="/" 
-        component={TestRoute}
-    />
-
 // Test Route
 
-const TestRoute = () => 
+const Home = () => 
         <div style={{display : 'flex', height : '100%'}}>
             <App />
-            <Datatable />
+            {/* <Datatable /> */}
         </div>
 
 

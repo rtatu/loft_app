@@ -2,18 +2,16 @@ import React from 'react';
 import './datatable_navigation.sass';
 import {NavLink} from 'react-router-dom';
 
-const data = ['Terminal', 'Divisions', 'Category', 'Equipment Type', 'Payment Terms']
 
-
-const DtNavs = () => 
+const DtNavs = (props) => 
     <div className="dtnavs">
         <ul>
             {
-                data.map((item, index) => 
+                props.data.map((item, index) => 
                     <li key={index} >
                         <NavLink 
-                            style={{zIndex: `${data.length - index}`}} 
-                            to={`/${index}`} 
+                            style={{zIndex: `${props.data.length - index}`}} 
+                            to={`${props.baseLink}/${item.toLocaleLowerCase()}`} 
                             activeClassName="dtn-active"
                             activeStyle={{zIndex: 100}}
                         >

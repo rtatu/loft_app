@@ -2,12 +2,26 @@ import React from 'react'
 import fetchList  from '../utils/api_funtions';
 
 
-// fetchArchiveData().then(res => console.log(res))
-
-fetchList().then(res => console.log(res))
-
 // creating context
 const ArchiveContext = React.createContext();
+
+
+// convert an array to obj
+/**
+ * @param {keyName} keyName by which obj is created
+ * @explanation -> [{id: 2, name:"Rohit Tatu"}]
+ * @return -> array.toObj('id') -> {2 : {id: 2, name : "Rohit Tatu"}}
+ */
+Array.prototype.toObj = function(keyName){
+    let tempObj = {}
+
+    for (let item of this) {
+        tempObj[item[keyName]] = item
+    }
+
+    return tempObj
+}
+
 
 
 // creating provider
@@ -22,19 +36,56 @@ class ArchiveProvider extends React.Component {
         this.state = {
             datastore : {
                 lists : {
-                    vendors : [],
-                    trucks : [],
-                    trailer : [],
-                    container : [],
-                    chasis : [],
-                    class : [],
-                    location : [],
-                    customers : [],
-
+                    data : {
+                        truck : {},
+                        class : {},
+                        location : {},
+                        department : {},
+                        driver : {},
+                        payterm : {},
+                        service : {},
+                        subsidiary: {}
+                    },
+                    fetching : false,
+                    error : false
                 }
             }
         }
 
+    }
+
+    componentDidMount(){
+        // fetch all the lists
+        
+        fetchList().then(
+            res => this.filterData(res) 
+        ).then(
+            data => {
+                let tempState = {...this.state}
+                
+                for (let key of Object.keys(tempState.datastore.lists.data)) {
+                    tempState.datastore.lists.data[key] = data[key]
+                }
+
+                tempState.datastore.lists.fetching = false
+                
+                this.setState({...tempState}, () => console.log(this.state))
+            }
+        )
+    }
+
+    // filter the data
+    filterData = (data_array) => {
+
+        let keys = Object.keys(data_array)
+
+        let filteredData = {}
+        
+        for (let key of keys) {
+            filteredData[key] = data_array[key].data ? data_array[key].data.toObj('id') : {}
+        }
+        
+        return filteredData
     }
 
     /* actions */
