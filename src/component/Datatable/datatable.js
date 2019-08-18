@@ -19,7 +19,6 @@ Array.prototype.getFlex = function(){
 function getIn(data, prop) {
     let path = prop.split('.')
     let temp = data;
-    // console.log(path)
     for (let p of path) {
         if(temp[p] != undefined && temp[p] != null && temp != "") {
             temp = temp[p]
@@ -34,7 +33,6 @@ function getIn(data, prop) {
         return temp ? 'True' : 'False'
     }
 
-    // console.log(path, temp)
     return temp
 }
 
