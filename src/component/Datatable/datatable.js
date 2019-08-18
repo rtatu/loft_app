@@ -1,22 +1,8 @@
 import React from 'react'
-import DataSet from './../../static/MOCK_DATA.json'
 import './datatable.sass'
 import colResize from '../resize.js'
 import DtConfig from './datatable_config'
-import Empty from '../Empty/empty.js';
-
-let Data = DataSet
-
-
-/**
- * 1. Add proptypes and default value
- */
-
-// test data
-const datatable_head = Object.keys(Data[0])
-const keys = [...datatable_head]
-
-
+import DTHEADER from './datatable_header'
 
 // proto for sum
 Array.prototype.sum = function(){
@@ -29,6 +15,29 @@ Array.prototype.getFlex = function(){
     return this.map( item => parseInt(item / min ))
 
 }
+
+function getIn(data, prop) {
+    let path = prop.split('.')
+    let temp = data;
+    // console.log(path)
+    for (let p of path) {
+        if(temp[p] != undefined && temp[p] != null && temp != "") {
+            temp = temp[p]
+        }
+    }
+
+    if(typeof temp == 'object') {
+        return ""
+    }
+
+    if(typeof temp == 'boolean') {
+        return temp ? 'True' : 'False'
+    }
+
+    // console.log(path, temp)
+    return temp
+}
+
 
 const DatatableJSX = (props ) =>
     <div className="datatable">
@@ -43,7 +52,7 @@ const DatatableJSX = (props ) =>
                             className={`dtd col-${index}`}
                             style={(props.styles[`col-${index}`]) ? props.styles[`col-${index}`] : {}}
                         >
-                            <span>{item}</span>
+                            <span>{item.label}</span>
                             {/* <span className="resize-line" draggable={true} data-col={index}></span> */}
                         </li>
                     )
@@ -59,12 +68,12 @@ const DatatableJSX = (props ) =>
                             <input type="checkbox"/>
                         </li> */}
                         {
-                            Object.keys(props.data[0]).map( (nested_item, nested_index) =>
+                            props.datatable_head.map( (nested_item, nested_index) =>
                                 <li key={nested_index}
                                     className={`dtd col-${nested_index}`}
                                     style={(props.styles[`col-${nested_index}`]) ? props.styles[`col-${nested_index}`] : {}}
                                 >
-                                    {item[nested_item]}
+                                    {getIn(item, nested_item.prop)}
                                 </li>
                             )
                         }
@@ -88,62 +97,7 @@ class DatatableContainer extends React.Component {
     componentDidMount() {
 
         if(this.props.data) {
-            
-            let coloumns = []
-    
-            // get all the coloumns
-    
-            for ( let i = 0; i < datatable_head.length; i++) {
-                coloumns.push(document.getElementsByClassName(`col-${i}`))
-            }
-    
-            // calculate autoWidth given by browser
-            let colWidth = []
-    
-            // for every coloumn of columns get the maximum width
-            for ( let coloumn of coloumns) {
-                let width = 0
-                for ( let cell of coloumn) {
-                    if(cell.offsetWidth  > width) {
-                        width = cell.offsetWidth
-                    }
-                }
-                colWidth.push(parseInt(width))
-            }
-    
-            // create styles used by calculated width
-            /**
-             * set the flex basis
-             * set the min width
-             * and flex property
-             */
-            let ind = 0
-            let style = {}
-            let flexValues = colWidth.getFlex()
-            for ( let col of colWidth) {
-                style[`col-${ind}`] = {
-                    flexBasis: `${col}px`,
-                    minWidth : `${col + 16}px`,
-                    flex: flexValues[ind]
-                }
-                ind++
-            }
-    
-            this.setState({styles : {...style}})
-    
-            let thead = document.getElementsByClassName('dthead')[0]
-            let tbody = document.getElementsByClassName('dtbody')[0]
-    
-            thead.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
-    
-            tbody.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
-    
-            // console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
-    
-    
-            // add event listener for resize
-            this.colResize = new colResize('resize-line', this.pushStyles);
-            this.colResize.addEvent()
+            this.resizeEvent()
         }
 
     }
@@ -156,6 +110,65 @@ class DatatableContainer extends React.Component {
         }
 
 
+    }
+
+    resizeEvent = () => {
+
+        let coloumns = []
+
+        // get all the coloumns
+
+        for ( let i = 0; i < DTHEADER[this.props.tableName].length; i++) {
+            coloumns.push(document.getElementsByClassName(`col-${i}`))
+        }
+
+        // calculate autoWidth given by browser
+        let colWidth = []
+
+        // for every coloumn of columns get the maximum width
+        for ( let coloumn of coloumns) {
+            let width = 0
+            for ( let cell of coloumn) {
+                if(cell.offsetWidth  > width) {
+                    width = cell.offsetWidth
+                }
+            }
+            colWidth.push(parseInt(width))
+        }
+
+        // create styles used by calculated width
+        /**
+         * set the flex basis
+         * set the min width
+         * and flex property
+         */
+        let ind = 0
+        let style = {}
+        let flexValues = colWidth.getFlex()
+        for ( let col of colWidth) {
+            style[`col-${ind}`] = {
+                flexBasis: `${col}px`,
+                minWidth : `${col + 16}px`,
+                flex: flexValues[ind]
+            }
+            ind++
+        }
+
+        this.setState({styles : {...style}})
+
+        let thead = document.getElementsByClassName('dthead')[0]
+        let tbody = document.getElementsByClassName('dtbody')[0]
+
+        thead.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
+
+        tbody.style.minWidth = `${colWidth.sum() + (16*colWidth.length)}px`
+
+        // console.log(tbody.style.minWidth, tbody.offsetWidth, thead.offsetWidth, thead.style.minWidth)
+
+
+        // add event listener for resize
+        this.colResize = new colResize('resize-line', this.pushStyles);
+        this.colResize.addEvent()
     }
 
     pushStyles = (data, diffX, col) => {
@@ -186,17 +199,16 @@ class DatatableContainer extends React.Component {
         return (
             <div className="dt_container">
                 {
-                    this.props.data ? 
+                    this.props.data ?
                         <React.Fragment>
                             <DtConfig name={this.props.tableName}/>
-                            <DatatableJSX 
+                            <DatatableJSX
                                 styles={this.state.styles}
-                                datatable_head = {(this.props.header == null) ? [] : this.props.header}
+                                datatable_head = {DTHEADER[this.props.tableName]}
                                 data = {this.props.data}
                             />
                         </React.Fragment>
-                    :
-                        <Empty link="Terminal"/>
+                    : null
                 }
             </div>
         )

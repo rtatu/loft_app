@@ -1,7 +1,7 @@
 const Service = [
     {
-        label : "name",
-        prop : "Name"
+        label : "Name",
+        prop : "name"
     },
     {
         label : "Text Field",

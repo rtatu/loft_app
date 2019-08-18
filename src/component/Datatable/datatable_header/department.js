@@ -1,15 +1,15 @@
 const  Department = [
     {
         label : "Name",
-        props : "name"
+        prop : "name"
     },
     {
         label : "Association With",
-        props : "associationWith"
+        prop : "associationWith"
     },
     {
         label : "Status",
-        props : "status"
+        prop : "status"
     }
 ]
 export default Department

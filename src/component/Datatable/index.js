@@ -4,7 +4,7 @@ import Header from '../header';
 import React from 'react';
 import DtConfig from './datatable_config';
 import { ArchiveContext } from '../../context/archiveContext';
-
+import Empty from '../Empty'
 
 const style = {
     width:'100%',
@@ -27,14 +27,14 @@ const Datatable = (props) =>
     <ArchiveContext.Consumer>
         {
             context =>  {
-                console.log(props.location)
                 let navigateData;
+                let fetching;
                 if(context.datastore[props.navigate]) {
                     navigateData = context.datastore[props.navigate].data
-                    console.log('navigateData', navigateData)
+                    fetching = context.datastore[props.navigate].fetching
                 }
                 let data;
-                if(props.tableName) {
+                if(props.tableName && !fetching) {
                     data = Object.values(navigateData[props.tableName])
                 }
 
@@ -42,7 +42,7 @@ const Datatable = (props) =>
                     <div style={style}>
                         <Header />
                         {
-                        (navigateData) ?
+                        (navigateData) ? // if table exists  than show table navigation
                         <React.Fragment>
                             <DtNavs
                                 data={Object.keys(navigateData).toUppperCase()}
@@ -50,19 +50,18 @@ const Datatable = (props) =>
                                 key={props.navigate}
                             />
                         {
-                         (data) ?
-                         <DatatableContainer
-                            data={data}
-                            tableName={props.tableName}
-                            key={props.tableName}
-                            header={(data[0]) ? Object.keys(data[0]).cameltoLabel() : null}
-                            table_prop_type={(data[0]) ? Object.keys(data[0]) : null}
-                        />
-                        : null
+                         (!fetching && data) ? // if data is not fetching
+                            (data.length != 0) ?
+                                <DatatableContainer
+                                    data={data}
+                                    tableName={props.tableName}
+                                    key={props.tableName}
+                                />
+                            : <Empty link={props.tableName.charAt(0).toLocaleUpperCase() + props.tableName.slice(1)}/> // if data is empty
+                        : null // put loading component here
                         }
-
                         </React.Fragment>
-                        : null
+                        : null // do not show anything if table does not exists
                         }
                     </div>
             )}

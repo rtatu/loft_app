@@ -13,47 +13,47 @@ const Truck = [
     },
     {
         label : "Vin No",
-        prop : "vinNo"
+        prop : "truckRegistration.vinNo"
     },
     {
         label : "Make",
-        prop : "make"
+        prop : "truckRegistration.make"
     },
     {
         label : "Model",
-        prop : "model"
+        prop : "truckRegistration.model"
     },
     {
         label : "Year",
-        prop : "year"
+        prop : "truckRegistration.year"
     },
     {
         label : "Plate No",
-        prop : "plateNo"
+        prop : "truckRegistration.plateNo"
     },
     {
         label : "Rin No",
-        prop : "rinNo"
+        prop : "truckRegistration.rinNo"
     },
     {
         label : "IFTA",
-        prop : "ifta"
+        prop : "truckRegistration.ifta"
     },
     {
         label : "Vehicle Weight",
-        prop : "vehicleWeight"
+        prop : "truckRegistration.vehicleWeight"
     },
     {
         label : "Vehicle Weight Unit",
-        prop : "vehicleWeightUnit"
+        prop : "truckRegistration.vehicleWeightUnit"
     },
     {
         label : "Reg Gross Weight",
-        prop : "regGrossWeight"
+        prop : "truckRegistration.regGrossWeight"
     },
     {
         label : "Reg Gross Weight Unit",
-        prop : "regGrossWeightUnit"
+        prop : "truckRegistration.regGrossWeightUnit"
     },
 ]
 

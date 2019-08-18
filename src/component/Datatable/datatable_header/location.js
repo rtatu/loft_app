@@ -1,4 +1,4 @@
-const location = [
+const Location = [
     {
         label : "Name",
         prop : "name"

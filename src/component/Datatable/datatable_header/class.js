@@ -1,19 +1,19 @@
 const  Class = [
     {
         label : "Name",
-        props : "name"
+        prop : "name"
     },
     {
         label : "Association With",
-        props : "associationWith"
+        prop : "associationWith"
     },
     {
         label : "Status",
-        props : "status"
+        prop : "status"
     },
     {
         label : "Color Code",
-        props : "colorCode"
+        prop : "colorCode"
     }
 ]
 
