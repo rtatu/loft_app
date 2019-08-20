@@ -4,6 +4,7 @@ import Home from "./home";
 import DataMaintenance from "./data_maintenance";
 import Empty from "../component/Empty";
 import FormContainer from "./form";
+import Planner from "./planner";
 
 const Root = () => (
   <Router>
@@ -19,6 +20,7 @@ const Root = () => (
     />
     <Route path="/empty" component={Empty} />
     <Route path="/form" component={FormContainer} />
+    <Route path="/planner" component={Planner} />
   </Router>
 );
 
