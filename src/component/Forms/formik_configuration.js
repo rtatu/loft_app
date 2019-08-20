@@ -1,17 +1,34 @@
 const config = {
-    mapPropsToValues : (props) => {
+  mapPropsToValues: props => {
+    // props -> formName
+    const values = {};
+    const formHeader = props.formheader[props.formName];
+    const headerKeys = Object.keys(formHeader);
 
-        // reutrn the mapping of propsToValue
-    },
-    validate : (values, formikBag) => {
+    for (let key of headerKeys) {
+      if (Array.isArray(formHeader[key])) {
+        for (let obj of formHeader[key]) {
+          values[key] = { ...values[key] };
+          values[`${key}`][`${obj.name}`] = obj.value || obj.defaultValue || "";
+        }
+      }
+    }
 
-        // validate values
-    },
-    validateOnBlur : true,
+    console.log(values);
+    // reutrn the mapping of propsToValue
+    return values;
+  },
+  validate: (values, formikBag) => {
+    // validate values
+    return {};
+  },
+  validateOnBlur: true,
 
-    handleSubmit : (values, {setSubmitting}) => {
-        // handle submittion of the form
-    },
-}
+  handleSubmit: (values, { setSubmitting }) => {
+    // handle submittion of the form
 
-export default config
+    console.log(values);
+  }
+};
+
+export default config;

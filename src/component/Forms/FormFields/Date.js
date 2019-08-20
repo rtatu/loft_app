@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const Date = ({label, handleChange}) =>
-    <div className="field">
-        <label>
-            {label}
-        </label>
-        <input type="date" />
-    </div>
+const Datefield = ({ label, handleChange, name, value }) => (
+  <div className="field">
+    <label>{label}</label>
+    <input type="date" name={name} onChange={handleChange} value={value} />
+  </div>
+);
 
-export default Date
+export default Datefield;

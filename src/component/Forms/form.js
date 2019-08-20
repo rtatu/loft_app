@@ -1,194 +1,201 @@
-import React from 'react';
-import './styles/form.sass'
-import Select from './FormFields/Select';
-import Text from './FormFields/Text';
-import Textarea from './FormFields/TextArea';
-import Date from './FormFields/Date';
+import React from "react";
+import "./form.sass";
+import Select from "./FormFields/Select";
+import Text from "./FormFields/Text";
+import Textarea from "./FormFields/TextArea";
+import Date from "./FormFields/Date";
 
-const data = {
-    "General" : [
-        {
-            "label" : "Customer Code",
-            "name" : "customerCode",
-            "type" : "autocomplete"
-        },
-        {
-            "label" : "Customer Name",
-            "name" : "customerName",
-            "type" : "autocomplete"
-        },
-        {
-            "label" : "Address Line 1",
-            "name" : "addressLine1",
-            "type" : "text"
-        },
-        {
-            "label" : "Address Line 2",
-            "name" : "addressLine2",
-            "type" : "text"
-        },
-        {
-            "label" : "Country",
-            "name" : "country",
-            "type" : "select",
-            "values" : ["USA", "CANADA"],
-            "defaultValue" : "USA"
-        },
-        {
-            "label" : "State",
-            "name" : "state_province",
-            "type" : "autocomplete"
-        },
-        {
-            "label" : "City",
-            "name" : "city",
-            "type" : "text"
-        },
-        {
-            "label" : "Postal Code",
-            "name" : "postal_zip",
-            "type" : "text"
-        },
-        {
-            "label" : "Cell",
-            "name" : "cell",
-            "type" : "text"
-        },
-        {
-            "label" : "Phone",
-            "name" : "phone",
-            "type" : "text"
-        },
-        {
-            "label" : "Email",
-            "name" : "email",
-            "type" : "text"
-        },
-        {
-            "label" : "Status",
-            "name" : "status",
-            "type" : "select",
-            "values" : ["ACTIVE", "INACTIVE"],
-            "defaultValue" : "ACTIVE"
-        },
-    ],
-    "Bill To" : [
-        {
-            "label" : "Billing Location",
-            "name" : "billingLocation",
-            "type" : "autocomplete"
-        },
-        {
-            "label" : "Terms",
-            "name" : "terms",
-            "type" : "autocomplete"
-        },
-        {
-            "label" : "Address",
-            "name" : "address",
-            "type" : "text"
-        },
-        {
-            "label" : "Status",
-            "name" : "status",
-            "type" : "select",
-            "values" : ["ACTIVE", "INACTIVE"],
-            "defaultValue" : "ACTIVE"
-        },
-        {
-            "label" : "Standard to Print Notes",
-            "name" : "standard_print_notes",
-            "type" : "textarea"
-        },
-        {
-            "label" : "Standard Invoice Instruction",
-            "name" : "standard_invoice_instruction",
-            "type" : "textarea"
-        },
-        {
-            "label" : "Postal Code",
-            "name" : "postal_zip",
-            "type" : "text"
-        },
-        {
-            "label" : "QuickPay Discount Type 1",
-            "name" : "discount_one",
-            "type" : "text"
-        },
-        {
-            "label" : "If Paid in",
-            "name" : "discount_one_unit",
-            "type" : "text"
-        },
-        {
-            "label" : "QuickPay Discount Type 2",
-            "name" : "discount_two",
-            "type" : "text"
-        },
-        {
-            "label" : "If Paid in",
-            "name" : "discount_two_unit",
-            "type" : "text"
-        },
-        {
-            "label" : "QuickPay Discount Type 3",
-            "name" : "discount_two",
-            "type" : "text"
-        },
-        {
-            "label" : "If Paid in",
-            "name" : "discount_three_unit",
-            "type" : "text"
-        },
-    ],
-    "Contacts" : [],
-    "Notification" : [],
-    "Notes" : []
-}
+let selectdata = [
+  { name: "Rajah" },
+  { name: "Burke" },
+  { name: "Wesley" },
+  { name: "Alan" },
+  { name: "Cooper" },
+  { name: "Drake" },
+  { name: "Roth" },
+  { name: "Fitzgerald" },
+  { name: "Ashton" },
+  { name: "Tobias" },
+  { name: "Linus" },
+  { name: "Garrison" },
+  { name: "Nasim" },
+  { name: "Keith" },
+  { name: "Sawyer" },
+  { name: "Lamar" },
+  { name: "Eaton" },
+  { name: "Garth" },
+  { name: "Francis" },
+  { name: "Kyle" },
+  { name: "Steven" },
+  { name: "Darius" },
+  { name: "Rafael" },
+  { name: "Abel" },
+  { name: "Kane" },
+  { name: "Damian" },
+  { name: "Cairo" },
+  { name: "Prescott" },
+  { name: "Rooney" },
+  { name: "Henry" },
+  { name: "Jeremy" },
+  { name: "Chancellor" },
+  { name: "Dexter" },
+  { name: "Callum" },
+  { name: "Hilel" },
+  { name: "Macon" },
+  { name: "Alec" },
+  { name: "Leo" },
+  { name: "Stuart" },
+  { name: "Beck" },
+  { name: "Derek" },
+  { name: "Ciaran" },
+  { name: "Jasper" },
+  { name: "Aaron" },
+  { name: "Hector" },
+  { name: "Jelani" },
+  { name: "Leo" },
+  { name: "Trevor" },
+  { name: "Ciaran" },
+  { name: "Grady" },
+  { name: "Christopher" },
+  { name: "Hakeem" },
+  { name: "Jasper" },
+  { name: "Reed" },
+  { name: "Clarke" },
+  { name: "Oleg" },
+  { name: "Thane" },
+  { name: "Ignatius" },
+  { name: "Coby" },
+  { name: "Micah" },
+  { name: "Herrod" },
+  { name: "Marvin" },
+  { name: "Tyrone" },
+  { name: "Ezekiel" },
+  { name: "Fritz" },
+  { name: "Blaze" },
+  { name: "Clinton" },
+  { name: "Thomas" },
+  { name: "Brendan" },
+  { name: "Axel" },
+  { name: "Chancellor" },
+  { name: "Dane" },
+  { name: "Garrison" },
+  { name: "Timon" },
+  { name: "Ryder" },
+  { name: "Odysseus" },
+  { name: "Raja" },
+  { name: "Jameson" },
+  { name: "Addison" },
+  { name: "Noble" },
+  { name: "Maxwell" },
+  { name: "Caleb" },
+  { name: "Warren" },
+  { name: "Colin" },
+  { name: "Sean" },
+  { name: "Zeus" },
+  { name: "Drew" },
+  { name: "Owen" },
+  { name: "Noble" },
+  { name: "Alec" },
+  { name: "Nasim" },
+  { name: "Abraham" },
+  { name: "Judah" },
+  { name: "Hedley" },
+  { name: "Reed" },
+  { name: "David" },
+  { name: "Geoffrey" },
+  { name: "Demetrius" },
+  { name: "George" },
+  { name: "Benedict" }
+];
 
-let keys = Object.keys(data)
-/**
- * @params {replace data with props}
- */
-const GeneralForm = () =>
+selectdata = selectdata.map(item => item.name);
+
+const showSections = e => {
+  const sections = document.getElementsByClassName("form-section");
+  const sectionsNav = document.getElementsByClassName("form-nav");
+
+  let index = parseInt(e.target.dataset.index);
+  for (let i = 0; i < sections.length; i++) {
+    if (i == index) {
+      sections[i].classList.remove("hide");
+      sectionsNav[i].classList.add("header-active");
+    } else {
+      sections[i].classList.add("hide");
+      sectionsNav[i].classList.remove("header-active");
+    }
+  }
+};
+
+const GeneralForm = props => {
+  let data = props.formheader[props.formName];
+  let keys = Object.keys(data);
+  let values = props.values;
+
+  return (
     <div className="form">
-        <form className="genform">
-            <div className="form-header">
-                {
-                    keys.map((item, index) =>
-                        <div key={index} className={(index == 0) ? " form-nav header-active" : "form-nav"}>
-                            {item}
-                        </div>
-                    )
-                }
+      <form className="genform" onSubmit={props.handleSubmit}>
+        <div className="form-header">
+          {keys.map((item, index) => (
+            <div
+              key={index}
+              className={index == 0 ? " form-nav header-active" : "form-nav"}
+              data-index={index}
+              onClick={showSections}
+            >
+              {item}
             </div>
-            {
-                keys.map((item, index) =>
-                    <div key={index} className={(index == 0) ? "form-section" : "form-section hide"}>
-                        {
-                            data[item].map( (nested_item, nested_index) =>
-                                (nested_index != 0) ?
-                                    <div key={nested_index} className="field">
-                                        <label>
-                                            {nested_item.label}
-                                        </label>
-                                        <input type={nested_item.type} />
-                                    </div>
-                                :
-                                <Select key={nested_index} label={nested_item.label}/>
-                                // <Text key={nested_index} label={nested_item.label}/>
-                                // <Date label={nested_item.label} key={nested_index}/>
+          ))}
+        </div>
+        {keys.map((item, index) => (
+          <div
+            key={index}
+            className={index == 0 ? "form-section" : "form-section hide"}
+          >
+            {Array.isArray(data[item])
+              ? data[item].map((nested_item, nested_index) => (
+                  <nested_item.component
+                    key={
+                      nested_item.changeOn
+                        ? `${nested_index}.${
+                            nested_item.labelChange[
+                              values[item][nested_item.changeOn]
+                            ]
+                          }`
+                        : nested_index
+                    }
+                    name={`${item}.${nested_item.name}`}
+                    handleChange={props.handleChange}
+                    value={values[`${item}.${nested_item.name}`]}
+                    label={
+                      nested_item.changeOn
+                        ? nested_item.labelChange[
+                            values[item][nested_item.changeOn]
+                          ]
+                        : nested_item.label
+                    }
+                    defaultValue={nested_item.defaultValue}
+                    data={nested_item.readOnly ? nested_item.data : selectdata}
+                    readOnly={
+                      nested_item.readOnly ? nested_item.readOnly : false
+                    }
+                    setFieldsValue={props.setFieldValue}
+                  />
+                ))
+              : null}
+          </div>
+        ))}
 
-                        )}
-                    </div>
-                )
-            }
-
-            <div className="form-action">
-                <button className="discard">Discard Changes</button>
-                <button className="save">Save</button>
-            </div>
-        </form>
+        <div className="form-action">
+          <button className="discard" type="button">
+            Discard Changes
+          </button>
+          <button className="save" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
+  );
+};
 
-export default GeneralForm
+export default GeneralForm;

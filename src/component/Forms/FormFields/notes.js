@@ -1,14 +1,14 @@
 import React from "react";
-import './styles/notes.sass';
+import './notes.sass';
 
 // add icon
-import attachment_added from '../../static/icon/attachment_added.svg';
-import add_attachment from '../../static/icon/attachment_add.svg';
-import send from '../../static/icon/send.svg';
+import attachment_added from '../../../static/icon/attachment_added.svg';
+import add_attachment from '../../../static/icon/attachment_add.svg';
+import send from '../../../static/icon/send.svg';
 
 // add avatar
-import current from '../../static/avatar_user.jpg';
-import another from '../../static/avatar_current.png';
+import current from '../../../static/avatar_user.jpg';
+import another from '../../../static/avatar_current.png';
 
 const data = [
     {
