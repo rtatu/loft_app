@@ -6,8 +6,8 @@ import Formheader from "./form_header";
 
 const FormHOC = withFormik(config)(GeneralForm);
 
-const FormContainer = () => (
-  <FormHOC formName="customer" formheader={Formheader} />
-);
-
+const FormContainer = props => {
+  const { name } = props.match.params;
+  return name ? <FormHOC formName={name} formheader={Formheader} /> : null;
+};
 export default FormContainer;

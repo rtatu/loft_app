@@ -1,9 +1,5 @@
 import React from "react";
 import "./form.sass";
-import Select from "./FormFields/Select";
-import Text from "./FormFields/Text";
-import Textarea from "./FormFields/TextArea";
-import Date from "./FormFields/Date";
 
 let selectdata = [
   { name: "Rajah" },
@@ -126,61 +122,70 @@ const showSections = e => {
   }
 };
 
+const ConditionalWrapper = (data, item, props, values) =>
+  // console.log(data, item);
+  Array.isArray(data[item]) ? (
+    <React.Fragment>
+      {data[item].map((nested_item, nested_index) => (
+        <nested_item.component
+          key={
+            nested_item.changeOn
+              ? `${nested_index}.${
+                  nested_item.labelChange[values[item][nested_item.changeOn]]
+                }`
+              : nested_index
+          }
+          name={`${item}.${nested_item.name}`}
+          handleChange={props.handleChange}
+          value={values[`${item}.${nested_item.name}`]}
+          label={
+            nested_item.changeOn
+              ? nested_item.labelChange[values[item][nested_item.changeOn]]
+              : nested_item.label
+          }
+          defaultValue={nested_item.defaultValue}
+          data={nested_item.readOnly ? nested_item.data : selectdata}
+          readOnly={nested_item.readOnly ? nested_item.readOnly : false}
+          setFieldsValue={props.setFieldValue}
+        />
+      ))}
+    </React.Fragment>
+  ) : null;
+
 const GeneralForm = props => {
   let data = props.formheader[props.formName];
-  let keys = Object.keys(data);
+  let keys = Object.keys(data); // keys reference to check if  address exists
+  let header_keys = keys.filter(item => (item != "Address" ? item : null)); // different key for not including "Address"
   let values = props.values;
 
   return (
     <div className="form">
       <form className="genform" onSubmit={props.handleSubmit}>
-        <div className="form-header">
-          {keys.map((item, index) => (
-            <div
-              key={index}
-              className={index == 0 ? " form-nav header-active" : "form-nav"}
-              data-index={index}
-              onClick={showSections}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-        {keys.map((item, index) => (
+        {header_keys.length != 1 ? (
+          <div className="form-header">
+            {header_keys.map((item, index) => (
+              <div
+                key={index}
+                className={index == 0 ? " form-nav header-active" : "form-nav"}
+                data-index={index}
+                onClick={showSections}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {header_keys.map((item, index) => (
           <div
             key={index}
             className={index == 0 ? "form-section" : "form-section hide"}
           >
-            {Array.isArray(data[item])
-              ? data[item].map((nested_item, nested_index) => (
-                  <nested_item.component
-                    key={
-                      nested_item.changeOn
-                        ? `${nested_index}.${
-                            nested_item.labelChange[
-                              values[item][nested_item.changeOn]
-                            ]
-                          }`
-                        : nested_index
-                    }
-                    name={`${item}.${nested_item.name}`}
-                    handleChange={props.handleChange}
-                    value={values[`${item}.${nested_item.name}`]}
-                    label={
-                      nested_item.changeOn
-                        ? nested_item.labelChange[
-                            values[item][nested_item.changeOn]
-                          ]
-                        : nested_item.label
-                    }
-                    defaultValue={nested_item.defaultValue}
-                    data={nested_item.readOnly ? nested_item.data : selectdata}
-                    readOnly={
-                      nested_item.readOnly ? nested_item.readOnly : false
-                    }
-                    setFieldsValue={props.setFieldValue}
-                  />
-                ))
+            {ConditionalWrapper(data, item, props, values)}
+            {index == 0 // Rendering Address after index 0
+              ? keys.includes("Address")
+                ? ConditionalWrapper(data, "Address", props, values)
+                : null
               : null}
           </div>
         ))}

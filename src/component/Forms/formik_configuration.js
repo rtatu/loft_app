@@ -1,6 +1,7 @@
 const config = {
   mapPropsToValues: props => {
     // props -> formName
+    console.log(props);
     const values = {};
     const formHeader = props.formheader[props.formName];
     const headerKeys = Object.keys(formHeader);

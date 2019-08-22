@@ -19,7 +19,7 @@ const Root = () => (
       component={DataMaintenance}
     />
     <Route path="/empty" component={Empty} />
-    <Route path="/form" component={FormContainer} />
+    <Route path="/form/:name" component={FormContainer} />
     <Route path="/planner" component={Planner} />
   </Router>
 );

@@ -13,6 +13,31 @@ const Customer = {
       component: Fields.Select
     },
     {
+      label: "Cell",
+      name: "cell",
+      component: Fields.Text
+    },
+    {
+      label: "Phone",
+      name: "phone",
+      component: Fields.Text
+    },
+    {
+      label: "Email",
+      name: "email",
+      component: Fields.Text
+    },
+    {
+      label: "Status",
+      name: "status",
+      component: Fields.Select,
+      data: ["ACTIVE", "INACTIVE"],
+      readOnly: true,
+      defaultValue: "ACTIVE"
+    }
+  ],
+  Address: [
+    {
       label: "Address Line 1",
       name: "addressLine1",
       component: Fields.Text
@@ -48,29 +73,6 @@ const Customer = {
       component: Fields.Text,
       labelChange: { USA: "Postal Code", CANADA: "Zip Code" },
       changeOn: "country"
-    },
-    {
-      label: "Cell",
-      name: "cell",
-      component: Fields.Text
-    },
-    {
-      label: "Phone",
-      name: "phone",
-      component: Fields.Text
-    },
-    {
-      label: "Email",
-      name: "email",
-      component: Fields.Text
-    },
-    {
-      label: "Status",
-      name: "status",
-      component: Fields.Select,
-      data: ["ACTIVE", "INACTIVE"],
-      readOnly: true,
-      defaultValue: "ACTIVE"
     }
   ],
   "Bill To": [
@@ -139,7 +141,63 @@ const Customer = {
     }
   ],
   Contacts: Fields.Text,
-  Notification: Fields.Text,
+  Notification: [
+    {
+      label: "Delay In Pickup",
+      name: "delayInPickup",
+      component: Fields.Select
+    },
+    {
+      label: "Delay In Delivery",
+      name: "delayInDelivery",
+      component: Fields.Select
+    },
+    {
+      label: "Order Entered",
+      name: "orderEntered",
+      component: Fields.Select
+    },
+    {
+      label: "Live Tracking Mail",
+      name: "liveTrackingMail",
+      component: Fields.Select
+    },
+    {
+      label: "Shipment Picked Up",
+      name: "shipmentPickedUp",
+      component: Fields.Select
+    },
+    {
+      label: "Shipment Delivered",
+      name: "shipmentDelivered",
+      component: Fields.Select
+    },
+    {
+      label: "Check Calls",
+      name: "checkCalls",
+      component: Fields.Select
+    },
+    {
+      label: "Email for accessorial charges",
+      name: "emailsForAccessorialCharges",
+      component: Fields.Select
+    },
+    {
+      label: "Invoice",
+      name: "invoice",
+      component: Fields.Select
+    },
+    {
+      label: "Invoice Due",
+      name: "invoiceDue",
+      component: Fields.Select
+    },
+    {
+      label: "Equipment Availability",
+      name: "equipmentAvailability",
+      component: Fields.Select
+    }
+  ],
   Notes: Fields.Notes
 };
 

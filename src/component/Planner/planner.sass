@@ -1,0 +1,164 @@
+@import '../../static/theme.sass'
+
+.planner-container
+  outline: 1px solid red
+  height: 100%
+  padding: 1px
+  font-family: "Source Sans Pro"
+
+.planner
+  margin: 20px
+  height: 100%
+  overflow-x: auto
+
+.planner-name
+  h1
+    font-size: 26px
+    font-family: "Source Sans Pro"
+    font-weight: 600
+    color: $primary-color-hex
+
+.planner-header
+  display: flex
+  margin-top: 20px
+
+
+.planner-header-left
+  height: 100px
+  box-sizing: border-box
+  max-height: 100px
+  border: 1px solid rgba(112,112,112,0.08)
+  display: flex
+  border-radius: 2px
+  flex-direction: column
+  margin-right: auto
+
+.planner-links
+  box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.06)
+  display: flex
+
+  a
+    text-decoration: none
+    display: block
+    width: 70px
+    font-size: 12px
+    background: white
+    height: 40px
+    text-align: center
+    line-height: 40px
+    color: $primary-color-hex
+
+    &.planner-active 
+      background: $second-primary-color-hex
+      color: white
+      border-top-right-radius: 15px
+
+.planner-data-header
+  margin-top: auto
+  display: flex
+  flex: 1
+  align-items: center
+  span
+    font-size: 13px
+    margin-left: 20px
+    margin-right: 20px
+    font-weight: 600
+    color: #131D4A
+  span:first-child
+    margin-right: auto
+
+
+.planner-header-right
+  display: flex
+  text-align: right
+  margin-left: 20px
+
+  .day
+    width: 100px
+    height: 100px
+    box-sizing: border-box
+    max-height: 100px
+    border: 1px solid rgba(112,112,112,0.06)
+    padding-top: 2px
+    padding-right: 5px
+    font-size: 12px
+    color: $second-primary-color-hex
+
+    span
+      display: block
+    
+    span:nth-child(2)
+      font-weight: 500
+
+.day
+    width: 100px
+    height: 100%
+    max-width: 100px
+    max-height: 100px
+    border: 1px solid rgba(112,112,112,0.06)
+    border-top: none
+    // border-right: none
+    box-sizing: border-box
+
+// planner data
+
+.planner-data
+  height: 100%
+  outline: 2px solid blue
+
+
+.planner-data-cell
+  display: flex
+
+.data-cell
+  width: 350px
+  min-width: 350px
+
+  height: 100px
+  // outline: 1px solid gray
+  font-size: 12px
+  display: flex
+  align-items: center
+  margin-right: auto
+  border: 1px solid rgba(112,112,112,0.08)
+  border-top: none
+  border-radius: 2px
+
+  img
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    border: 2px solid $second-primary-color-hex
+    box-sizing: border-box
+
+  span
+    margin-right: 20px
+    text-align: right
+
+  .data-profile
+    display: flex
+    align-items: center
+    margin-right: auto
+    margin-left: 20px
+
+    div
+      margin-left: 5px
+
+    span
+      display: block
+      text-align: left
+      color: $secondary-color-hex
+
+      &:first-child
+        color: $primary-color-hex
+        font-weight: 600
+
+.day-cell
+  display: grid
+  grid-template-columns: repeat(8, 100px)
+  margin-left: 20px
+  grid-gap: none
+
+.event
+  position: absolute
+  display: none
