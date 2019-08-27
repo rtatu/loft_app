@@ -120,6 +120,13 @@ const showSections = e => {
       sectionsNav[i].classList.remove("header-active");
     }
   }
+
+  // resize events
+  let form = document.getElementsByClassName("genform")[0];
+  let width = 800;
+  let height = form.offsetHeight + 100;
+  console.log(width, height);
+  electronRenderer.send("form-resize", { width, height });
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
@@ -137,7 +144,7 @@ const ConditionalWrapper = (data, item, props, values) =>
           }
           name={`${item}.${nested_item.name}`}
           handleChange={props.handleChange}
-          value={values[`${item}.${nested_item.name}`]}
+          value={values[`${item}`][`${nested_item.name}`]}
           label={
             nested_item.changeOn
               ? nested_item.labelChange[values[item][nested_item.changeOn]]

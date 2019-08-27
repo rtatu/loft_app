@@ -5,6 +5,7 @@ import DataMaintenance from "./data_maintenance";
 import Empty from "../component/Empty";
 import FormContainer from "./form";
 import Planner from "./planner";
+import Order from "./Order";
 
 const Root = () => (
   <Router>
@@ -21,6 +22,7 @@ const Root = () => (
     <Route path="/empty" component={Empty} />
     <Route path="/form/:name" component={FormContainer} />
     <Route path="/planner" component={Planner} />
+    <Route path="/order" exact component={Order} />
   </Router>
 );
 

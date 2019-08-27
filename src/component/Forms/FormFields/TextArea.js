@@ -1,4 +1,5 @@
 import React from "react";
+import "./fields.sass";
 
 const Textarea = ({ label, handleChange, name, value }) => (
   <div className="field textarea">

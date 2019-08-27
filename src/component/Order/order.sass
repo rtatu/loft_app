@@ -1,0 +1,180 @@
+@import './../../static/theme.sass';
+
+// pointer events
+
+.leg-list
+  pointer-events: none
+
+  img
+    pointer-events: auto
+
+.leg
+  cursor: pointer
+
+.order
+  // outline: 2px solid blue
+  width: 100%
+  height: 100%
+  font-family: "Source Sans Pro"
+
+.order-form
+  width: 800px
+  margin: 0 auto
+  margin-top: 10px
+
+.order-general
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 10px
+
+.hide
+  display: none
+
+
+// order summary
+
+.order-summary
+  display: flex
+  align-items: center
+
+  h1
+    font-size: 20px
+    color: $primary-color-hex
+
+.order-gen-summary
+  margin-left: auto
+  display: flex
+
+  div
+    display: flex
+    flex-direction: column
+    padding: 0px 10px
+    border-left: 1px solid rgba(112,112,112,0.1)
+
+    &:first-child
+      border-left: none
+
+    span
+      font-size: 12px
+      color: $primary-color-hex
+    
+    span:first-child
+      font-size: 12px
+      color: $secondary-color-hex
+
+
+.order-nav
+  width: 100%
+  margin-top: 10px
+  margin-bottom: 10px
+  border: 1px solid rgba(112,112,112,0.04)
+  ul
+    list-style-type: none
+    font-size: 12px
+    display: flex
+    box-shadow: 0px 1px 8px -2px rgba(112, 112, 112, 0.05)
+
+    li
+      height: 40px
+      line-height: 40px
+      min-width: 80px
+      text-align: center
+      user-select: none
+      cursor: pointer
+      border-top-right-radius: 12px
+
+      &:hover
+        color: $second-primary-color-hex
+
+      &.active
+        background: $second-primary-color-hex
+        color: white
+        box-shadow: 0px 1px 8px -2px rgba(112, 112, 112, 0.05)
+
+
+// order-leg 
+
+.order-leg
+  // outline: 1px solid blue
+
+.leg
+  margin-bottom: 10px
+  border: 1px solid rgba(112, 112, 112, 0.05)
+  box-shadow: 0px 1px 8px -2px rgba(112, 112, 112, 0.05)
+  max-height: 62px
+  overflow: hidden
+  transition: max-height 0.5s ease-out
+
+  // padding: 20px
+
+  // &:hover
+    // max-height: 600px
+
+
+.leg-list ul
+  display: flex
+  list-style-type: none
+  padding-bottom: 2px
+  box-sizing: border-box  
+
+  li
+    display: flex
+    flex-direction: column
+    flex: 2
+    height: 60px
+    box-sizing: border-box
+    user-select: none
+    cursor: pointer
+    padding: 10px
+
+
+    span
+      font-size: 12px
+      color: $primary-color-hex
+      padding-left: 2px
+    
+    span:first-child
+      font-size: 12px
+      color: $secondary-color-hex
+      font-weight: 600
+      padding-left: 0
+
+  li:nth-child(odd)
+    flex: 4
+
+  li:last-child
+    justify-content: center
+    img 
+      height: 10px
+    flex: 0
+
+
+.leg-form
+  // outline: 1px solid red
+  box-sizing: border-box
+  padding: 10px
+
+  & > div 
+    h1
+      color: $primary-color-hex
+      font-size: 12px
+      font-weight: 500
+      padding: 10px 2px
+
+  a
+    text-decoration: none
+    font-size: 12px
+    color: $second-primary-color-hex
+    cursor: pointer
+    margin-left: 2px
+    margin-top: 5px
+    display: inline-block
+    
+
+.leg-form .leg-pickup
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 10px
+
+    
+

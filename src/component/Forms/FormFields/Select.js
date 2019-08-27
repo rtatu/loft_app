@@ -1,5 +1,6 @@
 import React from "react";
 import down from "../../../static/icon/down.svg";
+import "./fields.sass";
 
 class Select extends React.Component {
   // constructor

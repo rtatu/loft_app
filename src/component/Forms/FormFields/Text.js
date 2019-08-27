@@ -1,4 +1,5 @@
 import React from "react";
+import "./fields.sass";
 
 const Text = ({ label, handleChange, name, value, defaultValue }) => (
   <div className="field">
