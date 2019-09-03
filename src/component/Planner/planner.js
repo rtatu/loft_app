@@ -177,40 +177,10 @@ const Planning = () => (
           ))}
         </div>
       </div>
-
-      {/* planner data */}
-
-      <div className="planner-data">
-        {data.map((item, index) => (
-          <div className="planner-data-cell" key={index}>
-            <div className="data-cell">
-              <div className="data-profile">
-                <img src={profile} />
-                <div>
-                  <span>{item.name}</span>
-                  <span>{item.code}</span>
-                </div>
-              </div>
-              <span>{item.currentStatus}</span>
-            </div>
-
-            <div className="day-cell">
-              {days.map((day, count) => (
-                <div className="day" key={count} />
-              ))}
-              {item.history.map((event, index) =>
-                event.span ? (
-                  <div className="event">{event.status}</div>
-                ) : (
-                  <div className="event">{event.status}</div>
-                )
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   </div>
 );
+
+const PlannerData = () => <div>Hello World!</div>;
 
 export default Planning;

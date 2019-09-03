@@ -90,6 +90,7 @@ const DatatableJSX = props => (
 class DatatableContainer extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       styles: {}
     };
@@ -197,6 +198,7 @@ class DatatableContainer extends React.Component {
     let sendData = {
       formName: this.props.tableName,
       data: data,
+      datastore: this.props.datastore,
       editMode: "?editMode"
     };
     electronRenderer.send("new-form", sendData);
@@ -207,7 +209,10 @@ class DatatableContainer extends React.Component {
       <div className="dt_container">
         {this.props.data ? (
           <React.Fragment>
-            <DtConfig name={this.props.tableName} />
+            <DtConfig
+              name={this.props.tableName}
+              datastore={this.props.datastore}
+            />
             <DatatableJSX
               styles={this.state.styles}
               datatable_head={DTHEADER[this.props.tableName]}

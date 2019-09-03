@@ -32,7 +32,7 @@ function createWindow(width, height, url, windowName) {
 
 // app event listners
 app.on("ready", () =>
-  createWindow(950, 768, "http://localhost:8000/#/order/", "mainWindow")
+  createWindow(950, 768, "http://localhost:8000/", "mainWindow")
 );
 
 // Quit when all windows are closed.
@@ -63,15 +63,28 @@ ipcMain.on("database-maintenance", (event, data) => {
 ipcMain.on("new-form", (event, data) => {
   let { formName } = data;
   let { editMode } = data;
+  let { datastore } = data;
   createWindow(
     1366,
     768,
     `http://localhost:8000/#/form/${formName}${editMode ? "?editMode" : ""}`,
     "formWindow"
   );
+
   if (editMode) {
     window["formWindow"].webContents.once("did-finish-load", () => {
-      window.formWindow.webContents.send("form_edit_mode", data.data);
+      window.formWindow.webContents.send("form_edit_mode", {
+        data: data.data,
+        datastore: datastore
+      });
+    });
+  } else {
+    console.log("sending data");
+
+    window["formWindow"].webContents.once("did-finish-load", () => {
+      window.formWindow.webContents.send("form_edit_mode", {
+        datastore: datastore
+      });
     });
   }
 });

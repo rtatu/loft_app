@@ -1,6 +1,6 @@
 const DatatableEvents = {
-  formEvent: function(formName) {
-    electronRenderer.send("new-form", { formName });
+  formEvent: function(formName, datastore) {
+    electronRenderer.send("new-form", { formName, datastore });
   }
 };
 

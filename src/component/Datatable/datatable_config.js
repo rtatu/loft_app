@@ -18,7 +18,11 @@ const DtConfig = props =>
         </div>
       </div>
       <div className="dtconfig-actions">
-        <button onClick={() => DatatableEvents["formEvent"](props.name)}>
+        <button
+          onClick={() =>
+            DatatableEvents["formEvent"](props.name, props.datastore)
+          }
+        >
           Add New{" "}
           {props.name.charAt(0).toLocaleUpperCase() + props.name.slice(1)}
         </button>

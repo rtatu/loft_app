@@ -8,58 +8,64 @@ const FormHOC = withFormik(config)(GeneralForm);
 
 class FormContainer extends React.Component {
   constructor(props) {
+    console.log("fm", props);
     super(props);
     this.state = {
       name: props.match.params.name,
       editMode: props.location.search,
-      values: undefined
+      values: undefined,
+      datastore: undefined
     };
   }
 
   componentDidMount() {
-    if (this.state.editMode == "?editMode") {
-      electronRenderer.on("form_edit_mode", (e, data) => {
-        this.setState({ values: data }, () => {
-          let form = document.getElementsByClassName("genform")[0];
-          let width = 800;
-          let height = form.offsetHeight + 100;
-          electronRenderer.send("form-resize", {
-            width,
-            height
-          });
-        });
-      });
-    }
-
-    if (this.state.editMode != "?editMode") {
-      let form = document.getElementsByClassName("genform")[0];
-      let width = 800;
-      let height = form.offsetHeight + 100;
-      electronRenderer.send("form-resize", {
-        width,
-        height
-      });
-    }
+    electronRenderer.on("form_edit_mode", (e, props) => {
+      let { data } = props;
+      if (data) {
+        this.setState(
+          { ...this.state, values: data, datastore: props.datastore },
+          () => console.log(this.state) || this.resizeForm()
+        );
+      } else {
+        console.log("im working");
+        this.setState({ datastore: props.datastore }, () => this.resizeForm());
+      }
+    });
   }
 
+  resizeForm = () => {
+    let form = document.getElementsByClassName("genform")[0];
+    let width = 800;
+    let height = form.offsetHeight + 100;
+    electronRenderer.send("form-resize", {
+      width,
+      height
+    });
+  };
+
   componentWillUnmount() {
-    if (this.state.editMode == "?editMode") {
-      electronRenderer.removeAllListeners("form_edit_mode");
-    }
+    electronRenderer.removeAllListeners("form_edit_mode");
   }
 
   render() {
     if (this.state.name) {
       if (this.state.editMode == "?editMode") {
-        return this.state.values ? (
+        return this.state.values && this.state.datastore ? (
           <FormHOC
             formName={this.state.name}
             formheader={Formheader}
             data={this.state.values}
+            datastore={this.state.datastore}
           />
         ) : null;
       }
-      return <FormHOC formName={this.state.name} formheader={Formheader} />;
+      return this.state.datastore ? (
+        <FormHOC
+          formName={this.state.name}
+          formheader={Formheader}
+          datastore={this.state.datastore}
+        />
+      ) : null;
     }
     return null;
   }

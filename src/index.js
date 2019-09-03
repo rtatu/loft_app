@@ -8,7 +8,7 @@ import Root from "./routes/";
 const App = () => (
   // <ArchiveProvider>
   <Root />
+  // </ArchiveProvider>
 );
-// </ArchiveProvider>
 
 ReactDOM.render(<App />, document.getElementById("root"));
