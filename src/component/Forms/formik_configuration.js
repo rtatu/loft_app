@@ -1,7 +1,5 @@
 const config = {
   mapPropsToValues: props => {
-    // props -> formName
-    console.log(props);
     const values = {};
     const formHeader = props.formheader[props.formName];
     const headerKeys = Object.keys(formHeader);
@@ -37,10 +35,12 @@ const config = {
                 : editdata[obj.name] || obj.defaultValue || "";
           }
         }
+      } else {
+        values[key] =
+          editdata[formHeader[key]["name"]] || formHeader[key]["defaultValue"];
       }
     }
 
-    console.log("values", values);
     // reutrn the mapping of propsToValue
     return values;
   },
@@ -52,6 +52,7 @@ const config = {
 
   handleSubmit: (values, formikBag) => {
     // handle submittion of the form
+    console.log(values);
 
     // data ready to send
     let keys = Object.keys(values);

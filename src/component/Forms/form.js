@@ -1,5 +1,8 @@
 import React from "react";
 import "./form.sass";
+import getIn from "../../utils/data_functions";
+import getComponent from "../../utils/get_react_comp";
+import { Form } from "formik";
 
 let selectdata = [
   { name: "Rajah" },
@@ -151,12 +154,26 @@ const ConditionalWrapper = (data, item, props, values) =>
               : nested_item.label
           }
           defaultValue={nested_item.defaultValue}
-          data={nested_item.readOnly ? nested_item.data : selectdata}
+          data={
+            nested_item.readOnly
+              ? nested_item.data
+              : nested_item.autoprop
+              ? getIn(props, nested_item.autoprop)
+              : null
+          }
+          autofillProp={nested_item.autofillProp}
           readOnly={nested_item.readOnly ? nested_item.readOnly : false}
           setFieldsValue={props.setFieldValue}
         />
       ))}
     </React.Fragment>
+  ) : item == "Notes" ? (
+    <data.Notes.component
+      name={item}
+      value={values[item]}
+      {...props}
+      render={data[item].render}
+    />
   ) : null;
 
 const GeneralForm = props => {
@@ -186,7 +203,13 @@ const GeneralForm = props => {
         {header_keys.map((item, index) => (
           <div
             key={index}
-            className={index == 0 ? "form-section" : "form-section hide"}
+            className={
+              index == 0
+                ? "form-section"
+                : Array.isArray(data[item])
+                ? "form-section hide"
+                : "form-section hide standalone"
+            }
           >
             {ConditionalWrapper(data, item, props, values)}
             {index == 0 // Rendering Address after index 0

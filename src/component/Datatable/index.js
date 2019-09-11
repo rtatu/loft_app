@@ -61,6 +61,7 @@ const Datatable = props => (
                       props.tableName.charAt(0).toLocaleUpperCase() +
                       props.tableName.slice(1)
                     }
+                    datastore={navigateData}
                   />
                 ) // if data is empty
               ) : null // put loading component here

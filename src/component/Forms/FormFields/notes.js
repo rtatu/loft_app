@@ -1,118 +1,104 @@
 import React from "react";
-import './notes.sass';
+import "./notes.sass";
 
 // add icon
-import attachment_added from '../../../static/icon/attachment_added.svg';
-import add_attachment from '../../../static/icon/attachment_add.svg';
-import send from '../../../static/icon/send.svg';
+import attachment_added from "../../../static/icon/attachment_added.svg";
+import add_attachment from "../../../static/icon/attachment_add.svg";
+import send from "../../../static/icon/send.svg";
 
 // add avatar
-import current from '../../../static/avatar_user.jpg';
-import another from '../../../static/avatar_current.png';
+import current from "../../../static/avatar_user.jpg";
+import another from "../../../static/avatar_current.png";
 
-const data = [
-    {
-        user : "Daniel Shiffman",
-        message:
-            `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-        attachment : null
-    },
-    {
-        user : "Rohit Tatu",
-        message:
-            `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-        attachment : null
-    },
-    {
-        user : "Rohit Tatu",
-        message : null,
-        attachment : {
-            name : "project_guide.pdf",
-            data : null
-        }
-    },
-    {
-        user : "Daniel Shiffman",
-        message:
-            `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-        attachment : null
-    },
-    {
-        user : "Daniel Shiffman",
-        message:
-            `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-        attachment : null
-    },
+const CURRENT_USER = "Rohit Tatu";
 
-];
-
-const CURRENT_USER = "Rohit Tatu"
-
-
-
-const Notes = () =>
-    <div className="notes_container">
-
-        <div className="notes_data">
-            {
-                data.map( (item, index) =>
-                    <div className={(CURRENT_USER == item.user) ? "notes_message right" : "notes_message"} key={index}>
-                        <img src={(CURRENT_USER == item.user) ? current : another} className="notes_user_profile"/>
-                        <div>
-                            <span>{item.user}</span>
-                            {
-                                (item.message !== null) ?
-                                <div className="message">
-                                    <p>{item.message}</p>
-                                </div>
-                                : (item.attachment !== null)
-                                    ? <div className="attachment">
-                                            <img src={attachment_added}/>
-                                            <span>{item.attachment.name}</span>
-                                        </div>
-                                    : null
-                            }
-                        </div>
-                    </div>
-                )
-            }
-        </div>
-
-        <div className="notes_input">
-            <div>
-                <img src={add_attachment}/>
-                <input type="text" placeholder="Enter your message"/>
+const NotesJSX = props => (
+  <div className="notes_container">
+    <div className="notes_data" ref={props.lastChild}>
+      {props.data.map(
+        (item, index) =>
+          console.log(index, props.data.length, "finding one") || (
+            <div
+              className={
+                CURRENT_USER == item.user
+                  ? "notes_message right"
+                  : "notes_message"
+              }
+              key={index}
+            //   ref={index == props.data.length - 1 ? props.lastChild : null}
+            >
+              <img
+                src={CURRENT_USER == item.user ? current : another}
+                className="notes_user_profile"
+              />
+              <div>
+                <span>{item.user}</span>
+                {item.message !== null ? (
+                  <div className="message">
+                    <p>{item.message}</p>
+                  </div>
+                ) : item.attachment !== null ? (
+                  <div className="attachment">
+                    <img src={attachment_added} />
+                    <span>{item.attachment.name}</span>
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <img src={send}/>
-        </div>
+          )
+      )}
     </div>
+
+    <div className="notes_input">
+      <div>
+        <img src={add_attachment} />
+        <input
+          type="text"
+          placeholder="Enter your message"
+          ref={props.inputRef}
+          value={props.value}
+          onChange={props.handleChange}
+        />
+      </div>
+      <img src={send} onClick={props.saveChanges} />
+    </div>
+  </div>
+);
+
+class Notes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ""
+    };
+    this.inputRef = React.createRef();
+  }
+
+  saveChanges = () => {
+    let val = this.inputRef.current.value;
+    this.props.push({
+      user: CURRENT_USER,
+      message: val,
+      attachment: null
+    });
+    this.setState({ value: "" })
+  };
+
+  handleChange = e => {
+    let value = e.target.value;
+    this.setState({ value });
+  };
+  render() {
+    return (
+      <NotesJSX
+        {...this.props}
+        inputRef={this.inputRef}
+        saveChanges={this.saveChanges}
+        value={this.state.value}
+        handleChange={this.handleChange}
+      />
+    );
+  }
+}
 
 export default Notes;

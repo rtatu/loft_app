@@ -12,7 +12,10 @@ const Empty = props => (
       {props.link ? (
         <NavLink
           onClick={() =>
-            DatatableEvents["formEvent"](`${props.link.toLocaleLowerCase()}`)
+            DatatableEvents["formEvent"](
+              `${props.link.toLocaleLowerCase(props.link)}`,
+              props.datastore
+            )
           }
         >
           Add New {props.link}

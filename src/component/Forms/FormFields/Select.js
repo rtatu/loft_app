@@ -7,14 +7,23 @@ class Select extends React.Component {
 
   constructor(props) {
     super(props);
-
     // create refs
+
+    try {
+      this.sug = this.props.readOnly
+        ? this.props.data
+        : Object.values(this.props.data);
+    } catch (error) {
+      console.log(this.props.data);
+      console.log(error);
+    }
 
     this.state = {
       show: false,
-      suggestions: this.props.data,
+      suggestions: this.sug,
       value: this.props.value || this.props.defaultValue || "",
-      select: -1
+      select: -1,
+      name: !this.props.readOnly ? this.props.autofillProp : undefined
     };
 
     this.input = React.createRef();
@@ -68,11 +77,23 @@ class Select extends React.Component {
   };
 
   handleSuggestions = value => {
-    let d = [...this.props.data];
+    let d = this.sug;
     let regex = new RegExp(`^${value}`, "i");
-    let suggestions = d.sort().filter(v => regex.test(v));
+    let suggestions = [];
+
+    if (this.state.name) {
+      suggestions = d
+        .sort(this.sortObject)
+        .filter(v => regex.test(v[this.state.name]));
+    } else {
+      suggestions = d.sort().filter(v => regex.test(v));
+    }
 
     this.setState({ value, suggestions, select: 0 });
+  };
+
+  sortObject = (a, b) => {
+    return a[this.state.name] - b[this.state.name];
   };
 
   handleOptionClick = e => {
@@ -87,7 +108,7 @@ class Select extends React.Component {
     if (inputText != "") {
       this.handleSuggestions(inputText);
     } else {
-      this.setState({ value: "", select: -1, suggestions: this.props.data });
+      this.setState({ value: "", select: -1, suggestions: this.sug });
     }
   };
 
@@ -176,7 +197,8 @@ class Select extends React.Component {
                 onMouseDown={this.handleOptionClick}
                 className={index == this.state.select ? "selected" : null}
               >
-                {value}
+                {/* console.log(this.state.name)  */}
+                {this.state.name ? value[this.state.name] : value}
               </li>
             ))}
           </ul>

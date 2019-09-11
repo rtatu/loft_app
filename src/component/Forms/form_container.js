@@ -27,7 +27,6 @@ class FormContainer extends React.Component {
           () => console.log(this.state) || this.resizeForm()
         );
       } else {
-        console.log("im working");
         this.setState({ datastore: props.datastore }, () => this.resizeForm());
       }
     });

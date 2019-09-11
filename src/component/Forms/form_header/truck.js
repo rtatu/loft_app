@@ -15,17 +15,23 @@ const Truck = {
     {
       label: "Category",
       name: "category",
-      component: Fields.Select
+      component: Fields.Select,
+      autoprop: "datastore.class",
+      autofillProp: "name"
     },
     {
       label: "Division",
       name: "division",
-      component: Fields.Select
+      component: Fields.Select,
+      autoprop: "datastore.subsidiary",
+      autofillProp: "name"
     },
     {
       label: "Terminal",
       name: "terminal",
-      component: Fields.Select
+      component: Fields.Select,
+      autoprop: "datastore.subsidiary",
+      autofillProp: "name"
     },
     {
       label: "Status",
@@ -112,8 +118,17 @@ const Truck = {
       component: Fields.Select
     }
   ],
-  Notes: Fields.Notes,
-  History: Fields.Text
+  Notes: {
+    name: 'notes',
+    defaultValue: [],
+    component: Fields.InputArrayHOC,
+    render: Fields.Notes
+  },
+  History: {
+    name: 'notes',
+    defaultValue: [],
+    component: Fields.Notes
+  },
 };
 
 export default Truck;

@@ -8,6 +8,7 @@ import Terminal from "./terminal";
 import Contact from "./contact";
 import Driver from "./driver";
 import Subsidiary from "./subsidiary";
+import Location from "./location";
 
 export default {
   customer: Customer,
@@ -19,5 +20,6 @@ export default {
   terminal: Terminal,
   contact: Contact,
   driver: Driver,
-  subsidiary: Subsidiary
+  subsidiary: Subsidiary,
+  location: Location
 };
