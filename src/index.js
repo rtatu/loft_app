@@ -6,9 +6,9 @@ import "./static/global.sass";
 import Root from "./routes/";
 
 const App = () => (
-  <ArchiveProvider>
-    <Root />
-  </ArchiveProvider>
+  // <ArchiveProvider>
+  <Root />
+  // </ArchiveProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
