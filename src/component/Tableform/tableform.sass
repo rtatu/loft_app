@@ -1,0 +1,58 @@
+.table-form-container
+  outline: 1px solid blue
+  width: 100%
+  height: 100%
+
+.table-form
+  width: 100%
+  box-shadow: 0px 2px 12px -6px rgba(112,112,112,0.2)
+
+.table-form-row
+  display: flex
+  list-style-type: none
+  margin: 0 auto
+  font-family: "Source Sans Pro"
+  font-size: 14px
+  font-weight: 500
+
+  &:first-child
+    background: #F6F8F9
+
+  &:last-child
+    border-bottom: 1px solid rgba(112, 112, 112, 0.13)
+
+    li:first-child
+      display: flex
+      align-items: center
+      justify-content: center
+
+      img
+        width: 20px
+        height: 20px
+  li
+    width: 100px
+    min-width: 100px
+    height: 50px
+    line-height: 50px
+    box-sizing: border-box
+    border-right: 1px solid rgba(112, 112, 112, 0.13)
+    border-top: 1px solid rgba(112, 112, 112, 0.13)
+
+    
+    span
+      margin-left: 10px
+
+    input
+      width: 100%
+      height: 100%
+      outline: none
+      border: none
+      -webkit-appearance: none
+      font-size: 12px
+      font-weight: 500
+      padding-left: 10px
+      box-sizing: border-box
+
+      &:focus
+        box-sizing: none
+        border: 1px solid #507DF0
