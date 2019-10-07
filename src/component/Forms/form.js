@@ -173,11 +173,13 @@ const ConditionalWrapper = (data, item, props, values) =>
       value={values[item]}
       {...props}
       render={data[item].render}
+      setFieldsValue={props.setFieldValue}
     />
   ) : null;
 
 const GeneralForm = props => {
   let data = props.formheader[props.formName];
+  console.log(props.formheader)
   let keys = Object.keys(data); // keys reference to check if  address exists
   let header_keys = keys.filter(item => (item != "Address" ? item : null)); // different key for not including "Address"
   let values = props.values;

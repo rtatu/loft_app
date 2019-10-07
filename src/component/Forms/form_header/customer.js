@@ -5,12 +5,12 @@ const Customer = {
     {
       label: "Customer Code",
       name: "customerCode",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Customer Name",
       name: "customerName",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Cell",
@@ -58,7 +58,7 @@ const Customer = {
     {
       label: "State",
       name: "state_province",
-      component: Fields.Select,
+      component: Fields.Text,
       labelChange: { USA: "State", CANADA: "Province" },
       changeOn: "country"
     },
@@ -79,7 +79,7 @@ const Customer = {
     {
       label: "Billing Location",
       name: "billingLocation",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Terms",
@@ -145,60 +145,65 @@ const Customer = {
     {
       label: "Delay In Pickup",
       name: "delayInPickup",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Delay In Delivery",
       name: "delayInDelivery",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Order Entered",
       name: "orderEntered",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Live Tracking Mail",
       name: "liveTrackingMail",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Shipment Picked Up",
       name: "shipmentPickedUp",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Shipment Delivered",
       name: "shipmentDelivered",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Check Calls",
       name: "checkCalls",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Email for accessorial charges",
       name: "emailsForAccessorialCharges",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Invoice",
       name: "invoice",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Invoice Due",
       name: "invoiceDue",
-      component: Fields.Select
+      component: Fields.Text
     },
     {
       label: "Equipment Availability",
       name: "equipmentAvailability",
-      component: Fields.Select
+      component: Fields.Text
     }
   ],
-  Notes: Fields.Notes
+  Notes: {
+    name: 'notes',
+    defaultValue: [],
+    component: Fields.InputArrayHOC,
+    render: Fields.Notes
+  }
 };
 
 export default Customer;

@@ -108,4 +108,10 @@ ipcMain.on("form_action", (event, data) => {
   }
 });
 
+ipcMain.on("form_action_response", (event, data) => {
+  if (window.formWindow){
+    window.formWindow.webContents.send( "action_response", data)
+  }
+})
+
 // data table actions

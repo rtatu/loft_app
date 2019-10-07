@@ -7,7 +7,7 @@ import Root from "./routes/";
 
 const App = () => (
   // <ArchiveProvider>
-  <Root />
+    <Root />
   // </ArchiveProvider>
 );
 

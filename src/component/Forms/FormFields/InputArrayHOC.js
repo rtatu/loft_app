@@ -1,4 +1,5 @@
 import React from "react";
+import { throws } from "assert";
 const data = [
   {
     user: "Daniel Shiffman",
@@ -63,7 +64,7 @@ class InputArrayHOC extends React.Component {
     console.log(props, "inputhoc")
     super(props);
     this.state = {
-      data: this.props.value || data
+      data: this.props.value || value 
     };
     this.lastChild = React.createRef()
   }
@@ -77,9 +78,19 @@ class InputArrayHOC extends React.Component {
     let data = [...this.state.data];
     data.push(obj);
     this.setState({ data }, ()=>{
-      this.lastChild.current.scrollTo(0,this.lastChild.current.scrollHeight)
+      this.lastChild.current.scrollTo(0,this.lastChild.current.scrollHeight);
+      this.pushValue()
     });
   };
+
+  // push the values to formik component
+
+  pushValue = () => {
+    if(this.props.setFieldValue) {
+      console.log("bola", this.state.data)
+      this.props.setFieldValue(this.props.name, this.state.data, false)
+    }
+  }
 
   remove = ind => {
     let data = [...this.state.data];

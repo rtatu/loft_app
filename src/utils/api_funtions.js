@@ -8,7 +8,9 @@ const lists = [
   "payterm",
   "service",
   "subsidiary",
-  "truck"
+  "truck",
+  "contact",
+  "customer"
 ];
 
 // get routes

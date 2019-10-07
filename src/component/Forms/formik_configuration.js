@@ -6,11 +6,14 @@ const config = {
     const editdata = props.data || {};
 
     for (let key of headerKeys) {
-      // alteredKEy
+      
+      // alteredKEy -> General = general
       let alteredKey = key
         .split(" ")
         .map((item, index) => (index == 0 ? item.toLocaleLowerCase() : item))
         .join("");
+      
+      
       if (Array.isArray(formHeader[key])) {
         for (let obj of formHeader[key]) {
           values[key] = { ...values[key] };
@@ -90,6 +93,14 @@ const config = {
       tableName: formikBag.props.formName,
       bag
     });
+
+    electronRenderer.on("action_response", (event,data) => {
+      if(data == 1){
+        electronRemote.getCurrentWindow().close()
+      } else {
+        console.log("errror")
+      }
+    })
   }
 };
 

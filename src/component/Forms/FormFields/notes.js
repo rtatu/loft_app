@@ -15,38 +15,32 @@ const CURRENT_USER = "Rohit Tatu";
 const NotesJSX = props => (
   <div className="notes_container">
     <div className="notes_data" ref={props.lastChild}>
-      {props.data.map(
-        (item, index) =>
-          console.log(index, props.data.length, "finding one") || (
-            <div
-              className={
-                CURRENT_USER == item.user
-                  ? "notes_message right"
-                  : "notes_message"
-              }
-              key={index}
-            //   ref={index == props.data.length - 1 ? props.lastChild : null}
-            >
-              <img
-                src={CURRENT_USER == item.user ? current : another}
-                className="notes_user_profile"
-              />
-              <div>
-                <span>{item.user}</span>
-                {item.message !== null ? (
-                  <div className="message">
-                    <p>{item.message}</p>
-                  </div>
-                ) : item.attachment !== null ? (
-                  <div className="attachment">
-                    <img src={attachment_added} />
-                    <span>{item.attachment.name}</span>
-                  </div>
-                ) : null}
+      {props.data.map((item, index) => (
+        <div
+          className={
+            CURRENT_USER == item.user ? "notes_message right" : "notes_message"
+          }
+          key={index}
+        >
+          <img
+            src={CURRENT_USER == item.user ? current : another}
+            className="notes_user_profile"
+          />
+          <div>
+            <span>{item.user}</span>
+            {item.message !== null ? (
+              <div className="message">
+                <p>{item.message}</p>
               </div>
-            </div>
-          )
-      )}
+            ) : item.attachment !== null ? (
+              <div className="attachment">
+                <img src={attachment_added} />
+                <span>{item.attachment.name}</span>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ))}
     </div>
 
     <div className="notes_input">
@@ -81,7 +75,7 @@ class Notes extends React.Component {
       message: val,
       attachment: null
     });
-    this.setState({ value: "" })
+    this.setState({ value: "" });
   };
 
   handleChange = e => {

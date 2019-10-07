@@ -4,7 +4,7 @@ const Truck = {
   General: [
     {
       label: "Unit No",
-      name: "unit No",
+      name: "unitNo",
       component: Fields.Text
     },
     {

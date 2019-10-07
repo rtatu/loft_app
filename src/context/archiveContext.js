@@ -39,7 +39,9 @@ class ArchiveProvider extends React.Component {
             driver: {},
             payterm: {},
             service: {},
-            subsidiary: {}
+            subsidiary: {},
+            customer: {},
+            contact: {}
           },
           fetching: false,
           error: false
@@ -111,9 +113,16 @@ class ArchiveProvider extends React.Component {
       tempState.datastore.lists.data[tableName] = {
         ...tempState.datastore.lists.data[tableName],
         ...result
-      };
+    }
 
-      this.setState({ ...tempState }, () => console.log(this.state));
+      this.setState({ ...tempState }, () => {
+        console.log(this.state);
+        electronRenderer.send("form_action_response", 1)
+        // elecron send for confirmation
+      });
+    } else {
+      // send error details
+      electronRenderer.send("form_action_response", 0)
     }
   };
 
