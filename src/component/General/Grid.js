@@ -1,15 +1,28 @@
-import React from 'react';
+import React from "react";
 
-const gridStyle = {
+const stack = {
   display: "grid",
   gridTemplateColumns: "1fr",
-  width: '100%'
+  width: "100%"
 };
 
-const Grid = props => (
-  <div className="grid" style={{...gridStyle, ...props.style}}>
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  width: "100%",
+  boxSizing: 'border-box',
+}
+
+const Stack = props => (
+  <div className="grid" style={{ ...stack, ...props.style }}>
     {props.children}
   </div>
 );
 
-export {Grid}
+const Grid = props => (
+  <div className="grid" style={{ ...grid, ...props.style }}>
+    {props.children}
+  </div>
+);
+
+export { Grid, Stack };
