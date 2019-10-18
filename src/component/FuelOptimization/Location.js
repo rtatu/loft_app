@@ -3,6 +3,11 @@ import "./geo.css";
 import Geosuggest from "react-geosuggest";
 
 class LocationSearch extends React.Component {
+  onSuggestSelect = (val) => {
+    this.props.handleChange(val, this.props.name, this.props.index)
+  }
+
+
   render() {
     return (
       <div>
@@ -14,7 +19,7 @@ class LocationSearch extends React.Component {
               : null
           }
         </div>
-        <Geosuggest />
+        <Geosuggest onSuggestSelect={this.onSuggestSelect} initialValue={this.props.initialValue} />
       </div>
     );
   }
