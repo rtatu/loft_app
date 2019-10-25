@@ -3,6 +3,9 @@ import FuelOpDetails from "./details";
 import Map from "./map";
 import "./fuel.sass";
 import { Header } from "../General/Header";
+import nearByMarker from "./nearbyMarkers";
+
+
 
 const FuelOptimzationJSX = (props) => (
   <div className="fuel-container">
@@ -46,8 +49,10 @@ class FuelOptimzation extends React.Component {
       waypoints: wp, // middle destination
       travelMode: window.google.maps.TravelMode.DRIVING
     }, (result, status) => {
-      console.log(result)
-      this.setState({ directions: (status == window.google.maps.DirectionsStatus.OK) ? result : undefined })
+      if(status == window.google.maps.DirectionsStatus.OK){
+        this.setState({ directions:  result })
+        console.log('nbm',nearByMarker(5, result))
+      }
     })
 
   }

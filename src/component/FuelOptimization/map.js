@@ -1,6 +1,7 @@
 import React from "react";
 import "./map.sass";
 import marker from '../../static/icon/svg/marker.svg'
+import stops from '../../static/icon/svg/stops.svg';
 import marker_second from '../../static/icon/svg/marker_second.svg'
 import {
   GoogleMap,
@@ -12,6 +13,7 @@ import {
 } from "react-google-maps";
 
 import data from './../../static/jsonFuel.json';
+
 
 
 class Map extends React.Component {
@@ -66,7 +68,6 @@ const FuelOpMap = withGoogleMap(props => (
     {(props.isMarkerShown && props.data) &&
       Object.keys(data).map(item => (
         data[item].map((station, i) => (
-          console.log(station) ||
           <Marker
             position={{ lat: station.lat, lng: station.lng }}
             icon={{ url: (station.brand == "LOVES") ? marker : marker_second, scaledSize: new window.google.maps.Size(15, 15) }}
@@ -95,8 +96,8 @@ const FuelOpMap = withGoogleMap(props => (
         options={{
           markerOptions: {
             icon: {
-              url: marker,
-              scaledSize: new window.google.maps.Size(15, 15),
+              url: stops,
+              scaledSize: new window.google.maps.Size(25, 25),
               label: 'A'
             }
           },
