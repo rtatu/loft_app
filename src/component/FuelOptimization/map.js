@@ -1,50 +1,47 @@
 import React from "react";
 import "./map.sass";
-import marker from '../../static/icon/svg/marker.svg'
-import stops from '../../static/icon/svg/stops.svg';
-import marker_second from '../../static/icon/svg/marker_second.svg'
+import marker from "../../static/icon/svg/marker.svg";
+import stops from "../../static/icon/svg/stops.svg";
+import marker_second from "../../static/icon/svg/marker_second.svg";
 import {
   GoogleMap,
   Marker,
   withGoogleMap,
   DirectionsRenderer,
   InfoWindow,
-  withScriptjs
 } from "react-google-maps";
-
-import data from './../../static/jsonFuel.json';
-
 
 
 class Map extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      data: data,
-      showMarker: '',
-    }
+      showMarker: ""
+    };
   }
 
-  showMarkerInfo = (val) => {
+  showMarkerInfo = val => {
     // show marker info
     if (this.state.showMarkerInfo == val) {
-      this.setState({ showMarker: "" })
+      this.setState({ showMarker: "" });
     } else {
-      this.setState({ showMarker: val })
+      this.setState({ showMarker: val });
     }
-
-  }
-
-
+  };
 
   render() {
-    return <MapJSX data={data} showMarkerInfo={this.showMarkerInfo} showMarker={this.state.showMarker} directions={this.props.directions} />
+    return (
+      <MapJSX
+        data={this.props.data}
+        showMarkerInfo={this.showMarkerInfo}
+        showMarker={this.state.showMarker}
+        directions={this.props.directions}
+      />
+    );
   }
-
 }
 
-const MapJSX = (props) => (
+const MapJSX = props => (
   <div className="fuelOp-map">
     <FuelOpMap
       isMarkerShown
@@ -59,38 +56,38 @@ const MapJSX = (props) => (
   </div>
 );
 
-const FuelOpMap = withGoogleMap(props => (
+const FuelOpMap = withGoogleMap(props => ( console.log(props.data) ||
   <GoogleMap
     defaultOptions={{ styles: mapstyle }}
     defaultZoom={8}
     defaultCenter={{ lat: 43.6532, lng: -79.3832 }}
   >
-    {(props.isMarkerShown && props.data) &&
-      Object.keys(data).map(item => (
-        data[item].map((station, i) => (
+    {props.isMarkerShown &&
+      props.data &&
+      Object.keys(props.data).map(item =>
+        props.data[item].map((station, i) => (
           <Marker
             position={{ lat: station.lat, lng: station.lng }}
-            icon={{ url: (station.brand == "LOVES") ? marker : marker_second, scaledSize: new window.google.maps.Size(15, 15) }}
+            icon={{
+              url: station.brand == "LOVES" ? marker : marker_second,
+              scaledSize: new window.google.maps.Size(15, 15)
+            }}
             key={i}
             onClick={() => props.showMarkerInfo(`${item}${i}`)}
           >
-            {
-              props.showMarker == `${item}${i}` &&
+            {props.showMarker == `${item}${i}` && (
               <InfoWindow onCloseClick={() => props.showMarkerInfo(i)}>
                 <p>
                   <b>Site Id</b> : {`${station.site_id}`} <br />
                   <b>Address</b> : {`${station.Street}`} <br />
                 </p>
               </InfoWindow>
-            }
+            )}
           </Marker>
         ))
-      ))
+      )}
 
-    }
-
-    {
-      props.directions &&
+    {props.directions && (
       <DirectionsRenderer
         directions={props.directions}
         options={{
@@ -98,18 +95,17 @@ const FuelOpMap = withGoogleMap(props => (
             icon: {
               url: stops,
               scaledSize: new window.google.maps.Size(25, 25),
-              label: 'A'
+              label: "A"
             }
           },
           polylineOptions: {
-            strokeColor: '#507DF0', // string - all css colr
+            strokeColor: "#507DF0", // string - all css colr
             strokeOpacity: 0.6, // number - 0.0 - 1.0
-            strokeWeight: 4, // number - stroke width in pixels
-
+            strokeWeight: 4 // number - stroke width in pixels
           }
-
-        }} />
-    }
+        }}
+      />
+    )}
   </GoogleMap>
 ));
 
@@ -277,6 +273,5 @@ const mapstyle = [
     ]
   }
 ];
-
 
 export default Map;

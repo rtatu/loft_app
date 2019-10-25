@@ -7,8 +7,6 @@ export default function nearByMarker(distance, directions) {
   let routeBoxer = new RouteBoxer();
 
   let gmarkers = getMarkers(data);
-
-  console.log(directions)
   
   let path = directions.routes[0].overview_path;
 
@@ -28,7 +26,10 @@ export default function nearByMarker(distance, directions) {
     }
   }
   console.table(containsMarker);
-  return containsMarker;
+
+  return {
+    "result" : containsMarker
+  }
 }
 
 const getMarkers = location => {
