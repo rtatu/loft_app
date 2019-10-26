@@ -145,12 +145,7 @@ class FuelOpDetails extends React.Component {
   removeVia = (index) => {
     let via = [...this.state.via]
 
-    // at 0 index empty the array
-    if (index == 0) {
-      via = []
-    } else {
-      via.splice(index, index)
-    }
+    via.splice(index, 1) // remove 1 item at index
 
     this.setState({ via })
   }

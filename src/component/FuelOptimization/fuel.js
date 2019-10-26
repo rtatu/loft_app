@@ -18,7 +18,7 @@ const FuelOptimzationJSX = props => (
     />
     <div className="fuel-op-container">
       <FuelOpDetails handleDirection={props.handleDirection} />
-      <Map directions={props.directions} data={props.data}/>
+      <Map directions={props.directions} data={props.data} />
     </div>
   </div>
 );
@@ -33,6 +33,7 @@ class FuelOptimzation extends React.Component {
   }
 
   handleDirection = (source, destination, wayPoints) => {
+
     const DirectionService = new window.google.maps.DirectionsService();
 
     let wp = [];
@@ -62,9 +63,11 @@ class FuelOptimzation extends React.Component {
       (result, status) => {
         if (status == window.google.maps.DirectionsStatus.OK) {
           this.setState({ directions: result });
-          let data = nearByMarker(5, result);
+          let data = nearByMarker(5, result); // getting nearby marker
 
-          this.setState({data_points: data}, ()=>console.log('changing state', this.state))
+          this.setState({ data_points: data }) // changing the state
+
+
         }
       }
     );
