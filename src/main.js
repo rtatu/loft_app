@@ -3,7 +3,15 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
-const { ipcMain } = require("electron");
+const { ipcMain, dialog } = require("electron");
+
+
+
+const messageBoxOptions = {
+  type: "error",
+  title: "Error in Main process",
+  message: "Can not connect to the server"
+};
 
 let window = {};
 
@@ -31,9 +39,13 @@ function createWindow(width, height, url, windowName) {
 }
 
 // app event listners
-app.on("ready", () =>
-  createWindow(950, 768, "http://localhost:8000/", "mainWindow")
-);
+app.on("ready", () =>{
+
+  dialog.showMessageBox(messageBoxOptions);
+  const err = new Error('Can not connect to the server');
+  throw err;
+  // createWindow(950, 768, "http://localhost:8000/", "mainWindow")
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function() {

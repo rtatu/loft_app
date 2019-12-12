@@ -56,7 +56,7 @@ const MapJSX = props => (
   </div>
 );
 
-const FuelOpMap = withGoogleMap(props => ( console.log(props.data) ||
+const FuelOpMap = withGoogleMap(props => ( 
   <GoogleMap
     defaultOptions={{ styles: mapstyle }}
     defaultZoom={8}

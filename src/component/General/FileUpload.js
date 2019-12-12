@@ -6,7 +6,7 @@ import PapaParse from "papaparse";
 
 const UploadFieldJSX = props => (
   <div style={uploadfieldstyle} id="file-drop-area">
-    <p style={addfont}>click to choose to upload file</p>
+    <p style={addfont} ref={props.fileName}>click to choose to upload file</p>
     <div>
       <input
         type="file"
@@ -22,14 +22,18 @@ const UploadFieldJSX = props => (
 );
 
 // csv - file reader using papa parser
-const readCSVFile = e => {
+const readCSVFile = (e, label, setData) => {
   let reader = new FileReader();
   if (e.target.files.length > 0) {
     const filename = e.target.files[0].name;
 
     reader.onload = event => {
-      const csvData = PapaParse.parse(event.target.result);
-      console.log(csvData.data, filename);
+      const csvData = PapaParse.parse(event.target.result, {
+        header: true
+      });
+
+      label.innerText = filename
+      setData(csvData.data);
     };
 
     reader.readAsText(e.target.files[0], "UTF-8");
@@ -37,11 +41,29 @@ const readCSVFile = e => {
 };
 
 class UploadField extends React.Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      fileData : undefined
+    }
+
+    this.fileName = React.createRef();
+  }
+
+
   handleFileUpload = e => {
-    readCSVFile(e);
+    readCSVFile(e, this.fileName.current, this.setData);
   };
+
+  setData = (data) => {
+    this.setState({fileData: data}, () => {
+      this.props.pushData(this.state.fileData)
+    })
+  }
   render() {
-    return <UploadFieldJSX handleChange={this.handleFileUpload} />;
+    return <UploadFieldJSX handleChange={this.handleFileUpload} fileName={this.fileName}/>;
   }
 }
 

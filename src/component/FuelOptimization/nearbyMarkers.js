@@ -25,10 +25,9 @@ export default function nearByMarker(distance, directions) {
       }
     }
   }
-  console.table(containsMarker);
 
   return {
-    "result" : containsMarker
+    "gasStation" : containsMarker
   }
 }
 

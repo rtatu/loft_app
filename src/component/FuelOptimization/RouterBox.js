@@ -125,11 +125,9 @@ RouteBoxer.prototype.buildGrid_ = function (vertices, range) {
     routeBounds.extend(vertices[i]);
   }
 
-  console.log('yee', routeBounds)
   
   // Find the center of the bounding box of the path
   var routeBoundsCenter = routeBounds.getCenter();
-  console.log(routeBounds.getCenter().lat(),routeBounds.getCenter().lng())
   
   // Starting from the center define grid lines outwards vertically until they
   //  extend beyond the edge of the bounding box by more than one cell
