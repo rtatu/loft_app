@@ -19,7 +19,7 @@ const FuelOptimzationJSX = props => (
     />
     <div className="fuel-op-container">
       <FuelOpDetails handleDirection={props.handleDirection} />
-      <Map directions={props.directions} data={props.data}/>
+      <Map directions={props.directions} data={props.data} />
     </div>
   </div>
 );
@@ -33,6 +33,7 @@ class FuelOptimzation extends React.Component {
     };
   }
 
+<<<<<<< HEAD
   handleDirection = (props) => {
 
     let {source, destination} = props;
@@ -45,6 +46,9 @@ class FuelOptimzation extends React.Component {
       fuelRateList,
       reserve,
       pricelist} = props;
+=======
+  handleDirection = (source, destination, wayPoints) => {
+>>>>>>> c7cb31288d4122cdd209cb65628b8b4ef200936c
 
     const DirectionService = new window.google.maps.DirectionsService();
 
@@ -79,8 +83,16 @@ class FuelOptimzation extends React.Component {
       (result, status) => {
         if (status == window.google.maps.DirectionsStatus.OK) {
           this.setState({ directions: result });
+<<<<<<< HEAD
           let data = nearByMarker(offRoadDistance, result);
           this.setState({data_points: data})
+=======
+          let data = nearByMarker(5, result); // getting nearby marker
+
+          this.setState({ data_points: data }) // changing the state
+
+
+>>>>>>> c7cb31288d4122cdd209cb65628b8b4ef200936c
         }
       }
     );

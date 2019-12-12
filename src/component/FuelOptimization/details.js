@@ -165,7 +165,11 @@ class FuelOpDetails extends React.Component {
   removeVia = index => {
     let via = [...this.state.via];
 
+<<<<<<< HEAD
     via.splice(index, 1);
+=======
+    via.splice(index, 1) // remove 1 item at index
+>>>>>>> c7cb31288d4122cdd209cb65628b8b4ef200936c
 
     this.setState({ via });
   };
