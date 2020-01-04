@@ -86,7 +86,7 @@ const FuelOpDetailsJSX = props => (
 
       <div>
         <label style={{ marginBottom: "5px" }}>Gas Station Data</label>
-        <UploadField pushData={props.pushData}/>
+        <UploadField pushData={props.pushData} />
       </div>
     </Stack>
     <div className="fuel-op-button">
@@ -111,7 +111,7 @@ class FuelOpDetails extends React.Component {
       initFuel: "100",
       fuelRateList: "",
       reserve: "",
-      pricelist : ""
+      pricelist: ""
     };
   }
 
@@ -130,10 +130,11 @@ class FuelOpDetails extends React.Component {
     }
   };
 
-
-  handlePriceList = (data) => {
-    this.setState({pricelist : data}, () => {console.log(this.state)})
-  }
+  handlePriceList = data => {
+    this.setState({ pricelist: data }, () => {
+      console.log(this.state);
+    });
+  };
 
   // update state for rest of the component
   handleChange = (e, name) => {
@@ -165,11 +166,7 @@ class FuelOpDetails extends React.Component {
   removeVia = index => {
     let via = [...this.state.via];
 
-<<<<<<< HEAD
     via.splice(index, 1);
-=======
-    via.splice(index, 1) // remove 1 item at index
->>>>>>> c7cb31288d4122cdd209cb65628b8b4ef200936c
 
     this.setState({ via });
   };
@@ -177,10 +174,7 @@ class FuelOpDetails extends React.Component {
   // optimized route function
 
   optimizedRoute = () => {
-    this.props.handleDirection(
-      {...this.state}
-      
-    );
+    this.props.handleDirection({ ...this.state });
   };
 
   render() {
