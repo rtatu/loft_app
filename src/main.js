@@ -95,6 +95,8 @@ function createWindow(width, height, url, windowName) {
     }
   });
 
+  window[windowName].setMenuBarVisibility(false);
+
   // and load the index.html of the app.
   window[windowName].loadURL(url);
 

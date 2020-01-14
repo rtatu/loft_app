@@ -7,7 +7,8 @@ import FormContainer from "./form";
 import Planner from "./planner";
 import Order from "./Order";
 import TableForm from "./tableform";
-import FuelOp from './fuelop'
+import FuelOp from "./fuelop";
+import Maintenance from "./maintenance";
 
 const Root = () => (
   <Router>
@@ -27,6 +28,7 @@ const Root = () => (
     <Route path="/order" exact component={Order} />
     <Route path="/tableform" exact component={TableForm} />
     <Route path="/fo" exact component={FuelOp} />
+    <Route path="/maintenance" exact component={Maintenance} />
   </Router>
 );
 
