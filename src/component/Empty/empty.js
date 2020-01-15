@@ -17,6 +17,7 @@ const Empty = props => (
               props.datastore
             )
           }
+          to="#"
         >
           Add New {props.link}
         </NavLink>

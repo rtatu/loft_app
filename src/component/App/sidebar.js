@@ -82,13 +82,13 @@ const SidebarJSX = () => (
           <span className="sidebar_hide">Collapse Panel</span>
         </li>
         <li className="base_options">
-          <NavLink to="#">
+          <NavLink to="setting">
             <img src={images["Setting"]} />
             <span className="sidebar_hide">Setting</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="#">
+          <NavLink to="logout">
             <img src={images["Logout"]} />
             <span className="sidebar_hide">Log Out</span>
           </NavLink>
