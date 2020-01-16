@@ -60,9 +60,5 @@ const auth = () => {
   };
 };
 
-const database = () => {
-  let token = Storage.getItem("token");
-  return {};
-};
-
 export default auth;
+

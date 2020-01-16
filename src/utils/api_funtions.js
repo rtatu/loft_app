@@ -1,5 +1,6 @@
 import axios from "axios";
-import auth from "./loftsdk";
+import auth from "./@loftsdk/auth";
+import database from "./@loftsdk/database";
 
 const lists = [
   "class",
@@ -11,22 +12,15 @@ const lists = [
   "subsidiary",
   "truck",
   "contact",
-  "customer"
+  "customer",
+  "issue"
 ];
 
 // get routes
 const fetchList = async () => {
   const data = {};
 
-  auth()
-    .signInWithEmailAndPassword("yashmalik23@gmail.com", "12345678")
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
+  database().ref().getAll()
   try {
     for (let list of lists) {
       data[list] = await get(list).catch(error => {
