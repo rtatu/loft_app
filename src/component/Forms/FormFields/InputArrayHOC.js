@@ -61,36 +61,35 @@ const data = [
 
 class InputArrayHOC extends React.Component {
   constructor(props) {
-    console.log(props, "inputhoc")
+    console.log(props, "inputhoc");
     super(props);
     this.state = {
-      data: this.props.value || value 
+      data: this.props.value || value
     };
-    this.lastChild = React.createRef()
+    this.lastChild = React.createRef();
   }
 
-  componentDidMount(){
-    this.lastChild.current.scrollIntoView(false)
-    
+  componentDidMount() {
+    this.lastChild.current.scrollIntoView(false);
   }
 
   push = obj => {
     let data = [...this.state.data];
     data.push(obj);
-    this.setState({ data }, ()=>{
-      this.lastChild.current.scrollTo(0,this.lastChild.current.scrollHeight);
-      this.pushValue()
+    this.setState({ data }, () => {
+      this.lastChild.current.scrollTo(0, this.lastChild.current.scrollHeight);
+      this.pushValue();
     });
   };
 
   // push the values to formik component
 
   pushValue = () => {
-    if(this.props.setFieldValue) {
-      console.log("bola", this.state.data)
-      this.props.setFieldValue(this.props.name, this.state.data, false)
+    if (this.props.setFieldValue) {
+      console.log("bola", this.state.data);
+      this.props.setFieldValue(this.props.name, this.state.data, false);
     }
-  }
+  };
 
   remove = ind => {
     let data = [...this.state.data];
@@ -99,7 +98,14 @@ class InputArrayHOC extends React.Component {
   };
 
   render() {
-    return <this.props.render data={this.state.data} push={this.push} remove={this.remove} lastChild={this.lastChild}/>;
+    return (
+      <this.props.render
+        data={this.state.data}
+        push={this.push}
+        remove={this.remove}
+        lastChild={this.lastChild}
+      />
+    );
   }
 }
 

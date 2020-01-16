@@ -9,7 +9,7 @@ const CheckBox = props => (
       className="col-vis-check checkbox-field"
       value={props.value[props.label]["checked"]}
       checked={props.value[props.label]["checked"]}
-      onChange={(e) => props.handleChange(e, "checked", props.label)}
+      onChange={e => props.handleChange(e, "checked", props.label)}
     />
     <div className="custom-checkbox">
       <svg className="svg svg-icon" viewBox="0 0 20 20">

@@ -12,15 +12,16 @@ const lists = [
   "subsidiary",
   "truck",
   "contact",
-  "customer",
-  "issue"
+  "customer"
 ];
 
 // get routes
 const fetchList = async () => {
   const data = {};
 
-  database().ref().getAll()
+  // database()
+  //   .ref()
+  //   .getAll();
   try {
     for (let list of lists) {
       data[list] = await get(list).catch(error => {

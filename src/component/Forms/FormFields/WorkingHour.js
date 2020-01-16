@@ -117,7 +117,10 @@ const DropDownHOC = FormField => {
       } else {
         dayData[type] = e.target.value != "" ? e.target.value : "00:00";
       }
-      this.setState({ value: { ...this.state.value, [day]: { ...dayData } } }, ()=>console.log(this.state));
+      this.setState(
+        { value: { ...this.state.value, [day]: { ...dayData } } },
+        () => console.log(this.state)
+      );
     };
 
     render() {
@@ -160,7 +163,7 @@ const DropDownHOC = FormField => {
       return;
     }
 
-    this.setState({ show: false }, ()=>{
+    this.setState({ show: false }, () => {
       this.props.setFieldsValue(this.props.name, this.state.value, false);
     });
   };

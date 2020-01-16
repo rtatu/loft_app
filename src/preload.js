@@ -1,9 +1,5 @@
 const { ipcRenderer, remote, webContents } = require("electron");
 
-console.log("preloading");
-
-console.log(webContents);
-
 window.electronRenderer = ipcRenderer;
 window.electronRemote = remote;
 window.wc = webContents;

@@ -128,8 +128,8 @@ const showSections = e => {
   let form = document.getElementsByClassName("genform")[0];
   let width = 800;
   let height = form.offsetHeight + 100;
-  console.log(width, height);
-  electronRenderer.send("form-resize", { width, height });
+
+  electronRemote.getCurrentWindow().setSize(width, height);
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
@@ -179,7 +179,7 @@ const ConditionalWrapper = (data, item, props, values) =>
 
 const GeneralForm = props => {
   let data = props.formheader[props.formName];
-  console.log(props.formheader)
+  console.log(props.formheader);
   let keys = Object.keys(data); // keys reference to check if  address exists
   let header_keys = keys.filter(item => (item != "Address" ? item : null)); // different key for not including "Address"
   let values = props.values;

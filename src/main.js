@@ -169,13 +169,6 @@ ipcMain.on("new-form", (event, data) => {
 
 // ipcMain data exchange event listener
 
-// form actions
-
-ipcMain.on("form-resize", (event, data) => {
-  const { width, height } = data;
-  window.formWindow.setSize(width, height);
-  // window.formWindow.center();
-});
 ipcMain.on("form_action", (event, data) => {
   // form action -> archive-context listener -> window["mainWindow"]
   if (window.dataMaintenanceWindow) {

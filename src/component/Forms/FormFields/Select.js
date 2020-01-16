@@ -158,7 +158,7 @@ class Select extends React.Component {
       ) {
         this.setState({ value: this.selected.current.innerText });
       } else if (this.state.suggestions.length == 0) {
-        console.log("yup")
+        console.log("yup");
         this.setState({ value: "", suggestions: this.sug });
       }
     }

@@ -97,6 +97,7 @@ class DatatableContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.fromDeco);
     if (this.props.data) {
       this.resizeEvent();
     }

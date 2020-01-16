@@ -1,5 +1,7 @@
 import React from "react";
 import fetchList, { add } from "../utils/api_funtions";
+import database from "../utils/@loftsdk/database";
+import auth from "../utils/@loftsdk/auth";
 
 // creating context
 const ArchiveContext = React.createContext();
@@ -51,13 +53,12 @@ class ArchiveProvider extends React.Component {
   }
 
   componentDidMount() {
-    // fetch all the lists
-
-    // return 0
-
-    fetchList()
+    database()
+      .ref()
+      .getAll()
       .then(res => this.filterData(res))
       .then(data => {
+        console.log(data, "check 12333333");
         let tempState = { ...this.state };
 
         for (let key of Object.keys(tempState.datastore.lists.data)) {
@@ -106,23 +107,26 @@ class ArchiveProvider extends React.Component {
   addToStore = async (tableName, bag) => {
     // path to route will be -> http://localhost:3000/archive/${tableName}
 
-    let result = await add(tableName, bag).catch(err => console.log(err));
+    let result = await database()
+      .ref(`/archive/${tableName}`)
+      .create(bag)
+      .catch(err => console.log(err));
     if (result) {
       result = { [result.data.response.id]: result.data.response };
       let tempState = { ...this.state };
       tempState.datastore.lists.data[tableName] = {
         ...tempState.datastore.lists.data[tableName],
         ...result
-    }
+      };
 
       this.setState({ ...tempState }, () => {
         console.log(this.state);
-        electronRenderer.send("form_action_response", 1)
+        electronRenderer.send("form_action_response", 1);
         // elecron send for confirmation
       });
     } else {
       // send error details
-      electronRenderer.send("form_action_response", 0)
+      electronRenderer.send("form_action_response", 0);
     }
   };
 
