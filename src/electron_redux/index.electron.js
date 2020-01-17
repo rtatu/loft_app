@@ -17,6 +17,12 @@ Object.defineProperty(exports, "forwardToMainWithParams", {
     return _forwardToMain.forwardToMainWithParams;
   }
 });
+Object.defineProperty(exports, "forwardToRenderer", {
+  enumerable: true,
+  get: function get() {
+    return _forwardToRenderer["default"];
+  }
+});
 Object.defineProperty(exports, "triggerAlias", {
   enumerable: true,
   get: function get() {
@@ -27,6 +33,12 @@ Object.defineProperty(exports, "createAliasedAction", {
   enumerable: true,
   get: function get() {
     return _createAliasedAction["default"];
+  }
+});
+Object.defineProperty(exports, "replayActionMain", {
+  enumerable: true,
+  get: function get() {
+    return _replayActionMain["default"];
   }
 });
 Object.defineProperty(exports, "replayActionRenderer", {
@@ -44,9 +56,13 @@ Object.defineProperty(exports, "getInitialStateRenderer", {
 
 var _forwardToMain = _interopRequireWildcard(require("./middleware/forwardToMain"));
 
+var _forwardToRenderer = _interopRequireDefault(require("./middleware/forwardToRenderer"));
+
 var _triggerAlias = _interopRequireDefault(require("./middleware/triggerAlias"));
 
 var _createAliasedAction = _interopRequireDefault(require("./helpers/createAliasedAction"));
+
+var _replayActionMain = _interopRequireDefault(require("./helpers/replayActionMain"));
 
 var _replayActionRenderer = _interopRequireDefault(require("./helpers/replayActionRenderer"));
 
