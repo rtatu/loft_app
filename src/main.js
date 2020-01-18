@@ -1,177 +1,44 @@
 const electron = require("electron");
 const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
-const url = require("url");
-const { ipcMain, dialog } = require("electron");
-const { createStore, applyMiddleware } = require("redux");
+const { ipcMain } = require("electron");
+const windowManager = require("./main/windowManager");
+const mainStore = require("./store/mainStore");
 
-const fetch = require("node-fetch");
-// fetch
-
-const {
-  forwardToRenderer,
-  triggerAlias,
-  replayActionMain
-} = require("./electron_redux/index.electron");
-
-const thunk = require("redux-thunk").default;
-
-// this should be placed at top of main.js to handle setup events quickly
-if (handleSquirrelEvent(app)) {
-  // squirrel event handled and app will exit in 1000ms, so don't do anything else
-  return;
-}
-
-function handleSquirrelEvent(application) {
-  if (process.argv.length === 1) {
-    return false;
-  }
-
-  const ChildProcess = require("child_process");
-  const path = require("path");
-
-  const appFolder = path.resolve(process.execPath, "..");
-  const rootAtomFolder = path.resolve(appFolder, "..");
-  const updateDotExe = path.resolve(path.join(rootAtomFolder, "Update.exe"));
-  const exeName = path.basename(process.execPath);
-
-  const spawn = function(command, args) {
-    let spawnedProcess, error;
-
-    try {
-      spawnedProcess = ChildProcess.spawn(command, args, {
-        detached: true
-      });
-    } catch (error) {}
-
-    return spawnedProcess;
-  };
-
-  const spawnUpdate = function(args) {
-    return spawn(updateDotExe, args);
-  };
-
-  const squirrelEvent = process.argv[1];
-  switch (squirrelEvent) {
-    case "--squirrel-install":
-    case "--squirrel-updated":
-      // Optionally do things such as:
-      // - Add your .exe to the PATH
-      // - Write to the registry for things like file associations and
-      //   explorer context menus
-
-      // Install desktop and start menu shortcuts
-      spawnUpdate(["--createShortcut", exeName]);
-
-      setTimeout(application.quit, 1000);
-      return true;
-
-    case "--squirrel-uninstall":
-      // Undo anything you did in the --squirrel-install and
-      // --squirrel-updated handlers
-
-      // Remove desktop and start menu shortcuts
-      spawnUpdate(["--removeShortcut", exeName]);
-
-      setTimeout(application.quit, 1000);
-      return true;
-
-    case "--squirrel-obsolete":
-      // This is called on the outgoing version of your app before
-      // we update to the new version - it's the opposite of
-      // --squirrel-updated
-
-      application.quit();
-      return true;
-  }
-}
-/**
- * store
- */
-
-// const reducer = (state = {}, action) => {
-// 	return state
-// };
-
-const action = dispatch => {
-  fetch("https://reqres.in/api/users?page=2")
-    .then(res => res.json())
-    .then(res => {
-      dispatch({ type: "DISPATCH_USER", payload: res.data });
-    });
-};
-
-const reducer = (state = {}, action) => {
-  switch (action.type) {
-    case "ADD_VALUE":
-      return { name: "Rohit Tatu" };
-
-    case "DISPATCH_USER":
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
-const initialState = {
-  name: "Rohit"
-};
-
-const store = createStore(
-  reducer,
-  initialState, // optional
-  applyMiddleware(
-    thunk,
-    triggerAlias, // optional
-    forwardToRenderer // IMPORTANT! This goes last
-  )
+// window path name
+const LOADING_WINDOW_PATH = path.join(
+  __dirname,
+  "screens/loading/loading.html"
 );
 
-console.log(store.getState(), "check 2133333");
+const MAIN_WINDOW = "http://localhost:8000";
 
-replayActionMain(store);
+const FORM_WINDOW = "http://localhost:8000/#/form/";
 
-// store.dispatch(action);
-
-setTimeout(() => {
-  store.dispatch(action);
-}, 10000);
-
-// store.dispatch({"type" : ""})
-store.subscribe(() => console.log(store.getState()));
-
-// creating the main window
+const DATA_MAINTENANCE_WINDOW =
+  "http://localhost:8000/#/database-maintenance/lists/class";
 
 let window = {};
-function createWindow(width, height, url, windowName) {
-  // Create the browser window.
-  window[windowName] = new BrowserWindow({
-    width,
-    height,
-    webPreferences: {
-      preload: path.join(app.getAppPath(), "src/preload.js")
-      // contextIsolation: true
-      // nodeIntegration: true
-    }
-  });
 
-  window[windowName].setMenuBarVisibility(false);
+const createWindow = (width, height, url, windowName) => {
+  window[windowName] = windowManager.createWindow(width, height);
+  windowManager.applyEventListener(window[windowName], url);
+};
 
-  // and load the index.html of the app.
-  window[windowName].loadURL(url);
-
-  // Emitted when the window is closed.
-  window[windowName].on("closed", function() {
-    window[windowName] = null;
-  });
-
-  require("devtron").install();
-}
-
-// app event listners
 app.on("ready", () => {
-  createWindow(950, 768, "http://localhost:8000/", "mainWindow");
+  // window["loadingWindow"] = windowManager.createLoadingWindow(500, 500);
+  // windowManager.applyEventListener(
+  //   window["loadingWindow"],
+  //   LOADING_WINDOW_PATH
+  // );
+
+  // window["mainWindow"] = windowManager.createWindow(950, 768);
+  // windowManager.applyEventListener(
+  //   window["mainWindow"],
+  //   "http://localhost:8000"
+  // );
+
+  createWindow(950, 768, MAIN_WINDOW, "mainWindow");
 });
 
 // Quit when all windows are closed.
@@ -184,19 +51,14 @@ app.on("window-all-closed", function() {
 // osx
 app.on("activate", function() {
   if (window["mainWindow"] === null) {
-    createWindow(1366, 768, "http://localhost:8000/", "mainWindow");
+    createWindow(1366, 768, MAIN_WINDOW, "mainWindow");
   }
 });
 
 // ipcMain window creater event listeners
 
 ipcMain.on("database-maintenance", (event, data) => {
-  createWindow(
-    1366,
-    768,
-    "http://localhost:8000/#/database-maintenance/lists/class",
-    "dataMaintenanceWindow"
-  );
+  createWindow(1366, 768, DATA_MAINTENANCE_WINDOW, "dataMaintenanceWindow");
 });
 
 ipcMain.on("new-form", (event, data) => {
@@ -206,7 +68,7 @@ ipcMain.on("new-form", (event, data) => {
   createWindow(
     1366,
     768,
-    `http://localhost:8000/#/form/${formName}${editMode ? "?editMode" : ""}`,
+    `${FORM_WINDOW}${formName}${editMode ? "?editMode" : ""}`,
     "formWindow"
   );
 

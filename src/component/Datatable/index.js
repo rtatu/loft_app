@@ -5,47 +5,6 @@ import React from "react";
 import DtConfig from "./datatable_config";
 import { ArchiveContext } from "../../context/archiveContext";
 import Empty from "../Empty";
-import { createStore, applyMiddleware } from "redux";
-
-/** store */
-
-import {
-  forwardToMain,
-  replayActionRenderer,
-  getInitialStateRenderer
-} from "../../electron_redux";
-
-function initStore() {
-  const initialState = getInitialStateRenderer();
-
-  const reducer = (state = {}, action) => {
-    switch (action.type) {
-      case "ADD_VALUE":
-        return { name: "Rohit Tatu" };
-      case "DISPATCH_USER":
-        return action.payload;
-      default:
-        return state;
-    }
-  };
-  const store = createStore(
-    reducer,
-    initialState,
-    applyMiddleware(
-      forwardToMain // IMPORTANT! This goes first
-    )
-  );
-
-  replayActionRenderer(store);
-
-  store.subscribe(() => console.log(store.getState(), "in renderer"));
-
-  console.log(store.getState(), "1222222222");
-}
-
-setTimeout(() => {
-  initStore();
-}, 20000);
 
 const style = {
   width: "100%",
