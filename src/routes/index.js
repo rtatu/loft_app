@@ -1,18 +1,21 @@
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
 import React from "react";
-import Home from "./home";
-import DataMaintenance from "./data_maintenance";
+import Home from "../screens/home";
+import DataMaintenance from "../screens/data_maintenance";
 import Empty from "../component/Empty";
-import FormContainer from "./form";
-import Planner from "./planner";
-import Order from "./Order";
-import TableForm from "./tableform";
-import FuelOp from "./fuelop";
-import Maintenance from "./maintenance";
+import FormContainer from "../screens/form";
+import Planner from "../screens/planner";
+import Order from "../screens/Order";
+import TableForm from "../screens/tableform";
+import FuelOp from "../screens/fuelop";
+import Maintenance from "../screens/maintenance";
+import Login from "../component/Login/";
+import AuthenticatedRoute from "./AuthenticatedRoute";
 
 const Root = () => (
   <Router>
-    <Route path="/" exact component={Home} />
+    <Route path="/login" exact component={Login} />
+    <AuthenticatedRoute path="/" exact component={Home} />
     <Route
       path="/database-maintenance/:navigate/"
       exact

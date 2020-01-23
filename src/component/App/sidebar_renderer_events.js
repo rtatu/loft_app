@@ -1,18 +1,8 @@
-
-/**
- * 
- * 
- */
-
-// routes renderer_events
 const RoutesEvents = {
-    database_maintenance : function(e){
-        e.preventDefault();
+  database_maintenance: function(e) {
+    e.preventDefault();
+    electronRenderer.send("database-maintenance", { name: "DM" });
+  }
+};
 
-        console.log('haha')
-
-        electronRenderer.send('database-maintenance', {name : "DM"})
-    }
-}
-
-export default RoutesEvents
+export default RoutesEvents;

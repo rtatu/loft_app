@@ -1,0 +1,194 @@
+$textColor: #34444E
+$primaryColor: #4D7CFE
+$inputBorder: rgba(52, 68, 78, 0.08)
+$inputSubmit: rgba(77, 124, 254, .2)
+$inputSubmitHover: rgba(77, 124, 254, .25)
+
+*
+    margin: 0
+    padding: 0
+
+html,body
+    width: 100%
+    height: 100%
+
+#root
+    width: 100%
+    height: 100%
+
+.error
+    margin-top: -20px
+    margin-bottom: 20px
+    color: red
+    font-weight: 500
+
+=submitButton($width: 400px)
+    -webkit-appearance: none
+    outline: none
+    border: none
+    background: $inputSubmit
+    color: $primaryColor
+    width: $width
+    height: 40px
+    +fontFamily
+    cursor: pointer
+    border-radius: 2px
+
+    &:hover, &:focus
+        background: $inputSubmitHover
+    
+    
+=inputField($color: #ccc, $direction: column)
+    display: flex
+    flex-direction: $direction
+    margin-top: 30px
+
+    input
+        -webkit-appearance: none
+        outline: none
+        border: 1px solid $inputBorder
+        height: 35px
+        +fontFamily
+        font-weight: 400
+        padding-left: 10px 
+        border-radius: 2px
+
+        &:focus
+            border: 1px solid $primaryColor
+    
+    
+=fontFamily()
+    font-family: 'Source Sans Pro', 'sans-serif'
+    font-size: 12px
+    font-weight: 600 
+    
+*
+    margin: 0
+    padding: 0
+    user-select: none
+
+html, body 
+    width: 100%
+    height: 100%
+
+
+.login
+    box-sizing: border-box 
+    width: 100%
+    height: 100%
+    background: url("./loginBackground.svg") center bottom no-repeat
+    display: flex
+    flex-direction: column
+    align-items: center
+    +fontFamily
+
+    .loginInput
+        +inputField
+
+
+    .loginForm
+        width: 400px;
+        color: $textColor
+        margin-top: 20px
+
+    label
+        margin-bottom: 10px
+
+    input[type="submit"]
+        +submitButton
+
+    .rememberMe
+        margin-top: 10px
+        margin-bottom: 30px
+        position: relative
+        +fontFamily
+        display: flex
+        height: 35px
+        align-items: center
+
+    h1
+        margin-top: 100px
+        color: $primaryColor
+        font-size: 14px
+        font-weight: 500
+
+
+
+// custom checkbox
+.custom-checkbox
+    position: absolute
+    width: 12px
+    height: 12px
+    background: white
+    border: 1px solid #ddd
+    border-radius: 2px
+    top: 50%
+    transform: translateY(-50%)
+    pointer-events: none
+
+.col-vis-check
+    width: 15px
+    height: 15px
+    margin-right: 2px
+    opacity: 0
+    cursor: pointer
+
+    &:focus ~ .custom-checkbox
+        border: 1px solid $primaryColor
+
+    &:checked ~ .custom-checkbox 
+        background: #4D7CFE
+        border: none
+
+    &:checked ~ .custom-checkbox > svg 
+        display: block
+    
+    & ~ label
+        color: $textColor
+        margin-bottom: 0px
+
+svg > path 
+    stroke: rgb(255, 255, 255)
+    fill: white
+
+
+
+
+.loader
+    height: 40px
+    justify-content: center
+    align-items: center
+    display: none
+
+.spinner
+  width: 30px
+  height: 30px
+  background: $inputSubmit
+  border-radius: 50%
+  position: relative
+  display: inline-block
+  
+  &:after, &:before
+    content: ''
+    display: block
+    width: 30px
+    height: 30px
+    border-radius: 50%
+
+  
+.spinner-1:after
+  position: absolute
+  top: -2px
+  left: -2px
+  border: 2px solid transparent
+  border-top-color: $primaryColor
+  border-bottom-color: $primaryColor
+  animation: spinny 1s linear infinite
+  
+@keyframes spinny
+  0%
+    transform: rotate(0deg) scale(1)
+  50%
+    transform: rotate(45deg) scale(1.2)
+  100%
+    transform: rotate(360deg) scale(1)
