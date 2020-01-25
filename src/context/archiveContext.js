@@ -53,7 +53,8 @@ class ArchiveProvider extends React.Component {
   }
 
   componentDidMount() {
-    database()
+    try {
+      database()
       .ref()
       .getAll()
       .then(res => this.filterData(res))
@@ -68,7 +69,10 @@ class ArchiveProvider extends React.Component {
         tempState.datastore.lists.fetching = false;
 
         this.setState({ ...tempState }, () => console.log(this.state));
-      });
+      })  
+    } catch (error) {
+      console.log(error)
+    }
 
     // add event listeners for electron windows
     electronRenderer.on("archive_context_listener", (e, data) => {
