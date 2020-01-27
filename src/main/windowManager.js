@@ -20,20 +20,20 @@ const createLoadingWindow = (width, height) => {
   });
 };
 
-const applyEventListener = (window, url) => {
-  window.setMenuBarVisibility(false);
+const applyEventListener = (window, windowName, url) => {
+  window[windowName].setMenuBarVisibility(false);
 
   // and load the index.html of the app.
-  window.loadURL(url);
+  window[windowName].loadURL(url);
 
   // Emitted when the window is closed.
-  window.on("closed", function() {
+  window[windowName].on("closed", function() {
     console.log("window is closed bitch!!!");
-    window = null;
+    window[windowName] = null;
   });
 
-  window.webContents.on("did-finish-load", () => {
-    window.show();
+  window[windowName].webContents.on("did-finish-load", () => {
+    window[windowName].show();
   });
 };
 

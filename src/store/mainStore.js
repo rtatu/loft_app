@@ -15,11 +15,18 @@ const userReducer = require("./reducers/userReducer");
 const listReducer = require("./reducers/listReducer");
 
 const initialState = {
-  user: {},
-  data: {}
+  user: {
+    data: null,
+    token: null,
+    loading: true
+  },
+  list: {
+    loading: true,
+    data: null
+  }
 };
 
-const reducer = combineReducers({ user: userReducer, data: listReducer });
+const reducer = combineReducers({ user: userReducer, list: listReducer });
 
 const mainStore = createStore(
   reducer,

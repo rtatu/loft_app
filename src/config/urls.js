@@ -1,7 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  LOADING_WINDOW_PATH: path.join(__dirname, "../screens/loading/loading.html"),
+  LOADING_WINDOW_PATH: `file://${path.join(
+    __dirname,
+    "../screens/loading/loading.html"
+  )}`,
 
   MAIN_WINDOW: "http://localhost:8000",
 

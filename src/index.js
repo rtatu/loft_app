@@ -1,16 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ArchiveProvider from "./context/archiveContext";
 import "./static/global.sass";
 
 import Root from "./routes/";
 import rendererStore from "./store/rendererStore";
+import { Provider } from "react-redux";
 
-console.log(rendererStore.getState());
 const App = () => (
-  <ArchiveProvider>
+  <Provider store={rendererStore}>
     <Root />
-  </ArchiveProvider>
+  </Provider>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));

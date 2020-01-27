@@ -1,64 +1,54 @@
-import axios from "axios";
-import Storage from "./storageFunction";
+const axios = require("axios").default;
+const Storage = require("./storageFunction");
 
-/**
- *
- * @param {email} email
- * @param {password} password
- */
-const signInWithEmailAndPassword = async (email, password) => {
-  return new Promise(async (resolve, reject) => {
-    let user;
-    try {
-      user = await axios({
-        method: "POST",
-        url: `${process.env.BASE_API_URL}/login`,
-        data: {
-          email,
-          password
-        },
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      Storage.setItem("currentUser", user.data.user);
-      Storage.setItem("token", user.data.token);
-      resolve(user);
-    } catch (err) {
-      reject(err.response.data);
-    }
-  });
-};
-
-/**
- *
- * @param {currentPassword} currentPassword
- * @param {newPassword} newPassword
- */
-const changePassword = async (currentPassword, newPassword) => {
-  console.log("Not Implemented");
-};
-
-const logout = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      Storage.removeItem("currentUser");
-      Storage.removeItem("token");
-      resolve(true);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
-const auth = () => {
-  return {
-    currentUser: Storage.getItem("currentUser"),
-    signInWithEmailAndPassword,
-    logout,
-    currentUser: Storage.getItem("currentStorage")
+class Auth {
+  getCurrentUser = () => {
+    return Storage().get();
   };
-};
 
-export default auth;
+  signInWithEmailAndPassword = async (email, password) => {
+    return new Promise(async (resolve, reject) => {
+      let user;
+      try {
+        user = await axios({
+          method: "POST",
+          url: `${process.env.BASE_API_URL}/login`,
+          data: {
+            email,
+            password
+          },
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        await Storage().set({
+          data: {
+            ...user.data.user,
+            token: user.data.token
+          }
+        });
+        resolve(user);
+      } catch (err) {
+        console.log(err);
+        reject(err.response);
+      }
+    });
+  };
 
+  changePassword = async (currentPassword, newPassword) => {
+    console.log("Not Implemented");
+  };
+
+  logout = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await Storage().remove();
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+}
+
+module.exports = Auth;

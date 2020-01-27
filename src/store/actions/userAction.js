@@ -9,12 +9,17 @@ const Action = require("../actions");
 
 const getToken = async dispatch => {
   let token = await Authentication.getAccessToken();
+  if (!token) return;
   dispatch({ type: Action.TOKEN, payload: token });
 };
 
 const initFetch = async dispatch => {
   let data;
   dispatch({ type: Action.FETCH, payload: data });
+};
+
+const loginUser = async dispatch => {
+  let data;
 };
 
 module.exports = {

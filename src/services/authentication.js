@@ -10,7 +10,7 @@ const setAccessToken = token => {
       let accessToken = await keytar.setPassword(
         keytarService,
         keytarAccount,
-        token
+        JSON.stringify(token)
       );
       resolve(accessToken);
     } catch (er) {
@@ -23,14 +23,26 @@ const getAccessToken = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let accessToken = await keytar.getPassword(keytarService, keytarAccount);
-      resolve(accessToken);
+      resolve(JSON.parse(accessToken));
     } catch (er) {
       reject(er);
     }
   });
 };
 
+const removeAccessToken = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let result = await keytar.deletePassword(keytarService, keytarAccount);
+      resolve(result);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
 module.exports = {
   setAccessToken,
-  getAccessToken
+  getAccessToken,
+  removeAccessToken
 };

@@ -1,4 +1,4 @@
-const getToken = () => {
+const getAccessToken = () => {
   return new Promise((resolve, reject) => {
     electronRenderer.send("tokenReq");
     electronRenderer.once("tokenRes", (event, payload) => {
@@ -11,7 +11,7 @@ const getToken = () => {
   });
 };
 
-const setToken = token => {
+const setAccessToken = token => {
   return new Promise((resolve, reject) => {
     electronRenderer.send("tokenSetReq", token);
     electronRenderer.once("tokenSetRes", (event, payload) => {
@@ -24,4 +24,21 @@ const setToken = token => {
   });
 };
 
-export { getToken, setToken };
+const removeAccessToken = () => {
+  return new Promise((resolve, reject) => {
+    electronRenderer.send("tokenDelReq");
+    electronRenderer.once("tokenDelRes", (event, payload) => {
+      if (payload.error) {
+        reject(payload.error);
+      } else {
+        resolve(payload.message);
+      }
+    });
+  });
+};
+
+module.exports = {
+  getAccessToken,
+  setAccessToken,
+  removeAccessToken
+};

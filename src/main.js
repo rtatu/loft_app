@@ -4,22 +4,49 @@ const { ipcMain } = require("electron");
 const windowManager = require("./main/windowManager");
 const mainStore = require("./store/mainStore");
 const URL = require("./config/urls");
-
 const Authentication = require("./services/authentication");
-
-Authentication.setAccessToken("token that fucks");
+const Auth = require("./utils/@loftsdk/auth");
+const dotenv = require("dotenv");
+const env = dotenv.config().parsed;
 
 let window = {};
 
 class App {
   constructor() {
-    app.on("ready", () =>
-      this.createWindow(950, 768, URL.MAIN_WINDOW, "mainWindow")
-    );
+    app.on("ready", () => {
+      this.createLoadingWindow(
+        500,
+        500,
+        URL.LOADING_WINDOW_PATH,
+        "loadingWindow"
+      );
+      this.init();
+    });
     app.on("window-all-closed", this.onWindowAllClosed);
     app.on("activate", this.onActivate);
     this.registerIpcChannels();
+
+    // console.log(new Auth().getCurrentUser(), "12333");
+    // this.loadState();
   }
+
+  // manually dispatch the action
+  init = async () => {
+    try {
+      let data = await Authentication.getAccessToken();
+      if (data.token) {
+        // mainStore.dispatch();
+        // console.log(window);
+        window["loadingWindow"].close();
+        console.log(window);
+      }
+    } catch (err) {
+      console.log(err);
+      this.closeLoadingAndCreateMainWindow();
+    }
+  };
+
+  closeLoadingAndCreateMainWindow = () => {};
 
   onWindowAllClosed = () => {
     if (process.platform !== "darwin") {
@@ -35,7 +62,12 @@ class App {
 
   createWindow = (width, height, url, windowName) => {
     window[windowName] = windowManager.createWindow(width, height);
-    windowManager.applyEventListener(window[windowName], url);
+    windowManager.applyEventListener(window, windowName, url);
+  };
+
+  createLoadingWindow = (width, height, url, windowName) => {
+    window[windowName] = windowManager.createLoadingWindow(width, height);
+    windowManager.applyEventListener(window, windowName, url);
   };
 
   registerIpcChannels = () => {

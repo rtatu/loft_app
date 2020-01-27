@@ -3,7 +3,7 @@ const Action = require("../actions");
 const userReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case Action.TOKEN:
-      return { ...state, token: payload };
+      return { ...state, loading: false, ...payload };
     default:
       return state;
   }
