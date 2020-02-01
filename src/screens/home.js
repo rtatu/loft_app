@@ -1,15 +1,6 @@
 import React from "react";
-import App from "../component/App";
-import Datatable from "../component/Datatable";
-// import Loading from '../static/truck_loading.gif';
+import Base from "../container/base";
 
-// Test Route
-
-const Home = () => (
-  <div style={{ display: "flex", height: "100%" }}>
-    <App />
-    {/* <Datatable /> */}
-  </div>
-);
+const Home = () => <Base />;
 
 export default Home;

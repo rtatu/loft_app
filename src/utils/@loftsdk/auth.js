@@ -50,7 +50,7 @@ class Auth {
     return new Promise(async (resolve, reject) => {
       try {
         let res = await Storage().remove();
-        if (res.message == "LOGGED_OUT") {
+        if (res == "LOGGED_OUT") {
           resolve(true);
         } else {
           reject(res);
