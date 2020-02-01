@@ -1,14 +1,32 @@
 function isRenderer() {
-  // running in a web browser
-  if (typeof process === "undefined") return true;
+  // Renderer process
+  if (
+    typeof window !== "undefined" &&
+    typeof window.process === "object" &&
+    window.process.type === "renderer"
+  ) {
+    return true;
+  }
 
-  // node-integration is disabled
-  if (!process) return true;
+  // Main process
+  if (
+    typeof process !== "undefined" &&
+    typeof process.versions === "object" &&
+    !process.versions.electron
+  ) {
+    return true;
+  }
 
-  // We're in node.js somehow
-  if (!process.type) return false;
+  // Detect the user agent when the `nodeIntegration` option is set to true
+  if (
+    typeof navigator === "object" &&
+    typeof navigator.userAgent === "string" &&
+    navigator.userAgent.indexOf("Electron") >= 0
+  ) {
+    return true;
+  }
 
-  return process.type === "renderer";
+  return false;
 }
 
 module.exports = isRenderer();

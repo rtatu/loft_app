@@ -16,22 +16,22 @@ const Root = () => (
   <Router>
     <Route path="/login" exact component={Login} />
     <AuthenticatedRoute path="/" exact component={Home} />
-    <Route
+    <AuthenticatedRoute
       path="/database-maintenance/:navigate/"
       exact
       component={DataMaintenance}
     />
-    <Route
+    <AuthenticatedRoute
       path="/database-maintenance/:navigate/:tableName"
       component={DataMaintenance}
     />
-    <Route path="/empty" component={Empty} />
-    <Route path="/form/:name" component={FormContainer} />
-    <Route path="/planner" component={Planner} />
-    <Route path="/order" exact component={Order} />
-    <Route path="/tableform" exact component={TableForm} />
-    <Route path="/fo" exact component={FuelOp} />
-    <Route path="/maintenance" exact component={Maintenance} />
+    <AuthenticatedRoute path="/empty" component={Empty} />
+    <AuthenticatedRoute path="/form/:name" component={FormContainer} />
+    <AuthenticatedRoute path="/planner" component={Planner} />
+    <AuthenticatedRoute path="/order" exact component={Order} />
+    <AuthenticatedRoute path="/tableform" exact component={TableForm} />
+    <AuthenticatedRoute path="/fo" exact component={FuelOp} />
+    <AuthenticatedRoute path="/maintenance" exact component={Maintenance} />
   </Router>
 );
 

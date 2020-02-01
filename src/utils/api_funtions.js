@@ -1,6 +1,4 @@
 import axios from "axios";
-import auth from "./@loftsdk/auth";
-import database from "./@loftsdk/database";
 
 const lists = [
   "class",

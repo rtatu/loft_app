@@ -1,9 +1,18 @@
-const TOKEN = "GET_ACCESS_TOKEN";
-const FETCH = "INIT_FETCH";
-const SET = "SET_TO_TABLE";
+// user related actions
+const LOG_IN = "REDUX_ACTION_LOGIN";
+const LOG_OUT = "REDUX_ACTION_LOGOUT";
+
+// list related actions
+const FETCH_LIST = "REDUX_ACTION_FETCHLIST";
+const ADD_TO_LIST = "REDUX_ACTION_ADD_TO_LIST";
+const UPDATE_IN_LIST = "REDUX_ACTION_UPDATE_IN_LIST";
+const REMOVE_FROM_LIST = "REDUX_ACTION_REMOVE_FROM_LIST";
 
 module.exports = {
-  TOKEN,
-  FETCH,
-  SET
+  LOG_IN,
+  LOG_OUT,
+  FETCH_LIST,
+  ADD_TO_LIST,
+  UPDATE_IN_LIST,
+  REMOVE_FROM_LIST
 };

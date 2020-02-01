@@ -40,7 +40,7 @@ const mainStore = createStore(
 
 replayActionMain(mainStore);
 
-mainStore.dispatch(LIST_ACTION.FETCH_LISTS);
+// mainStore.dispatch(LIST_ACTION.FETCH_LISTS);
 
 // mainStore.subscribe(() => console.log(mainStore.getState()));
 

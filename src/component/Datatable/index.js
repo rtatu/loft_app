@@ -3,7 +3,6 @@ import DtNavs from "./datatable_navigation";
 import Header from "../header";
 import React from "react";
 import DtConfig from "./datatable_config";
-import { ArchiveContext } from "../../context/archiveContext";
 import Empty from "../Empty";
 
 const style = {
@@ -24,55 +23,8 @@ Array.prototype.toUppperCase = function() {
 };
 
 const Datatable = props => (
-  <ArchiveContext.Consumer>
-    {context => {
-      let navigateData;
-      let fetching;
-      if (context.datastore[props.navigate]) {
-        navigateData = context.datastore[props.navigate].data;
-        fetching = context.datastore[props.navigate].fetching;
-      }
-      let data;
-      if (props.tableName && !fetching) {
-        data = Object.values(navigateData[props.tableName]);
-      }
-
-      return (
-        <div style={style}>
-          <Header />
-          {navigateData ? ( // if table exists  than show table navigation
-            <React.Fragment>
-              <DtNavs
-                data={Object.keys(navigateData).toUppperCase()}
-                baseLink={`/database-maintenance/${props.navigate}`}
-                key={props.navigate}
-              />
-              {!fetching && data ? (
-                data.length != 0 ? ( // if data is not fetching
-                  <DatatableContainer
-                    data={data}
-                    tableName={props.tableName}
-                    key={props.tableName}
-                    datastore={navigateData}
-                  />
-                ) : (
-                  <Empty
-                    link={
-                      props.tableName.charAt(0).toLocaleUpperCase() +
-                      props.tableName.slice(1)
-                    }
-                    datastore={navigateData}
-                  />
-                )
-              ) : null // if data is empty // put loading component here
-              }
-            </React.Fragment>
-          ) : null // do not show anything if table does not exists
-          }
-        </div>
-      );
-    }}
-  </ArchiveContext.Consumer>
+  <div>
+    <h1>test with datatablse</h1>
+  </div>
 );
-
 export default Datatable;

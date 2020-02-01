@@ -6,6 +6,8 @@ import Root from "./routes/";
 import rendererStore from "./store/rendererStore";
 import { Provider } from "react-redux";
 
+console.log(navigator);
+
 const App = () => (
   <Provider store={rendererStore}>
     <Root />

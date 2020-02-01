@@ -1,6 +1,12 @@
-const mainAuth = require("../../services/authentication");
+// const mainAuth = require("../../services/authentication");
+let mainAuth = null;
+
 const rendererAuth = require("../../renderer/token");
 const isRenderer = require("../isRenderer");
+
+if (!isRenderer) {
+  mainAuth = require("../../services/authentication");
+}
 
 const service = (type, payload) => {
   switch (type) {

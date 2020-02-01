@@ -1,6 +1,10 @@
 import React from "react";
 import "./login.sass";
 import { withFormik } from "formik";
+import Auth from "../../utils/@loftsdk/auth";
+import { connect } from "react-redux";
+import * as ActionCreator from "../../store/actions/";
+import { bindActionCreators } from "redux";
 
 const FormLogin = props => (
   <div className="login">
@@ -70,6 +74,9 @@ const FormLoginContainer = withFormik({
   handleSubmit(values, formikBag) {
     formikBag.setSubmitting(true);
     formikBag.props.showLoader(true);
+
+    console.log(values);
+    formikBag.props.login(values.username, values.password);
   }
 })(FormLogin);
 
@@ -81,7 +88,9 @@ class Login extends React.Component {
     this.submitContainer = React.createRef();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props, "props");
+  }
 
   showLoader = isSubmitting => {
     if (isSubmitting) {
@@ -93,16 +102,31 @@ class Login extends React.Component {
     }
   };
 
+  login = (email, password) => {
+    this.props.loginToLoft(email, password);
+  };
+
   render() {
     return (
       <FormLoginContainer
         loader={this.loader}
         submitContainer={this.submitContainer}
         showLoader={this.showLoader}
+        login={this.login}
         changestate={this.props.changestate}
       />
     );
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(ActionCreator, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

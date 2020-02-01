@@ -21,15 +21,22 @@ class Auth {
             "Content-Type": "application/json"
           }
         });
-        await Storage().set({
-          data: {
-            ...user.data.user,
-            token: user.data.token
-          }
+
+        let saveData = {
+          data: { ...user.data.user },
+          token: user.data.token
+        };
+
+        let res = await Storage().set({
+          data: saveData
         });
-        resolve(user);
+
+        if (res == "LOGGED_IN") {
+          resolve(saveData);
+        } else {
+          reject(res);
+        }
       } catch (err) {
-        console.log(err);
         reject(err.response);
       }
     });
@@ -42,8 +49,12 @@ class Auth {
   logout = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        await Storage().remove();
-        resolve(true);
+        let res = await Storage().remove();
+        if (res.message == "LOGGED_OUT") {
+          resolve(true);
+        } else {
+          reject(res);
+        }
       } catch (error) {
         reject(error);
       }
