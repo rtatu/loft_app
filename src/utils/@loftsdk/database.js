@@ -1,116 +1,116 @@
-import axios from "axios";
-import Storage from "./storageFunction";
-import lists from "./links";
+const axios = require("axios").default;
+const Storage = require("./storageFunction");
+const lists = require("./links");
 
-const GET_ALL = async token => {
-  return new Promise((resolve, reject) => {
-    try {
-      axios
-        .all(
-          lists.map(item =>
-            axios({
-              method: "GET",
-              url: `${process.env.BASE_API_URL}/archive/${item}`,
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            })
-          )
-        )
-        .then(
-          axios.spread(function(...res) {
-            let result = {};
-            let data = res.map((item, i) => {
-              result[lists[i]] = item;
-            });
-            resolve(result);
-          })
-        );
-    } catch (err) {
-      reject(err);
-    }
-  });
-};
+class Database {
+  constructor() {
+    // get token from keytar
+    this.currentUser = Storage().get();
 
-const GET = (url, token) => {
-  return new Promise(async (resolve, reject) => {
-    let data;
-    try {
-      data = await axios({
-        method: "GET",
-        url,
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      resolve(data);
-    } catch (error) {
-      reject(error.response.data);
-    }
-  });
-};
+    if (!this.currentUser) throw new Error("user is not logged in!");
 
-const POST = (url, token, data) => {
-  return new Promise(async (resolve, reject) => {
-    let result;
-    try {
-      result = await axios({
-        method: "POST",
-        url,
-        data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      });
-      resolve(result);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+    this.token = this.currentUser.token;
 
-const PUT = (url, token, data) => {
-  return new Promise(async (resolve, reject) => {
-    let result;
-    try {
-      result = await axios({
-        method: "PUT",
-        url,
-        data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      });
-      resolve(result);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+    // set axios config -- add token
+    this.axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    };
 
-const ref = (token, uri) => {
-  let url = `${process.env.BASE_API_URL}${uri}`;
-  console.log(url);
-  return {
-    set: data => PUT(url, token, data),
-    create: data => POST(url, token, data),
-    get: () => GET(url, token),
-    getAll: () => GET_ALL(token)
-  };
-};
-
-const database = () => {
-  let token = Storage.getItem("token");
-
-  if (token == null) {
-    throw new Error("Not Logged In");
+    // debug -- will be removed
+    console.log(this.currentUser, this.token);
   }
 
-  return {
-    ref: url => ref(token, url)
+  // set url for http method
+  ref = url => {
+    if (this.url) {
+      throw new Error("can not call ref twice");
+    }
+    this.url = process.env.BASE_API_URL + url;
+    this.axiosConfig["url"] = this.url;
+    return this;
   };
-};
 
-export default database;
+  // get data at specific url -- GET
+  get = () => {
+    return new Promise(async (resolve, reject) => {
+      let result;
+      try {
+        result = await axios({ ...this.axiosConfig, method: "GET" });
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  // set data at specific url -- PUT
+  set = data => {
+    return new Promise(async (resolve, reject) => {
+      let result;
+      try {
+        result = await axios({ ...this.axiosConfig, method: "PUT", data });
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  // create data at specific url -- POST
+  create = data => {
+    return new Promise(async (resolve, reject) => {
+      let result;
+      try {
+        result = await axios({ ...this.axiosConfig, method: "POST", data });
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  // remove data at specific url -- DELETE
+  remove = data => {
+    return new Promise(async (resolve, reject) => {
+      let result;
+      try {
+        result = await axios({ ...this.axiosConfig, method: "DELETE", data });
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  getArchive = () => {
+    return new Promise((resolve, reject) => {
+      try {
+        axios
+          .all(
+            lists.map(item =>
+              axios({
+                ...this.axiosConfig,
+                method: "GET",
+                url: `${process.env.BASE_API_URL}/archive/${item}`
+              })
+            )
+          )
+          .then(
+            axios.spread(function(...res) {
+              let result = {};
+              let data = res.map((item, i) => {
+                result[lists[i]] = item;
+              });
+              resolve(result);
+            })
+          );
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+}
+
+module.exports = Database;

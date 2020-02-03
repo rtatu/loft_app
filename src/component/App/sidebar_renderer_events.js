@@ -1,7 +1,12 @@
+import URL from "../../config/urls";
+
 const RoutesEvents = {
   database_maintenance: function(e) {
     e.preventDefault();
-    electronRenderer.send("database-maintenance", { name: "DM" });
+    electronRenderer.send("create_new_window", {
+      url: URL.DATA_MAINTENANCE_WINDOW,
+      name: "dataMaintenance"
+    });
   }
 };
 

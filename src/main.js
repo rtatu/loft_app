@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 const env = dotenv.config().parsed;
 const ACTION = require("./store/actions");
 const EVENTS = require("./main/events");
+const Database = require("./utils/@loftsdk/database");
 
 let appWindows = {};
 
@@ -20,6 +21,7 @@ class App {
     app.on("activate", this.onActivate);
   }
 
+  // initiliaze app
   init = async () => {
     let userData = {};
     // first create loading window
@@ -52,6 +54,10 @@ class App {
     this.registerIpcChannels();
   };
 
+  // fetch initial data
+
+  initFetch = async () => {};
+
   closeLoadingAndCreateMainWindow = () => {
     appWindows["loadingWindow"].close();
     this.createWindow(1300, 800, URL.MAIN_WINDOW, "mainWindow");
@@ -70,7 +76,11 @@ class App {
   };
 
   createWindow = (width, height, url, windowName) => {
-    appWindows[windowName] = windowManager.createWindow(width, height);
+    if (!url || !windowName) return;
+    appWindows[windowName] = windowManager.createWindow(
+      width || 1366,
+      height || 768
+    );
     windowManager.applyEventListener(appWindows, windowName, url);
   };
 
@@ -80,27 +90,12 @@ class App {
   };
 
   registerIpcChannels = () => {
-    ipcMain.on("database-maintenance", (event, data) => {
-      this.createWindow(
-        1366,
-        768,
-        URL.DATA_MAINTENANCE_WINDOW,
-        "dataMaintenanceWindow"
-      );
+    ipcMain.on("create_new_window", (event, data) => {
+      let { width, height, url, name } = data;
+      if (!url) console.error("no url provided for creating window");
+      if (!name) console.error("no name provided for window");
+      this.createWindow(width, height, url, name);
     });
-
-    ipcMain.on("new-form", (event, data) => {
-      let { formName } = data;
-      let { editMode } = data;
-      let { datastore } = data;
-      this.createWindow(
-        1366,
-        768,
-        `${URL.FORM_WINDOW}${formName}${editMode ? "?editMode" : ""}`,
-        "formWindow"
-      );
-    });
-
     // keytarTokenEvents
     EVENTS.keytarTokenEvent();
   };
