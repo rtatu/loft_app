@@ -8,7 +8,6 @@ import listReducer from "./reducers/listReducer";
 import userReducer from "./reducers/userReducer";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { loginToLoft } from "./actions/userAction";
 
 const initialState = getInitialStateRenderer();
 const reducer = combineReducers({ user: userReducer, list: listReducer });
@@ -17,8 +16,8 @@ const rendererStore = createStore(
   initialState,
   applyMiddleware(
     forwardToMain, // IMPORTANT! This goes first
-    logger,
-    thunk
+    thunk,
+    logger
   )
 );
 

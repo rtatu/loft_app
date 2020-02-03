@@ -6,7 +6,7 @@ class Auth {
     return Storage().get();
   };
 
-  signInWithEmailAndPassword = async (email, password) => {
+  signInWithEmailAndPassword = (email, password, rememberMe) => {
     return new Promise(async (resolve, reject) => {
       let user;
       try {
@@ -27,16 +27,14 @@ class Auth {
           token: user.data.token
         };
 
-        let res = await Storage().set({
-          data: saveData
-        });
-
-        if (res == "LOGGED_IN") {
-          resolve(saveData);
-        } else {
-          reject(res);
+        if (rememberMe) {
+          let res = await Storage().set({
+            data: saveData
+          });
         }
+        resolve(saveData);
       } catch (err) {
+        console.log(err);
         reject(err.response);
       }
     });
@@ -50,11 +48,7 @@ class Auth {
     return new Promise(async (resolve, reject) => {
       try {
         let res = await Storage().remove();
-        if (res == "LOGGED_OUT") {
-          resolve(true);
-        } else {
-          reject(res);
-        }
+        resolve(res);
       } catch (error) {
         reject(error);
       }

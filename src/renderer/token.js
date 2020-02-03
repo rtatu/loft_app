@@ -31,7 +31,7 @@ const removeAccessToken = () => {
       if (payload.error) {
         reject(payload.error);
       } else {
-        resolve(payload.message);
+        resolve(payload.res);
       }
     });
   });

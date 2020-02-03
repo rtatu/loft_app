@@ -13,6 +13,7 @@ class Image extends React.Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
     if (this.props.src && this.props.src.url) {
       axios({
         method: "GET",
@@ -21,11 +22,19 @@ class Image extends React.Component {
         responseType: "arraybuffer"
       })
         .then(res => Buffer.from(res.data, "binary").toString("base64"))
-        .then(res => this.setState({ src: `data:image;base64,${res}` }))
+        .then(res =>
+          this.mounted
+            ? this.setState({ src: `data:image;base64,${res}` })
+            : null
+        )
         .catch(err => {
           console.log(err);
         });
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   render() {

@@ -51,7 +51,9 @@ const FormLogin = props => (
         </div>
         <label htmlFor="rememberMe">Remember Me</label>
       </div>
-      {props.errors && <p className="error">{props.errors.username}</p>}
+      {props.status && props.status.error && (
+        <p className="error">{props.status.error}</p>
+      )}
       <div className="submit-login" ref={props.submitContainer}>
         <input type="submit" value="Sign In" id="login" />
       </div>
@@ -74,7 +76,19 @@ const FormLoginContainer = withFormik({
     formikBag.setSubmitting(true);
     formikBag.props.showLoader(true);
 
-    formikBag.props.login(values.username, values.password);
+    // start validating
+    formikBag.props
+      .login(values.username, values.password, values.rememberMe)
+      .then(res => console.log(res, "formik"))
+      .catch(err => {
+        console.log(err);
+        formikBag.setSubmitting(false);
+        formikBag.props.showLoader(false);
+
+        formikBag.setStatus({
+          error: err.data.message
+        });
+      });
   }
 })(FormLogin);
 
@@ -86,10 +100,6 @@ class Login extends React.Component {
     this.submitContainer = React.createRef();
   }
 
-  componentDidMount() {
-    console.log(this.props, "props");
-  }
-
   showLoader = isSubmitting => {
     if (isSubmitting) {
       this.loader.current.style.display = "flex";
@@ -98,17 +108,6 @@ class Login extends React.Component {
       this.loader.current.style.display = "none";
       this.submitContainer.current.style.display = "block";
     }
-  };
-
-  login = (email, password) => {
-    this.props
-      .loginToLoft(email, password)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   };
 
   render() {
@@ -123,7 +122,7 @@ class Login extends React.Component {
         loader={this.loader}
         submitContainer={this.submitContainer}
         showLoader={this.showLoader}
-        login={this.login}
+        login={this.props.loginToLoft}
         changestate={this.props.changestate}
       />
     );
@@ -138,7 +137,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginToLoft: (email, password) => loginToLoft(dispatch, email, password)
+    loginToLoft: (email, password, rememberMe) =>
+      dispatch(dispatch => loginToLoft(dispatch, email, password, rememberMe))
   };
 };
 

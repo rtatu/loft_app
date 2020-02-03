@@ -31,12 +31,13 @@ const keytarTokenEvent = () => {
     let data = {};
     try {
       let res = await Authentication.removeAccessToken();
-      data["message"] = "LOGGED_OUT";
+
+      data["res"] = res;
     } catch (error) {
       data["error"] = error;
     }
 
-    event.sender.send("tokeDelRes", data);
+    event.sender.send("tokenDelRes", data);
   });
 };
 

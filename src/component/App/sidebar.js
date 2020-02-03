@@ -3,6 +3,7 @@ import "./sidebar.sass";
 import { NavLink } from "react-router-dom";
 import { nav_bar } from "./navbar_data";
 import Auth from "../../utils/@loftsdk/auth";
+import LogOut from "../General/Logout";
 
 String.prototype.image_format = function() {
   let arr = this.split("_");
@@ -89,10 +90,7 @@ const SidebarJSX = props => (
           </NavLink>
         </li>
         <li>
-          <a onClick={props.logout} href="#">
-            <img src={images["Logout"]} />
-            <span className="sidebar_hide">Log Out</span>
-          </a>
+          <LogOut src={images["Logout"]} />
         </li>
       </ul>
     </div>
@@ -100,20 +98,8 @@ const SidebarJSX = props => (
 );
 
 class Sidebar extends React.Component {
-  logout = e => {
-    e.preventDefault();
-    new Auth()
-      .logout()
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   render() {
-    return <SidebarJSX logout={this.logout} />;
+    return <SidebarJSX />;
   }
 }
 

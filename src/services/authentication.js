@@ -34,9 +34,22 @@ const removeAccessToken = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let result = await keytar.deletePassword(keytarService, keytarAccount);
-      resolve(result);
+      if (result) {
+        resolve({
+          code: "LOGGED_OUT",
+          message: "You have been logged out!"
+        });
+      } else {
+        reject({
+          code: "USER_NOT_FOUND",
+          message: "No user found!! "
+        });
+      }
     } catch (err) {
-      reject(err);
+      reject({
+        code: "KEYTAR_ERROR",
+        error: err
+      });
     }
   });
 };
