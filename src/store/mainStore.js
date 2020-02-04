@@ -9,6 +9,7 @@ const { createStore, combineReducers, applyMiddleware } = require("redux");
 const thunk = require("redux-thunk").default;
 
 const LIST_ACTION = require("./actions/listAction");
+const ACTION = require("./actions");
 
 // import reducer
 const userReducer = require("./reducers/userReducer");
@@ -20,13 +21,18 @@ const initialState = {
     token: null,
     loading: true
   },
-  list: {
-    loading: true,
-    data: null
+  dm: {
+    list: {
+      loading: true,
+      data: null
+    }
   }
 };
 
-const reducer = combineReducers({ user: userReducer, list: listReducer });
+const reducer = combineReducers({
+  user: userReducer,
+  dm: combineReducers({ list: listReducer })
+});
 
 const mainStore = createStore(
   reducer,

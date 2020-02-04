@@ -1,14 +1,14 @@
 const lists = [
-    "class",
-    "department",
-    "driver",
-    "location",
-    "payterm",
-    "service",
-    "subsidiary",
-    "truck",
-    "contact",
-    "customer"
-  ];
+  "class",
+  "department",
+  "driver",
+  "location",
+  "payterm",
+  "service",
+  "subsidiary",
+  "truck",
+  "contact",
+  "customer"
+];
 
-export default lists
+module.exports = lists;

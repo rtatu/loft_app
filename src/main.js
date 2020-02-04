@@ -4,13 +4,14 @@ const { ipcMain } = require("electron");
 const windowManager = require("./main/windowManager");
 const mainStore = require("./store/mainStore");
 const URL = require("./config/urls");
-const Authentication = require("./services/authentication");
-const Auth = require("./utils/@loftsdk/auth");
+const ACTION = require("./store/actions");
 const dotenv = require("dotenv");
 const env = dotenv.config().parsed;
-const ACTION = require("./store/actions");
 const EVENTS = require("./main/events");
-const Database = require("./utils/@loftsdk/database");
+
+// @loftSdk
+const Auth = require("./utils/@loftsdk/auth");
+const mainListAction = require("./store/mainAction/fetchList");
 
 let appWindows = {};
 
@@ -37,12 +38,19 @@ class App {
       userData = await new Auth().getCurrentUser();
       if (!userData) {
         mainStore.dispatch({ type: ACTION.LOG_IN, payload: {} });
+        throw new Error("Not Logged In");
       } else {
         mainStore.dispatch({ type: ACTION.LOG_IN, payload: userData });
       }
-      setTimeout(() => {
-        this.closeLoadingAndCreateMainWindow();
-      }, 5000);
+
+      // wait for fetching list
+      let action = await mainListAction.fetchList();
+
+      // dispatch it to store
+      mainStore.dispatch(action);
+
+      // now create mainWindow and stop loading
+      this.closeLoadingAndCreateMainWindow();
     } catch (error) {
       console.log(error);
       this.closeLoadingAndCreateMainWindow();

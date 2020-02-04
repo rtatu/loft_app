@@ -10,7 +10,10 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 const initialState = getInitialStateRenderer();
-const reducer = combineReducers({ user: userReducer, list: listReducer });
+const reducer = combineReducers({
+  user: userReducer,
+  dm: combineReducers({ list: listReducer })
+});
 const rendererStore = createStore(
   reducer,
   initialState,
