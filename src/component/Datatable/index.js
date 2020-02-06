@@ -1,6 +1,4 @@
 import DatatableContainer from "./datatable";
-import DtNavs from "./datatable_navigation";
-import Header from "../header";
 import React from "react";
 import DtConfig from "./datatable_config";
 import Empty from "../Empty";
@@ -22,9 +20,18 @@ Array.prototype.toUppperCase = function() {
   return tempArray;
 };
 
-const Datatable = props => (
-  <div>
-    <h1>test with datatablse</h1>
-  </div>
-);
+const Datatable = props =>
+  !props.loading && !(Object.keys(props.data).length == 0) ? (
+    <DatatableContainer
+      data={Object.values(props.data)}
+      tableName={props.tableName}
+      key={props.tableName}
+    />
+  ) : !props.loading ? (
+    <Empty
+      link={
+        props.tableName.charAt(0).toLocaleUpperCase() + props.tableName.slice(1)
+      }
+    />
+  ) : null;
 export default Datatable;

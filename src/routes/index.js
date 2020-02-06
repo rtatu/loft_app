@@ -17,12 +17,7 @@ const Root = () => (
     <Route path="/login" exact component={Login} />
     <AuthenticatedRoute path="/" exact component={Home} />
     <AuthenticatedRoute
-      path="/database-maintenance/:navigate/"
-      exact
-      component={DataMaintenance}
-    />
-    <AuthenticatedRoute
-      path="/database-maintenance/:navigate/:tableName"
+      path="/database-maintenance/:navigate/:tableName?"
       component={DataMaintenance}
     />
     <AuthenticatedRoute path="/empty" component={Empty} />

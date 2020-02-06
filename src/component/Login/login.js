@@ -3,6 +3,7 @@ import "./login.sass";
 import { withFormik } from "formik";
 import { connect } from "react-redux";
 import { loginToLoft } from "../../store/actions/userAction";
+import { fetchList } from "../../store/actions/listAction";
 import { Redirect } from "react-router-dom";
 
 const FormLogin = props => (
@@ -79,7 +80,10 @@ const FormLoginContainer = withFormik({
     // start validating
     formikBag.props
       .login(values.username, values.password, values.rememberMe)
-      .then(res => console.log(res, "formik"))
+      .then(res => {
+        console.log(res, "formik");
+        formikBag.props.fetchList();
+      })
       .catch(err => {
         console.log(err);
         formikBag.setSubmitting(false);
@@ -124,6 +128,7 @@ class Login extends React.Component {
         showLoader={this.showLoader}
         login={this.props.loginToLoft}
         changestate={this.props.changestate}
+        fetchList={this.props.fetchList}
       />
     );
   }
@@ -131,14 +136,16 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    dm: state.dm
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     loginToLoft: (email, password, rememberMe) =>
-      dispatch(dispatch => loginToLoft(dispatch, email, password, rememberMe))
+      dispatch(dispatch => loginToLoft(dispatch, email, password, rememberMe)),
+    fetchList: () => dispatch(fetchList)
   };
 };
 

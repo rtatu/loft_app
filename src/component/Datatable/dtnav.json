@@ -1,0 +1,12 @@
+{
+  "list": [
+    "Class",
+    "Department",
+    "Driver",
+    "Location",
+    "Payterm",
+    "Service",
+    "Subsidiary",
+    "Truck"
+  ]
+}

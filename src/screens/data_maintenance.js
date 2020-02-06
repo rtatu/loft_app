@@ -1,16 +1,30 @@
 import React from "react";
 import Datatable from "../component/Datatable";
-import ArchiveSidebarJSX from "../component/App/archive_sidebar";
+import { connect } from "react-redux";
+import DataTableBase from "../container/DataTableBase";
 
 const DataMaintenance = props => (
-  <div style={{ display: "flex", height: "100%" }}>
-    <ArchiveSidebarJSX />
-    <Datatable
-      location={props.match.url}
-      tableName={props.match.params.tableName}
-      navigate={props.match.params.navigate}
-    />
-  </div>
+  <DataTableBase navigate={props.match.params.navigate}>
+    {!props.match.params.tableName ? null : (
+      <Datatable
+        tableName={props.match.params.tableName}
+        data={props.navigateData}
+        loading={props.loading}
+      />
+    )}
+  </DataTableBase>
 );
 
-export default DataMaintenance;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    navigateData:
+      (state.dm[ownProps.match.params.navigate]["data"] && // check if data is not null
+        state.dm[ownProps.match.params.navigate]["data"][
+          ownProps.match.params.tableName // get table data
+        ]) ||
+      state.dm[ownProps.match.params.navigate], // if no table in param then entire navigate data
+    loading: state.dm[ownProps.match.params.navigate]["loading"] // check if data is loaded
+  };
+};
+
+export default connect(mapStateToProps)(DataMaintenance);

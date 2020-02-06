@@ -11,5 +11,5 @@ module.exports = {
   FORM_WINDOW: "http://localhost:8000/#/form/",
 
   DATA_MAINTENANCE_WINDOW:
-    "http://localhost:8000/#/database-maintenance/lists/class"
+    "http://localhost:8000/#/database-maintenance/list/class"
 };
