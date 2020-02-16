@@ -1,6 +1,12 @@
+import URL from "../../config/urls";
+
 const DatatableEvents = {
-  formEvent: function(formName, datastore) {
-    electronRenderer.send("new-form", { formName, datastore });
+  newForm: function(e, formName) {
+    e.preventDefault();
+    electronRenderer.send("create_new_window", {
+      url: `${URL.FORM_WINDOW}/${formName}`,
+      name: "formWindow"
+    });
   }
 };
 

@@ -11,11 +11,8 @@ const Empty = props => (
       <p>No data found here.</p>
       {props.link ? (
         <NavLink
-          onClick={() =>
-            DatatableEvents["formEvent"](
-              `${props.link.toLocaleLowerCase(props.link)}`,
-              props.datastore
-            )
+          onClick={e =>
+            DatatableEvents.newForm(e, `${props.navigate}/${props.tableName}`)
           }
           to="#"
         >

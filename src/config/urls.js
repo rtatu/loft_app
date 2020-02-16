@@ -8,7 +8,7 @@ module.exports = {
 
   MAIN_WINDOW: "http://localhost:8000",
 
-  FORM_WINDOW: "http://localhost:8000/#/form/",
+  FORM_WINDOW: "http://localhost:8000/#/form",
 
   DATA_MAINTENANCE_WINDOW:
     "http://localhost:8000/#/database-maintenance/list/class"

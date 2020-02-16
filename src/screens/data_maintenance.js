@@ -8,6 +8,7 @@ const DataMaintenance = props => (
     {!props.match.params.tableName ? null : (
       <Datatable
         tableName={props.match.params.tableName}
+        navigate={props.match.params.navigate}
         data={props.navigateData}
         loading={props.loading}
       />
@@ -16,14 +17,16 @@ const DataMaintenance = props => (
 );
 
 const mapStateToProps = (state, ownProps) => {
+  let { navigate, tableName } = ownProps.match.params;
   return {
     navigateData:
-      (state.dm[ownProps.match.params.navigate]["data"] && // check if data is not null
-        state.dm[ownProps.match.params.navigate]["data"][
-          ownProps.match.params.tableName // get table data
+      (state.dm[navigate] &&
+      state.dm[navigate]["data"] && // check if data is not null
+        state.dm[navigate]["data"][
+          tableName // get table data
         ]) ||
-      state.dm[ownProps.match.params.navigate], // if no table in param then entire navigate data
-    loading: state.dm[ownProps.match.params.navigate]["loading"] // check if data is loaded
+      state.dm[navigate], // if no table in param then entire navigate data
+    loading: state.dm[navigate] && state.dm[navigate]["loading"] // check if data is loaded
   };
 };
 

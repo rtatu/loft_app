@@ -21,7 +21,10 @@ const Root = () => (
       component={DataMaintenance}
     />
     <AuthenticatedRoute path="/empty" component={Empty} />
-    <AuthenticatedRoute path="/form/:name" component={FormContainer} />
+    <AuthenticatedRoute
+      path="/form/:navigate/:tableName/:id?"
+      component={FormContainer}
+    />
     <AuthenticatedRoute path="/planner" component={Planner} />
     <AuthenticatedRoute path="/order" exact component={Order} />
     <AuthenticatedRoute path="/tableform" exact component={TableForm} />

@@ -29,6 +29,8 @@ const Datatable = props =>
     />
   ) : !props.loading ? (
     <Empty
+      tableName={props.tableName}
+      navigate={props.navigate}
       link={
         props.tableName.charAt(0).toLocaleUpperCase() + props.tableName.slice(1)
       }
