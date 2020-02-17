@@ -4,6 +4,7 @@ const config = {
     const formHeader = props.formheader[props.formName];
     const headerKeys = Object.keys(formHeader);
     const editdata = props.data || {};
+    console.log(editdata);
 
     for (let key of headerKeys) {
       // alteredKEy -> General = general
@@ -43,6 +44,7 @@ const config = {
     }
 
     // reutrn the mapping of propsToValue
+    console.log(values, "after mapping");
     return values;
   },
   validate: (values, formikBag) => {
@@ -85,20 +87,22 @@ const config = {
         : (bag["address"]["zip"] = bag["address"]["state_province"]);
     }
 
-    electronRenderer.send("form_action", {
-      name: "POST_DATA",
-      path: "datastore.lists.data.class",
-      tableName: formikBag.props.formName,
-      bag
-    });
+    // electronRenderer.send("form_action", {
+    //   name: "POST_DATA",
+    //   path: "datastore.lists.data.class",
+    //   tableName: formikBag.props.formName,
+    //   bag
+    // });
 
-    electronRenderer.on("action_response", (event, data) => {
-      if (data == 1) {
-        electronRemote.getCurrentWindow().close();
-      } else {
-        console.log("errror");
-      }
-    });
+    // electronRenderer.on("action_response", (event, data) => {
+    //   if (data == 1) {
+    //     electronRemote.getCurrentWindow().close();
+    //   } else {
+    //     console.log("errror");
+    //   }
+    // });
+
+    // upload data
   }
 };
 

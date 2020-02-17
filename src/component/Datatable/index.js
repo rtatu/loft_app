@@ -26,6 +26,7 @@ const Datatable = props =>
       data={Object.values(props.data)}
       tableName={props.tableName}
       key={props.tableName}
+      navigate={props.navigate}
     />
   ) : !props.loading ? (
     <Empty

@@ -3,6 +3,7 @@ import "./datatable.sass";
 import colResize from "../resize.js";
 import DtConfig from "./datatable_config";
 import DTHEADER from "./datatable_header";
+import DatatableEvents from "./datatable_renderer_events";
 
 // proto for sum
 Array.prototype.sum = function() {
@@ -189,20 +190,11 @@ class DatatableContainer extends React.Component {
   // editMode - form
   sendDataToEditMode = e => {
     let id = e.target.parentElement.dataset.id;
-    let data;
-    for (let item of this.props.data) {
-      if (parseInt(item.id) == parseInt(id)) {
-        data = item;
-        break;
-      }
-    }
-    let sendData = {
-      formName: this.props.tableName,
-      data: data,
-      datastore: this.props.datastore,
-      editMode: "?editMode"
-    };
-    electronRenderer.send("new-form", sendData);
+    DatatableEvents.editForm(
+      `${this.props.navigate}/${this.props.tableName}`,
+      this.props.tableName,
+      id
+    );
   };
 
   render() {
@@ -212,7 +204,7 @@ class DatatableContainer extends React.Component {
           <React.Fragment>
             <DtConfig
               name={this.props.tableName}
-              datastore={this.props.datastore}
+              navigate={this.props.navigate}
             />
             <DatatableJSX
               styles={this.state.styles}

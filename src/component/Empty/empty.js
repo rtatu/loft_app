@@ -12,7 +12,11 @@ const Empty = props => (
       {props.link ? (
         <NavLink
           onClick={e =>
-            DatatableEvents.newForm(e, `${props.navigate}/${props.tableName}`)
+            DatatableEvents.newForm(
+              e,
+              `${props.navigate}/${props.tableName}`,
+              props.tableName
+            )
           }
           to="#"
         >
