@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 const AuthenticatedRoute = props => {
   const { state, component: Component, ...rest } = props;
   return state.loading ? (
-    <div></div>
+    <div>
+      <h1>Loading</h1>
+    </div>
   ) : (
     <Route
       {...rest}

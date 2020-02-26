@@ -1,28 +1,29 @@
 import React from "react";
 import down from "../../../static/icon/down.svg";
 import "./fields.sass";
+import stateAndProvince from "../../../static/state_province.json";
 
-class Select extends React.Component {
+class StateAndProvince extends React.Component {
   // constructor
 
   constructor(props) {
     super(props);
-    // create refs
 
-    try {
-      this.sug = this.props.readOnly
-        ? this.props.data
-        : Object.values(this.props.data);
-    } catch (error) {
-      console.log(error);
+    this.sug = Object.values(stateAndProvince[this.props.country]);
+    this.sugKeys = Object.keys(stateAndProvince[this.props.country]);
+
+    this.value = this.props.value || this.props.defaultValue || "";
+
+    if (!this.sug.includes(this.value)) {
+      this.value = "";
     }
 
     this.state = {
       show: false,
-      suggestions: this.sug || [{ name: "NO DATA" }],
-      value: this.props.value || this.props.defaultValue || "",
+      suggestions: Object.values(stateAndProvince[this.props.country]),
+      value: this.value,
       select: -1,
-      name: !this.props.readOnly ? this.props.autofillProp : undefined
+      country: this.props.country
     };
 
     this.input = React.createRef();
@@ -79,26 +80,27 @@ class Select extends React.Component {
     let d = this.sug;
     let regex = new RegExp(`^${value}`, "i");
     let suggestions = [];
-
-    if (this.state.name) {
-      suggestions = d
-        .sort(this.sortObject)
-        .filter(v => regex.test(v[this.state.name]));
-    } else {
-      suggestions = d.sort().filter(v => regex.test(v));
+    let valueWithCode;
+    if (value.length == 2) {
+      valueWithCode = this.handleSuggestionWithCode(value);
+      if (valueWithCode) suggestions.push(valueWithCode);
     }
-
+    suggestions.push(
+      ...d.sort().filter(v => regex.test(v) && v !== valueWithCode)
+    );
     this.setState({ value, suggestions, select: 0 });
-  };
-
-  sortObject = (a, b) => {
-    return a[this.state.name] - b[this.state.name];
   };
 
   handleOptionClick = e => {
     e.preventDefault();
     if (e.target.innerText != "NO DATA") {
       this.setState({ value: e.target.innerText });
+    }
+  };
+
+  handleSuggestionWithCode = value => {
+    if (this.sugKeys.includes(value.toUpperCase())) {
+      return stateAndProvince[this.props.country][value.toUpperCase()];
     }
   };
 
@@ -180,7 +182,6 @@ class Select extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
           onKeyDown={this.onKeyDown}
-          readOnly={this.props.readOnly}
           name={this.props.name}
         />
         <img
@@ -208,4 +209,4 @@ class Select extends React.Component {
   }
 }
 
-export default Select;
+export default StateAndProvince;

@@ -1,6 +1,29 @@
 // import the route events for navbar
 import RouteEvents from "./sidebar_renderer_events";
 
+const poNav = [
+  {
+    label: "Dashboard",
+    path: "/po/dashboard"
+  },
+  {
+    label: "Issues",
+    path: "/po/issues"
+  },
+  {
+    label: "Inventory",
+    path: "/po/inventory"
+  },
+  {
+    label: "Purchase Order",
+    path: "/po/po"
+  },
+  {
+    label: "Reports",
+    path: "/po/reports"
+  }
+];
+
 const archiveNav = [
   {
     label: "Customers",
@@ -105,7 +128,8 @@ const nav_bar = [
     SERVICES: [
       {
         label: "Purchase Order",
-        path: "/purchase-order"
+        path: "/po",
+        event: RouteEvents["po"]
       },
       {
         label: "Maintenance",
@@ -128,4 +152,4 @@ const nav_bar = [
   }
 ];
 
-export { archiveNav, nav_bar };
+export { archiveNav, nav_bar, poNav };

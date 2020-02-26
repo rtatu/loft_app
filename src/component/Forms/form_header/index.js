@@ -9,6 +9,8 @@ import Contact from "./contact";
 import Driver from "./driver";
 import Subsidiary from "./subsidiary";
 import Location from "./location";
+import Trailer from "./trailer";
+import Item from "./item";
 
 export default {
   customer: Customer,
@@ -21,5 +23,7 @@ export default {
   contact: Contact,
   driver: Driver,
   subsidiary: Subsidiary,
-  location: Location
+  location: Location,
+  trailer: Trailer,
+  item: Item
 };

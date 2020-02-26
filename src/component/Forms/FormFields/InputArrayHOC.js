@@ -1,67 +1,7 @@
 import React from "react";
-import { throws } from "assert";
-const data = [
-  {
-    user: "Daniel Shiffman",
-    message: `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-    attachment: null
-  },
-  {
-    user: "Rohit Tatu",
-    message: `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-    attachment: null
-  },
-  {
-    user: "Rohit Tatu",
-    message: null,
-    attachment: {
-      name: "project_guide.pdf",
-      data: null
-    }
-  },
-  {
-    user: "Daniel Shiffman",
-    message: `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-    attachment: null
-  },
-  {
-    user: "Daniel Shiffman",
-    message: `In as name to here them deny wise this.
-            As rapid woody my he me which.
-            Men but they fail shew just wish next put.
-            Led all visitor musical calling nor her.
-            Within coming figure sex things are.
-            Pretended concluded did repulsive education smallness yet yet described.
-            Had country man his pressed shewing. No gate dare rose he.
-            Eyes year if miss he as upon. `,
-    attachment: null
-  }
-];
 
 class InputArrayHOC extends React.Component {
   constructor(props) {
-    console.log(props, "inputhoc");
     super(props);
     this.state = {
       data: this.props.value || value
@@ -86,7 +26,6 @@ class InputArrayHOC extends React.Component {
 
   pushValue = () => {
     if (this.props.setFieldValue) {
-      console.log("bola", this.state.data);
       this.props.setFieldValue(this.props.name, this.state.data, false);
     }
   };

@@ -48,12 +48,9 @@ const Location = {
     {
       label: "State",
       name: "state_province",
-      component: Fields.Select,
+      component: Fields.StateAndProvince,
       labelChange: { USA: "State", CANADA: "Province" },
-      changeOn: "country",
-      data: ["ACTIVE", "INACTIVE"],
-      readOnly: true,
-      defaultValue: "ACTIVE"
+      changeOn: "country"
     },
     {
       label: "City",

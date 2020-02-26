@@ -5,6 +5,7 @@ import Textarea from "./TextArea";
 import Notes from "./notes";
 import WorkingHour from "./WorkingHour";
 import InputArrayHOC from "./InputArrayHOC";
+import StateAndProvince from "./StateAndProvince";
 
 const Fields = {
   Date: Datefield,
@@ -13,7 +14,8 @@ const Fields = {
   Textarea: Textarea,
   Notes: Notes,
   WorkingHour: WorkingHour,
-  InputArrayHOC: InputArrayHOC
+  InputArrayHOC: InputArrayHOC,
+  StateAndProvince: StateAndProvince
 };
 
 export default Fields;

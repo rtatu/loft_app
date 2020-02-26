@@ -4,111 +4,6 @@ import getIn from "../../utils/data_functions";
 import getComponent from "../../utils/get_react_comp";
 import { Form } from "formik";
 
-let selectdata = [
-  { name: "Rajah" },
-  { name: "Burke" },
-  { name: "Wesley" },
-  { name: "Alan" },
-  { name: "Cooper" },
-  { name: "Drake" },
-  { name: "Roth" },
-  { name: "Fitzgerald" },
-  { name: "Ashton" },
-  { name: "Tobias" },
-  { name: "Linus" },
-  { name: "Garrison" },
-  { name: "Nasim" },
-  { name: "Keith" },
-  { name: "Sawyer" },
-  { name: "Lamar" },
-  { name: "Eaton" },
-  { name: "Garth" },
-  { name: "Francis" },
-  { name: "Kyle" },
-  { name: "Steven" },
-  { name: "Darius" },
-  { name: "Rafael" },
-  { name: "Abel" },
-  { name: "Kane" },
-  { name: "Damian" },
-  { name: "Cairo" },
-  { name: "Prescott" },
-  { name: "Rooney" },
-  { name: "Henry" },
-  { name: "Jeremy" },
-  { name: "Chancellor" },
-  { name: "Dexter" },
-  { name: "Callum" },
-  { name: "Hilel" },
-  { name: "Macon" },
-  { name: "Alec" },
-  { name: "Leo" },
-  { name: "Stuart" },
-  { name: "Beck" },
-  { name: "Derek" },
-  { name: "Ciaran" },
-  { name: "Jasper" },
-  { name: "Aaron" },
-  { name: "Hector" },
-  { name: "Jelani" },
-  { name: "Leo" },
-  { name: "Trevor" },
-  { name: "Ciaran" },
-  { name: "Grady" },
-  { name: "Christopher" },
-  { name: "Hakeem" },
-  { name: "Jasper" },
-  { name: "Reed" },
-  { name: "Clarke" },
-  { name: "Oleg" },
-  { name: "Thane" },
-  { name: "Ignatius" },
-  { name: "Coby" },
-  { name: "Micah" },
-  { name: "Herrod" },
-  { name: "Marvin" },
-  { name: "Tyrone" },
-  { name: "Ezekiel" },
-  { name: "Fritz" },
-  { name: "Blaze" },
-  { name: "Clinton" },
-  { name: "Thomas" },
-  { name: "Brendan" },
-  { name: "Axel" },
-  { name: "Chancellor" },
-  { name: "Dane" },
-  { name: "Garrison" },
-  { name: "Timon" },
-  { name: "Ryder" },
-  { name: "Odysseus" },
-  { name: "Raja" },
-  { name: "Jameson" },
-  { name: "Addison" },
-  { name: "Noble" },
-  { name: "Maxwell" },
-  { name: "Caleb" },
-  { name: "Warren" },
-  { name: "Colin" },
-  { name: "Sean" },
-  { name: "Zeus" },
-  { name: "Drew" },
-  { name: "Owen" },
-  { name: "Noble" },
-  { name: "Alec" },
-  { name: "Nasim" },
-  { name: "Abraham" },
-  { name: "Judah" },
-  { name: "Hedley" },
-  { name: "Reed" },
-  { name: "David" },
-  { name: "Geoffrey" },
-  { name: "Demetrius" },
-  { name: "George" },
-  { name: "Benedict" }
-];
-
-selectdata = selectdata.map(item => item.name);
-
 const showSections = e => {
   const sections = document.getElementsByClassName("form-section");
   const sectionsNav = document.getElementsByClassName("form-nav");
@@ -133,7 +28,6 @@ const showSections = e => {
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
-  // console.log(data, item);
   Array.isArray(data[item]) ? (
     <React.Fragment>
       {data[item].map((nested_item, nested_index) => (
@@ -158,12 +52,13 @@ const ConditionalWrapper = (data, item, props, values) =>
             nested_item.readOnly
               ? nested_item.data
               : nested_item.autoprop
-              ? getIn(props, nested_item.autoprop)
+              ? getIn({ datastore: props.datastore }, nested_item.autoprop)
               : null
           }
           autofillProp={nested_item.autofillProp}
           readOnly={nested_item.readOnly ? nested_item.readOnly : false}
           setFieldsValue={props.setFieldValue}
+          country={values[`${item}`]["country"]}
         />
       ))}
     </React.Fragment>
@@ -179,7 +74,6 @@ const ConditionalWrapper = (data, item, props, values) =>
 
 const GeneralForm = props => {
   let data = props.formheader[props.formName];
-  console.log(props.formheader);
   let keys = Object.keys(data); // keys reference to check if  address exists
   let header_keys = keys.filter(item => (item != "Address" ? item : null)); // different key for not including "Address"
   let values = props.values;

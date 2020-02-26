@@ -1,6 +1,6 @@
 import Fields from "../FormFields";
 
-const Truck = {
+const Trailer = {
   General: [
     {
       label: "Unit No",
@@ -8,8 +8,8 @@ const Truck = {
       component: Fields.Text
     },
     {
-      label: "Truck Type",
-      name: "truckType",
+      label: "Trailer Type",
+      name: "trailerType",
       component: Fields.Text
     },
     {
@@ -42,7 +42,7 @@ const Truck = {
       defaultValue: "ACTIVE"
     }
   ],
-  "Truck Registration": [
+  "Trailer Registration": [
     {
       label: "Vin No.",
       name: "vinNo",
@@ -51,6 +51,11 @@ const Truck = {
     {
       label: "Make",
       name: "make",
+      component: Fields.Text
+    },
+    {
+      label: "No. of Axles",
+      name: "noOfAxles",
       component: Fields.Text
     },
     {
@@ -74,13 +79,13 @@ const Truck = {
       component: Fields.Text
     },
     {
-      label: "Rin No",
-      name: "rinNo",
+      label: "Province / State",
+      name: "plateNo",
       component: Fields.Text
     },
     {
-      label: "IFTA",
-      name: "ifta",
+      label: "Rin No",
+      name: "rinNo",
       component: Fields.Text
     },
     {
@@ -97,17 +102,14 @@ const Truck = {
       component: Fields.Select
     },
     {
-      label: "Reg. Gross Weight",
-      name: "regGrossWeight",
+      label: "Reefer Make",
+      name: "reeferMake",
       component: Fields.Text
     },
     {
-      label: "Reg. Gross Weight Unit",
-      name: "regGrossWeightUnit",
-      data: ["KG", "POUND"],
-      readOnly: true,
-      defaultValue: "POUND",
-      component: Fields.Select
+      label: "Reefer Model",
+      name: "reeferModel",
+      component: Fields.Text
     }
   ],
   Notes: {
@@ -123,4 +125,4 @@ const Truck = {
   }
 };
 
-export default Truck;
+export default Trailer;

@@ -8,7 +8,9 @@ const lists = [
   "subsidiary",
   "truck",
   "contact",
-  "customer"
+  "customer",
+  "trailer",
+  "item"
 ];
 
 module.exports = lists;

@@ -18,6 +18,12 @@ const DataMaintenance = props => (
 
 const mapStateToProps = (state, ownProps) => {
   let { navigate, tableName } = ownProps.match.params;
+
+  // set window's title
+
+  electronRemote
+    .getCurrentWindow()
+    .setTitle("Lofty Logistics - Data Maintenance");
   return {
     navigateData:
       (state.dm[navigate] &&

@@ -5,8 +5,10 @@
     "Driver",
     "Location",
     "Payterm",
+    "Item",
     "Service",
     "Subsidiary",
-    "Truck"
+    "Truck",
+    "Trailer"
   ]
 }
