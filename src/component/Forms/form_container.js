@@ -22,6 +22,8 @@ class FormContainer extends React.Component {
         formheader={Formheader}
         data={this.props.id ? this.props.data : null}
         datastore={this.props.datastore}
+        addToList={this.props.addToList}
+        updateInList={this.props.updateInList}
       />
     );
   }

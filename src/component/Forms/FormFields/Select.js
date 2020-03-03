@@ -12,9 +12,11 @@ class Select extends React.Component {
     try {
       this.sug = this.props.readOnly
         ? this.props.data
-        : Object.values(this.props.data);
+        : this.props.data
+        ? Object.values(this.props.data)
+        : null;
     } catch (error) {
-      console.log(error);
+      console.log(error, this);
     }
 
     this.state = {
@@ -22,7 +24,8 @@ class Select extends React.Component {
       suggestions: this.sug || [{ name: "NO DATA" }],
       value: this.props.value || this.props.defaultValue || "",
       select: -1,
-      name: !this.props.readOnly ? this.props.autofillProp : undefined
+      name: !this.props.readOnly ? this.props.autofillProp : undefined,
+      id: null
     };
 
     this.input = React.createRef();
@@ -79,16 +82,22 @@ class Select extends React.Component {
     let d = this.sug;
     let regex = new RegExp(`^${value}`, "i");
     let suggestions = [];
+    let id = null;
 
     if (this.state.name) {
-      suggestions = d
-        .sort(this.sortObject)
-        .filter(v => regex.test(v[this.state.name]));
+      suggestions = d.sort(this.sortObject).filter(v => {
+        if (regex.test(v[this.state.name])) {
+          id = v.id;
+          return true;
+        } else {
+          return false;
+        }
+      });
     } else {
       suggestions = d.sort().filter(v => regex.test(v));
     }
 
-    this.setState({ value, suggestions, select: 0 });
+    this.setState({ value, suggestions, select: 0, id });
   };
 
   sortObject = (a, b) => {
@@ -97,8 +106,9 @@ class Select extends React.Component {
 
   handleOptionClick = e => {
     e.preventDefault();
+    let id = e.target.dataset.id;
     if (e.target.innerText != "NO DATA") {
-      this.setState({ value: e.target.innerText });
+      this.setState({ value: e.target.innerText, id });
     }
   };
 
@@ -166,6 +176,7 @@ class Select extends React.Component {
 
   pushChange = value => {
     this.props.setFieldsValue(this.props.name, value, false);
+    this.props.setFieldsValue(`${this.props.name}Id`, this.state.id, false);
   };
 
   render() {
@@ -197,6 +208,7 @@ class Select extends React.Component {
                 ref={index == this.state.select ? this.selected : null}
                 onMouseDown={this.handleOptionClick}
                 className={index == this.state.select ? "selected" : null}
+                data-id={value && value.id}
               >
                 {this.state.name ? value[this.state.name] : value}
               </li>

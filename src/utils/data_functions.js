@@ -1,5 +1,4 @@
 function getIn(data, str) {
-  console.log(data, str);
   let p = str.split(".");
   let temp_data = data;
 

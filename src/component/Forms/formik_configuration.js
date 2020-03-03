@@ -26,7 +26,11 @@ const config = {
 
   handleSubmit: (values, formikBag) => {
     let keys = Object.keys(values);
-    console.log(formikUtils.mapValuesToData(values), "new");
+    let data = formikUtils.mapValuesToData(values);
+
+    console.log(data, "after submission");
+
+    // formikBag.props.addToList(data).then(res => console.log(res));
   }
 };
 

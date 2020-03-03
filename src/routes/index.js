@@ -32,7 +32,7 @@ const Root = () => (
     <AuthenticatedRoute path="/fo" exact component={FuelOp} />
     <AuthenticatedRoute path="/maintenance" exact component={Maintenance} />
     <AuthenticatedRoute path="/po/:navigate?" exact component={PO} />
-    <AuthenticatedRoute path="/:anything" component={Home} />
+    <AuthenticatedRoute path="/:anything" exact component={Home} />
   </Router>
 );
 

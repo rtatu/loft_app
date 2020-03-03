@@ -1,6 +1,7 @@
 import FormContainer from "./../component/Forms";
 import { connect } from "react-redux";
 import React from "react";
+import { addToList, updateInList } from "../store/actions/listAction";
 
 const Form = props => (
   <FormContainer
@@ -8,6 +9,8 @@ const Form = props => (
     data={props.data}
     name={props.match.params.tableName}
     id={props.match.params.id}
+    addToList={props.addToList}
+    updateInList={props.updateInList}
   />
 );
 
@@ -39,4 +42,15 @@ const mapStateToProps = (state, ownProps) => {
   return cs;
 };
 
-export default connect(mapStateToProps)(Form);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  let { tableName } = ownProps.match.params;
+
+  return {
+    addToList: data =>
+      dispatch(dispatch => addToList(dispatch, tableName, data)),
+    updateInList: data =>
+      dispatch(dispatch => addToList(dispatch, tableName, data))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -58,7 +58,7 @@ const Customer = {
     {
       label: "State",
       name: "state_province",
-      component: Fields.Text,
+      component: Fields.StateAndProvince,
       labelChange: { USA: "State", CANADA: "Province" },
       changeOn: "country"
     },
@@ -199,7 +199,7 @@ const Customer = {
     }
   ],
   Notes: {
-    name: 'notes',
+    name: "notes",
     defaultValue: [],
     component: Fields.InputArrayHOC,
     render: Fields.Notes
