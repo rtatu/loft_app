@@ -16,6 +16,7 @@ const listReducer = (state = {}, { type, payload }) => {
     case Action.FETCH_LIST:
       return { loading: false, data: payload };
     case Action.UPDATE_IN_LIST:
+      console.log(payload);
       return {
         loading: false,
         data: {

@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     addToList: data =>
       dispatch(dispatch => addToList(dispatch, tableName, data)),
     updateInList: data =>
-      dispatch(dispatch => addToList(dispatch, tableName, data))
+      dispatch(dispatch => updateInList(dispatch, tableName, data))
   };
 };
 

@@ -29,9 +29,13 @@ const addToList = async (dispatch, tableName, data) => {
 const updateInList = async (dispatch, tableName, data) => {
   try {
     let result = await new Database().ref(archivePath + tableName).set(data);
-    console.log(result);
 
-    dispatch({ type: Action.UPDATE_IN_LIST, payload: result.response });
+    let payload = {
+      tableName,
+      data: result.response
+    };
+
+    dispatch({ type: Action.UPDATE_IN_LIST, payload });
   } catch (error) {
     console.log(error);
   }

@@ -3,6 +3,7 @@ import "./form.sass";
 import getIn from "../../utils/data_functions";
 import getComponent from "../../utils/get_react_comp";
 import { Form } from "formik";
+import Loader from "../General/Loader";
 
 const showSections = e => {
   const sections = document.getElementsByClassName("form-section");
@@ -125,6 +126,8 @@ const GeneralForm = props => {
           </button>
         </div>
       </form>
+      {console.log(props.isSubmitting)}
+      <Loader show={props.isSubmitting} />
     </div>
   );
 };

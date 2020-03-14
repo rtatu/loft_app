@@ -3,18 +3,19 @@ import Datatable from "../component/Datatable";
 import { connect } from "react-redux";
 import DataTableBase from "../container/DataTableBase";
 
-const DataMaintenance = props => (
-  <DataTableBase navigate={props.match.params.navigate}>
-    {!props.match.params.tableName ? null : (
-      <Datatable
-        tableName={props.match.params.tableName}
-        navigate={props.match.params.navigate}
-        data={props.navigateData}
-        loading={props.loading}
-      />
-    )}
-  </DataTableBase>
-);
+const DataMaintenance = props =>
+  console.log(props) || (
+    <DataTableBase navigate={props.match.params.navigate}>
+      {!props.match.params.tableName ? null : (
+        <Datatable
+          tableName={props.match.params.tableName}
+          navigate={props.match.params.navigate}
+          data={props.navigateData}
+          loading={props.loading}
+        />
+      )}
+    </DataTableBase>
+  );
 
 const mapStateToProps = (state, ownProps) => {
   let { navigate, tableName } = ownProps.match.params;
