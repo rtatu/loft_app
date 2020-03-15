@@ -1,4 +1,5 @@
 import formikUtils from "../../utils/formikUtils";
+import cogoToast from "cogo-toast";
 /**
  * returns "General" -> "general"
  * "Truck Registration" -> "truckRegistration"
@@ -33,20 +34,26 @@ const config = {
 
     if (formikBag.props.data) {
       data["id"] = formikBag.props.data.id;
-      formikBag.props.updateInList(data).then(res => {
-        console.log(res);
-        formikBag.setSubmitting(false);
-      });
+      formikBag.props
+        .updateInList(data)
+        .then(res => {
+          formikBag.setSubmitting(false);
+          electronRemote.getCurrentWindow().close();
+        })
+        .catch(err => {
+          cogoToast.error(err);
+        });
     } else {
-      formikBag.props.addToList(data).then(res => {
-        console.log(res);
-        formikBag.setSubmitting(false);
-      });
+      formikBag.props
+        .addToList(data)
+        .then(res => {
+          formikBag.setSubmitting(false);
+          electronRemote.getCurrentWindow().close();
+        })
+        .catch(err => {
+          cogoToast.error(err);
+        });
     }
-
-    // if edited then updateToList
-
-    // else add the data to the table
   }
 };
 
