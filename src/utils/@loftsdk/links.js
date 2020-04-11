@@ -13,4 +13,6 @@ const lists = [
   "item"
 ];
 
-module.exports = lists;
+const po = ["inventory", "po", "issue"];
+
+module.exports = { lists, po };

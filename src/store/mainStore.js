@@ -14,6 +14,7 @@ const ACTION = require("./actions");
 // import reducer
 const userReducer = require("./reducers/userReducer");
 const listReducer = require("./reducers/listReducer");
+const poReducer = require("./reducers/poReducer");
 
 const initialState = {
   user: {
@@ -26,12 +27,21 @@ const initialState = {
       loading: true,
       data: null
     }
+  },
+  purchase_order: {
+    data: {
+      inventory: null,
+      issues: null,
+      po: null
+    },
+    loading: true
   }
 };
 
 const reducer = combineReducers({
   user: userReducer,
-  dm: combineReducers({ list: listReducer })
+  dm: combineReducers({ list: listReducer }),
+  purchase_order: poReducer
 });
 
 const mainStore = createStore(

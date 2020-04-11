@@ -6,13 +6,16 @@ import {
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import listReducer from "./reducers/listReducer";
 import userReducer from "./reducers/userReducer";
+import poReducer from "./reducers/poReducer";
+
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 const initialState = getInitialStateRenderer();
 const reducer = combineReducers({
   user: userReducer,
-  dm: combineReducers({ list: listReducer })
+  dm: combineReducers({ list: listReducer }),
+  purchase_order: poReducer
 });
 const rendererStore = createStore(
   reducer,

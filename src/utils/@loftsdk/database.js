@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 const Storage = require("./storageFunction");
-const lists = require("./links");
+const { lists, po } = require("./links");
 const normalize = require("./normalize");
 
 class Database {
@@ -106,6 +106,36 @@ class Database {
               let data = res.map((item, i) => {
                 if (!item.data) reject("error occurred");
                 result[lists[i]] = normalize(item.data);
+              });
+              resolve(result);
+            })
+          );
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
+  getPO = () => {
+    return new Promise(async (resolve, reject) => {
+      await this.setToken();
+      try {
+        axios
+          .all(
+            po.map(item =>
+              axios({
+                ...this.axiosConfig,
+                method: "GET",
+                url: `${process.env.BASE_API_URL}/po/${item}`
+              })
+            )
+          )
+          .then(
+            axios.spread(function(...res) {
+              let result = {};
+              let data = res.map((item, i) => {
+                if (!item.data) reject("error occurred");
+                result[po[i]] = normalize(item.data);
               });
               resolve(result);
             })
