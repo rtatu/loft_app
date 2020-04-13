@@ -13,14 +13,14 @@ class Database {
       if (!currentUser) console.error("user is not logged in");
 
       this.axiosConfig["headers"] = {
-        Authorization: `Bearer ${currentUser.token}`
+        Authorization: `Bearer ${currentUser.token}`,
       };
     } catch (error) {
       console.error(error);
     }
   };
   // set url for http method
-  ref = url => {
+  ref = (url) => {
     if (this.url) {
       throw new Error("can not call ref twice");
     }
@@ -45,7 +45,7 @@ class Database {
   };
 
   // set data at specific url -- PUT
-  set = data => {
+  set = (data) => {
     return new Promise(async (resolve, reject) => {
       await this.setToken();
       let result;
@@ -59,7 +59,7 @@ class Database {
   };
 
   // create data at specific url -- POST
-  create = data => {
+  create = (data) => {
     return new Promise(async (resolve, reject) => {
       await this.setToken();
       let result;
@@ -73,7 +73,7 @@ class Database {
   };
 
   // remove data at specific url -- DELETE
-  remove = data => {
+  remove = (data) => {
     return new Promise(async (resolve, reject) => {
       await this.setToken();
       let result;
@@ -92,16 +92,16 @@ class Database {
       try {
         axios
           .all(
-            lists.map(item =>
+            lists.map((item) =>
               axios({
                 ...this.axiosConfig,
                 method: "GET",
-                url: `${process.env.BASE_API_URL}/archive/${item}`
+                url: `${process.env.BASE_API_URL}/archive/${item}`,
               })
             )
           )
           .then(
-            axios.spread(function(...res) {
+            axios.spread(function (...res) {
               let result = {};
               let data = res.map((item, i) => {
                 if (!item.data) reject("error occurred");
@@ -109,7 +109,10 @@ class Database {
               });
               resolve(result);
             })
-          );
+          )
+          .catch((err) => {
+            reject(err);
+          });
       } catch (err) {
         reject(err);
       }
@@ -122,16 +125,16 @@ class Database {
       try {
         axios
           .all(
-            po.map(item =>
+            po.map((item) =>
               axios({
                 ...this.axiosConfig,
                 method: "GET",
-                url: `${process.env.BASE_API_URL}/po/${item}`
+                url: `${process.env.BASE_API_URL}/po/${item}`,
               })
             )
           )
           .then(
-            axios.spread(function(...res) {
+            axios.spread(function (...res) {
               let result = {};
               let data = res.map((item, i) => {
                 if (!item.data) reject("error occurred");
