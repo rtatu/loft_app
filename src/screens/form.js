@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import React from "react";
 import { addToList, updateInList } from "../store/actions/listAction";
 
-const Form = props => (
+const Form = (props) => (
   <FormContainer
     datastore={props.datastore}
     data={props.data}
@@ -29,12 +29,14 @@ const setWindowTitle = (data, tableName) => {
 const mapStateToProps = (state, ownProps) => {
   let { navigate, tableName, id } = ownProps.match.params;
   let cs = {
-    datastore: state.dm[navigate] && state.dm[navigate]["data"],
+    datastore:
+      (state.dm[navigate] && state.dm[navigate]["data"]) ||
+      (state.dm["list"] && state.dm["list"]["data"]),
     data:
       state.dm[navigate] &&
       state.dm[navigate]["data"] &&
       state.dm[navigate]["data"][tableName] &&
-      state.dm[navigate]["data"][tableName][id]
+      state.dm[navigate]["data"][tableName][id],
   };
 
   setWindowTitle(cs.data, tableName);
@@ -46,10 +48,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   let { tableName } = ownProps.match.params;
 
   return {
-    addToList: data =>
-      dispatch(dispatch => addToList(dispatch, tableName, data)),
-    updateInList: data =>
-      dispatch(dispatch => updateInList(dispatch, tableName, data))
+    addToList: (data) =>
+      dispatch((dispatch) => addToList(dispatch, tableName, data)),
+    updateInList: (data) =>
+      dispatch((dispatch) => updateInList(dispatch, tableName, data)),
   };
 };
 

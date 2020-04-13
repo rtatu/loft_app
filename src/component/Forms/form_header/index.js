@@ -11,6 +11,8 @@ import Subsidiary from "./subsidiary";
 import Location from "./location";
 import Trailer from "./trailer";
 import Item from "./item";
+import Inventory from "./po/inventory";
+import Issues from "./po/issue";
 
 export default {
   customer: Customer,
@@ -25,5 +27,8 @@ export default {
   subsidiary: Subsidiary,
   location: Location,
   trailer: Trailer,
-  item: Item
+  item: Item,
+  // po
+  inventory: Inventory,
+  issues: Issues,
 };

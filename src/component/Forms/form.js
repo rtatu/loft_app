@@ -5,7 +5,7 @@ import getComponent from "../../utils/get_react_comp";
 import { Form } from "formik";
 import Loader from "../General/Loader";
 
-const showSections = e => {
+const showSections = (e) => {
   const sections = document.getElementsByClassName("form-section");
   const sectionsNav = document.getElementsByClassName("form-nav");
 
@@ -29,7 +29,7 @@ const showSections = e => {
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
-  Array.isArray(data[item]) ? (
+  console.log(values, "aaaadddd") || Array.isArray(data[item]) ? (
     <React.Fragment>
       {data[item].map((nested_item, nested_index) => (
         <nested_item.component
@@ -60,6 +60,14 @@ const ConditionalWrapper = (data, item, props, values) =>
           readOnly={nested_item.readOnly ? nested_item.readOnly : false}
           setFieldsValue={props.setFieldValue}
           country={values[`${item}`]["country"]}
+          fill={
+            nested_item.autoFillAnotherProps &&
+            `${item}.${nested_item.autoFillAnotherProps.fill}`
+          }
+          with={
+            nested_item.autoFillAnotherProps &&
+            nested_item.autoFillAnotherProps.with
+          }
         />
       ))}
     </React.Fragment>
@@ -73,10 +81,10 @@ const ConditionalWrapper = (data, item, props, values) =>
     />
   ) : null;
 
-const GeneralForm = props => {
+const GeneralForm = (props) => {
   let data = props.formheader[props.formName];
   let keys = Object.keys(data); // keys reference to check if  address exists
-  let header_keys = keys.filter(item => (item != "Address" ? item : null)); // different key for not including "Address"
+  let header_keys = keys.filter((item) => (item != "Address" ? item : null)); // different key for not including "Address"
   let values = props.values;
 
   return (

@@ -4,14 +4,14 @@ import "./empty.sass";
 import { NavLink } from "react-router-dom";
 import DatatableEvents from "../Datatable/datatable_renderer_events";
 
-const Empty = props => (
-  <div class="empty">
+const Empty = (props) => (
+  <div className="empty">
     <div>
       <img src={empty_data} />
       <p>No data found here.</p>
       {props.link ? (
         <NavLink
-          onClick={e =>
+          onClick={(e) =>
             DatatableEvents.newForm(
               e,
               `${props.navigate}/${props.tableName}`,

@@ -25,13 +25,21 @@ class Select extends React.Component {
       value: this.props.value || this.props.defaultValue || "",
       select: -1,
       name: !this.props.readOnly ? this.props.autofillProp : undefined,
-      id: null
+      id: null,
+      fillValue: null,
     };
 
     this.input = React.createRef();
     this.list = React.createRef();
     this.dropDown = React.createRef();
     this.selected = React.createRef();
+  }
+
+  UNSAFE_componentWillReceiveProps(props) {
+    let value = props.value;
+    if (value) {
+      this.setState({ value });
+    }
   }
 
   componentDidMount() {
@@ -42,7 +50,7 @@ class Select extends React.Component {
     document.removeEventListener("mousedown", this.handleClick, false);
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     if (e.target == this.input.current) {
       e.preventDefault();
       this.input.current.focus();
@@ -57,7 +65,7 @@ class Select extends React.Component {
     this.input.current.blur();
   };
 
-  onDownClick = e => {
+  onDownClick = (e) => {
     e.preventDefault();
 
     if (!this.state.show) {
@@ -67,52 +75,61 @@ class Select extends React.Component {
     }
   };
 
-  onInputFocus = e => {
+  onInputFocus = (e) => {
     this.setState({ show: true });
   };
 
-  onInputBlur = e => {
+  onInputBlur = (e) => {
     this.setState(
       { show: false, select: -1 },
       this.pushChange(this.state.value)
     );
   };
 
-  handleSuggestions = value => {
+  handleSuggestions = (value) => {
     let d = this.sug;
     let regex = new RegExp(`^${value}`, "i");
     let suggestions = [];
     let id = null;
+    let fillValue = null;
 
     if (this.state.name) {
-      suggestions = d.sort(this.sortObject).filter(v => {
+      suggestions = d.sort(this.sortObject).filter((v) => {
         if (regex.test(v[this.state.name])) {
           id = v.id;
+          if (this.props.with) {
+            fillValue = v[this.props.with];
+          }
           return true;
         } else {
           return false;
         }
       });
     } else {
-      suggestions = d.sort().filter(v => regex.test(v));
+      suggestions = d.sort().filter((v) => regex.test(v));
     }
 
-    this.setState({ value, suggestions, select: 0, id });
+    this.setState({ value, suggestions, select: 0, id, fillValue });
   };
 
   sortObject = (a, b) => {
     return a[this.state.name] - b[this.state.name];
   };
 
-  handleOptionClick = e => {
+  handleOptionClick = (e) => {
     e.preventDefault();
     let id = e.target.dataset.id;
+    let value = JSON.parse(e.target.dataset.value);
+    let fillValue = null;
     if (e.target.innerText != "NO DATA") {
-      this.setState({ value: e.target.innerText, id });
+      if (this.props.with) {
+        fillValue = value[this.props.with];
+      }
+      this.setState({ value: e.target.innerText, id, fillValue });
     }
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     // search from suggestion
     let inputText = e.target.value;
 
@@ -123,7 +140,7 @@ class Select extends React.Component {
     }
   };
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     if (
       e.keyCode == 40 &&
       this.state.select + 1 < this.state.suggestions.length
@@ -174,8 +191,12 @@ class Select extends React.Component {
     }
   };
 
-  pushChange = value => {
+  pushChange = (value) => {
     this.props.setFieldsValue(this.props.name, value, false);
+    console.log(this.props.name);
+    if (this.props.fill) {
+      this.props.setFieldsValue(this.props.fill, this.state.fillValue, false);
+    }
     this.props.setFieldsValue(`${this.props.name}Id`, this.state.id, false);
   };
 
@@ -209,6 +230,7 @@ class Select extends React.Component {
                 onMouseDown={this.handleOptionClick}
                 className={index == this.state.select ? "selected" : null}
                 data-id={value && value.id}
+                data-value={JSON.stringify(value)}
               >
                 {this.state.name ? value[this.state.name] : value}
               </li>
