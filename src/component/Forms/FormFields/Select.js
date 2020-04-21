@@ -193,7 +193,6 @@ class Select extends React.Component {
 
   pushChange = (value) => {
     this.props.setFieldsValue(this.props.name, value, false);
-    console.log(this.props.name);
     if (this.props.fill) {
       this.props.setFieldsValue(this.props.fill, this.state.fillValue, false);
     }

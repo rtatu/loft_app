@@ -1,14 +1,13 @@
 import React from "react";
 import "./form.sass";
-import getIn from "../../utils/data_functions";
 import getComponent from "../../utils/get_react_comp";
-import { Form } from "formik";
+import { Form, getIn } from "formik";
 import Loader from "../General/Loader";
+import get_In from "../../utils/data_functions";
 
 const showSections = (e) => {
   const sections = document.getElementsByClassName("form-section");
   const sectionsNav = document.getElementsByClassName("form-nav");
-
   let index = parseInt(e.target.dataset.index);
   for (let i = 0; i < sections.length; i++) {
     if (i == index) {
@@ -29,7 +28,7 @@ const showSections = (e) => {
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
-  console.log(values, "aaaadddd") || Array.isArray(data[item]) ? (
+  console.log(props.errors, "errors") || Array.isArray(data[item]) ? (
     <React.Fragment>
       {data[item].map((nested_item, nested_index) => (
         <nested_item.component
@@ -53,7 +52,7 @@ const ConditionalWrapper = (data, item, props, values) =>
             nested_item.readOnly
               ? nested_item.data
               : nested_item.autoprop
-              ? getIn({ datastore: props.datastore }, nested_item.autoprop)
+              ? get_In({ datastore: props.datastore }, nested_item.autoprop)
               : null
           }
           autofillProp={nested_item.autofillProp}
@@ -68,6 +67,7 @@ const ConditionalWrapper = (data, item, props, values) =>
             nested_item.autoFillAnotherProps &&
             nested_item.autoFillAnotherProps.with
           }
+          error={getIn(props.errors, `${item}.${nested_item.name}`)}
         />
       ))}
     </React.Fragment>
@@ -134,8 +134,7 @@ const GeneralForm = (props) => {
           </button>
         </div>
       </form>
-      {console.log(props.isSubmitting)}
-      <Loader show={props.isSubmitting} />
+      {/* <Loader show={props.isSubmitting} /> */}
     </div>
   );
 };

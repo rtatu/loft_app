@@ -1,7 +1,7 @@
 import React from "react";
 import "./fields.sass";
 
-const Text = ({ label, handleChange, name, value, defaultValue }) => (
+const Text = ({ label, handleChange, name, value, defaultValue, error }) => (
   <div className="field">
     <label>{label}</label>
     <input
@@ -11,6 +11,7 @@ const Text = ({ label, handleChange, name, value, defaultValue }) => (
       value={value}
       defaultValue={defaultValue}
     />
+    {error ? <p className="form-error">{error}</p> : null}
   </div>
 );
 

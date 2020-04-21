@@ -1,4 +1,4 @@
-function getIn(data, str) {
+function get_In(data, str) {
   let p = str.split(".");
   let temp_data = data;
 
@@ -10,4 +10,4 @@ function getIn(data, str) {
   return temp_data;
 }
 
-export default getIn;
+export default get_In;
