@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="68" height="68" viewBox="0 0 68 68">
+  <defs>
+    <filter id="Ellipse_37" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#131d4a" flood-opacity="0.22"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="general" transform="translate(-211 -182)">
+    <g transform="matrix(1, 0, 0, 1, 211, 182)" filter="url(#Ellipse_37)">
+      <g id="Ellipse_37-2" data-name="Ellipse 37" transform="translate(9 4)" fill="#fff" stroke="#131d4a" stroke-width="1">
+        <circle cx="25" cy="25" r="25" stroke="none"/>
+        <circle cx="25" cy="25" r="24.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Group_197" data-name="Group 197" transform="translate(-368.7 -104)">
+      <line id="Line_9" data-name="Line 9" y2="15" transform="translate(613.5 309.5)" fill="none" stroke="#131d4a" stroke-linecap="round" stroke-width="1"/>
+      <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(612.7 305)" fill="#fff" stroke="#131d4a" stroke-width="1">
+        <circle cx="0.75" cy="0.75" r="0.75" stroke="none"/>
+        <circle cx="0.75" cy="0.75" r="0.25" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

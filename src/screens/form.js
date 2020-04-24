@@ -2,16 +2,18 @@ import FormContainer from "./../component/Forms";
 import { connect } from "react-redux";
 import React from "react";
 import { addToList, updateInList } from "../store/actions/listAction";
+import PoForm from "../component/PoForm";
 
 const Form = (props) => (
-  <FormContainer
-    datastore={props.datastore}
-    data={props.data}
-    name={props.match.params.tableName}
-    id={props.match.params.id}
-    addToList={props.addToList}
-    updateInList={props.updateInList}
-  />
+  <PoForm />
+  // <FormContainer
+  //   datastore={props.datastore}
+  //   data={props.data}
+  //   name={props.match.params.tableName}
+  //   id={props.match.params.id}
+  //   addToList={props.addToList}
+  //   updateInList={props.updateInList}
+  // />
 );
 
 const setWindowTitle = (data, tableName) => {
