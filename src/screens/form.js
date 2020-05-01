@@ -4,17 +4,46 @@ import React from "react";
 import { addToList, updateInList } from "../store/actions/listAction";
 import PoForm from "../component/PoForm";
 
-const Form = (props) => (
-  <PoForm />
-  // <FormContainer
-  //   datastore={props.datastore}
-  //   data={props.data}
-  //   name={props.match.params.tableName}
-  //   id={props.match.params.id}
-  //   addToList={props.addToList}
-  //   updateInList={props.updateInList}
-  // />
-);
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { navigate, tableName, id } = props.match.params;
+
+    let isPOForm = navigate == "purchase_order" && tableName == "po";
+
+    this.state = {
+      isPOForm,
+      po_type: null,
+    };
+  }
+
+  choosePO = (text) => {
+    this.setState({ po_type: text });
+  };
+
+  renderForm = () => {
+    const { props } = this;
+    if (this.state.isPOForm && !this.state.po_type)
+      return <PoForm choosePO={this.choosePO} />;
+    else
+      return (
+        <FormContainer
+          datastore={props.datastore}
+          data={props.data}
+          name={props.match.params.tableName}
+          id={props.match.params.id}
+          addToList={props.addToList}
+          updateInList={props.updateInList}
+          poType={this.state.po_type}
+        />
+      );
+  };
+
+  render() {
+    return this.renderForm();
+  }
+}
 
 const setWindowTitle = (data, tableName) => {
   let tb = tableName.charAt(0).toUpperCase() + tableName.slice(1);

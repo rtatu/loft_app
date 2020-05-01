@@ -10,12 +10,20 @@ class PoForm extends React.Component {
   }
 
   handleTypeChange = (text) => {
-    this.setState({ poType: text }, () => console.log(this.state));
+    this.setState({ poType: text });
+  };
+
+  onContinue = () => {
+    this.props.choosePO(this.state.poType);
   };
 
   render() {
     return (
-      <Choose type={this.state.poType} handleClick={this.handleTypeChange} />
+      <Choose
+        type={this.state.poType}
+        handleClick={this.handleTypeChange}
+        onContinue={this.onContinue}
+      />
     );
   }
 }

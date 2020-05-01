@@ -26,7 +26,9 @@ const Choose = (props) => (
         </div>
       ))}
     </div>
-    <button className="continue">Continue</button>
+    <button className="continue" onClick={props.onContinue}>
+      Continue
+    </button>
   </div>
 );
 

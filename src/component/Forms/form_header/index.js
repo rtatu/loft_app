@@ -13,6 +13,7 @@ import Trailer from "./trailer";
 import Item from "./item";
 import Inventory from "./po/inventory";
 import Issues from "./po/issue";
+import PO from "./po/po";
 
 export default {
   customer: Customer,
@@ -31,4 +32,5 @@ export default {
   // po
   inventory: Inventory,
   issues: Issues,
+  po: PO,
 };

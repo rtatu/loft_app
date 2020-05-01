@@ -5,33 +5,33 @@ const Truck = {
     {
       label: "Unit No",
       name: "unitNo",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Truck Type",
       name: "truckType",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Category",
       name: "category",
       component: Fields.Select,
       autoprop: "datastore.class",
-      autofillProp: "name"
+      autofillProp: "name",
     },
     {
       label: "Division",
       name: "division",
       component: Fields.Select,
       autoprop: "datastore.subsidiary",
-      autofillProp: "name"
+      autofillProp: "name",
     },
     {
       label: "Terminal",
       name: "terminal",
       component: Fields.Select,
       autoprop: "datastore.terminal",
-      autofillProp: "name"
+      autofillProp: "name",
     },
     {
       label: "Status",
@@ -39,54 +39,54 @@ const Truck = {
       component: Fields.Select,
       data: ["ACTIVE", "INACTIVE"],
       readOnly: true,
-      defaultValue: "ACTIVE"
-    }
+      defaultValue: "ACTIVE",
+    },
   ],
   "Truck Registration": [
     {
       label: "Vin No.",
       name: "vinNo",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Make",
       name: "make",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Model",
       name: "model",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Model",
       name: "model",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Year",
       name: "year",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Plate No",
       name: "plateNo",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Rin No",
       name: "rinNo",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "IFTA",
       name: "ifta",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Vehicle Weight",
       name: "vehicleWeight",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Vehicle Weight Unit",
@@ -94,12 +94,12 @@ const Truck = {
       data: ["KG", "POUND"],
       readOnly: true,
       defaultValue: "POUND",
-      component: Fields.Select
+      component: Fields.Select,
     },
     {
       label: "Reg. Gross Weight",
       name: "regGrossWeight",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Reg. Gross Weight Unit",
@@ -107,20 +107,20 @@ const Truck = {
       data: ["KG", "POUND"],
       readOnly: true,
       defaultValue: "POUND",
-      component: Fields.Select
-    }
+      component: Fields.Select,
+    },
   ],
   Notes: {
     name: "notes",
     defaultValue: [],
     component: Fields.InputArrayHOC,
-    render: Fields.Notes
+    render: Fields.Notes,
   },
   History: {
     name: "notes",
     defaultValue: [],
-    component: Fields.Notes
-  }
+    component: Fields.Notes,
+  },
 };
 
 export default Truck;
