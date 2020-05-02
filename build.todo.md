@@ -1,0 +1,13 @@
+build
+  -- images/
+  -- bundle.js
+  -- index.html
+  --src
+      -- main.js
+      -- preload.js
+      -- main/
+      -- store/
+      -- utils/
+      -- services/
+      -- config/
+      -- loading.html

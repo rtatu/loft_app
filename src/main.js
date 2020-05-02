@@ -5,8 +5,10 @@ const windowManager = require("./main/windowManager");
 const mainStore = require("./store/mainStore");
 const URL = require("./config/urls");
 const ACTION = require("./store/actions");
-const dotenv = require("dotenv");
-const env = dotenv.config().parsed;
+// const dotenv = require("dotenv");
+// const env = dotenv.config().parsed;
+process.env.NODE_ENV = "dev";
+process.env.BASE_API_URL = "https://xplicitsoft.ca";
 const EVENTS = require("./main/events");
 
 // @loftSdk
