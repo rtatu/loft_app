@@ -15,49 +15,51 @@ module.exports = {
   mode: "development",
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
-    filename: "bundle.js"
+    path: path.resolve(__dirname, "build"),
+    publicPath: "./",
+    filename: "bundle.js",
   },
   devServer: {
     port: 8000,
     contentBase: "./",
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
       {
         test: /\.(css|sass|scss)$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpe?g|svg|gif)$/,
         use: [
           {
             loader: "file-loader",
-            options: {}
-          }
-        ]
+            options: {
+              outputPath: "images",
+            },
+          },
+        ],
       },
       {
         test: /\.node$/,
-        loader: "node-loader"
-      }
-    ]
+        loader: "node-loader",
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "public/index.html"
+      template: "public/index.html",
     }),
     new webpack.DefinePlugin(envKeys),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
-  target: "web"
+  target: "web",
 };

@@ -99,13 +99,28 @@ class App {
 
   registerIpcChannels = () => {
     ipcMain.on("create_new_window", (event, data) => {
-      let { width, height, url, name } = data;
+      let { width, height, url, name, formName, id } = data;
       if (!url) console.error("no url provided for creating window");
       if (!name) console.error("no name provided for window");
+      url = this.urlResolver(name, formName, id) || url;
+
       this.createWindow(width, height, url, name);
     });
     // keytarTokenEvents
     EVENTS.keytarTokenEvent();
+  };
+
+  urlResolver = (name, formName, id) => {
+    // console.log(formName, id);
+    switch (name) {
+      case "dataMaintenance":
+        return URL.DATA_MAINTENANCE_WINDOW;
+      case "purchaseOrder":
+        return URL.PURCHASE_ORDER_WINDOW;
+      default:
+        if (formName && id) return `${URL.FORM_WINDOW}/${formName}/${id}`;
+        return `${URL.FORM_WINDOW}/${formName}`;
+    }
   };
 }
 
