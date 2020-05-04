@@ -31,4 +31,4 @@ const DIST_URLS = {
   PURCHASE_ORDER_WINDOW: `${BASE}#/po`,
 };
 
-module.exports = DIST_URLS;
+module.exports = DEV_URLS;

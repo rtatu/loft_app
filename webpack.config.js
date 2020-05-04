@@ -16,7 +16,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
-    publicPath: "./",
+    publicPath: "/", // change it to "./" during production
     filename: "bundle.js",
   },
   devServer: {
