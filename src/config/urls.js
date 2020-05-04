@@ -1,6 +1,6 @@
 const path = require("path");
 
-const BASE = `file://${path.join(__dirname, "../index.html")}`;
+const BASE = `file://${path.join(__dirname, "../../build/index.html")}`;
 
 const DEV_URLS = {
   LOADING_WINDOW_PATH: `file://${path.join(

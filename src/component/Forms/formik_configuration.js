@@ -31,34 +31,32 @@ const config = {
   },
   validateOnChange: true,
   handleSubmit: (values, formikBag) => {
-    console.log(values);
-    // let keys = Object.keys(values);
-    // let data = formikUtils.mapValuesToData(values);
-    // // check if the table is being edited
-    // return;
-    // formikBag.setSubmitting(true);
-    // if (formikBag.props.data) {
-    //   data["id"] = formikBag.props.data.id;
-    //   formikBag.props
-    //     .updateInList(data)
-    //     .then((res) => {
-    //       formikBag.setSubmitting(false);
-    //       electronRemote.getCurrentWindow().close();
-    //     })
-    //     .catch((err) => {
-    //       cogoToast.error(err);
-    //     });
-    // } else {
-    //   formikBag.props
-    //     .addToList(data)
-    //     .then((res) => {
-    //       formikBag.setSubmitting(false);
-    //       electronRemote.getCurrentWindow().close();
-    //     })
-    //     .catch((err) => {
-    //       cogoToast.error(err);
-    //     });
-    // }
+    let keys = Object.keys(values);
+    let data = formikUtils.mapValuesToData(values);
+    // check if the table is being edited
+    formikBag.setSubmitting(true);
+    if (formikBag.props.data) {
+      data["id"] = formikBag.props.data.id;
+      formikBag.props
+        .updateInList(data)
+        .then((res) => {
+          formikBag.setSubmitting(false);
+          electronRemote.getCurrentWindow().close();
+        })
+        .catch((err) => {
+          cogoToast.error(err);
+        });
+    } else {
+      formikBag.props
+        .addToList(data)
+        .then((res) => {
+          formikBag.setSubmitting(false);
+          electronRemote.getCurrentWindow().close();
+        })
+        .catch((err) => {
+          cogoToast.error(err);
+        });
+    }
   },
 };
 

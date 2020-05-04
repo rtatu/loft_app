@@ -17,6 +17,8 @@ const mainListAction = require("./store/mainAction/fetchList");
 
 let appWindows = {};
 
+appWindows["allWindowClosed"] = false
+
 class App {
   constructor() {
     app.on("ready", this.init);
@@ -74,7 +76,10 @@ class App {
   };
 
   onWindowAllClosed = () => {
-    if (process.platform !== "darwin") {
+    console.log("Callling all window closed")
+    console.dir(appWindows)
+    if (process.platform !== "darwin" && appWindows.allWindowClosed) {
+      console.log("all windows are closed")
       app.quit();
     }
   };

@@ -30,6 +30,11 @@ const applyEventListener = (window, windowName, url) => {
   // Emitted when the window is closed.
   window[windowName].on("closed", function() {
     console.log("window is closed bitch!!!");
+    if(windowName == "mainWindow") {
+      console.log("closing all window set to true")
+      window["allWindowClosed"] = true
+      app.quit();
+    }
     window[windowName] = null;
   });
 
