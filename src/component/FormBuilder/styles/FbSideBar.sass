@@ -1,0 +1,179 @@
+@import "../../../static/theme.sass"
+
+.fb-sidebar
+  background: white
+  height: 100%
+  width: 300px
+  min-width: 300px
+  display: flex
+  align-items: center
+  flex-direction: column
+
+.fb-fields
+  font-family: "Source Sans Pro"
+  width: 300px
+  margin-top: 30px
+
+.fb-q-container
+  display: flex
+  align-items: center
+  margin-bottom: 20px
+  margin-left: 20px
+  margin-right: 20px
+  padding: 5px
+  box-sizing: border-box
+
+  &:hover
+    cursor: pointer
+    // border: 1px solid rgba(137, 145, 162, 0.2)
+
+  img
+    width: 25px
+    height: 25px
+    margin-right: 10px
+
+  div
+    display: flex
+    flex-direction: column
+    p
+      font-size: 14px
+      color: $primary-color-hex
+    span
+      padding: 2px
+      font-size: 10px
+      color : $secondary-color-hex
+
+// edit properties 
+
+.fb-ed-topbar
+  width: 90%
+  display: flex
+  align-items: center
+  margin-top: 10px
+  margin-bottom: 20px
+  img
+    width: 25px
+    height: 25px
+
+    &:hover
+      cursor: pointer
+
+  p
+    font-family: "Source Sans Pro"
+    font-size: 12px
+    border: 1px solid rgba(19, 29, 74, 0.3)
+    border-radius: 2px
+    width: 100%
+    height: 100%
+    display: flex
+    align-items: center
+    margin-left: 10px
+    box-sizing: border-box
+    padding-left: 10px
+
+// essentials
+
+.fb-ed-essentials
+  width: 90%
+  font-family: "Source Sans Pro"
+  border-bottom: 1px solid rgba(112, 112, 112, 0.1)
+
+  div
+    display: flex
+    flex-direction: column
+    margin-bottom: 20px
+
+    label
+      font-size: 12px
+      color: $primary-color-hex
+      margin-bottom: 5px
+      font-weight: 600
+
+    input
+      border: 1px solid rgba(19, 29, 74, 0.3)
+      height: 30px
+      padding-left: 10px
+      outline: none
+
+.fb-ed-switch
+  font-family: "Source Sans Pro"
+  width: 90%
+  box-sizing: border-box
+  padding: 20px 0px
+  border-bottom: 1px solid rgba(112, 112, 112, 0.1)
+
+// remove field
+.fb-ed-del
+  width: 90%
+  font-family: "Source Sans Pro"
+  font-size: 12px
+  color: #F82A77
+  margin-top: 10px
+  box-sizing: border-box
+  padding: 2px
+
+  &:hover
+    cursor: pointer
+
+  img
+    width: 7px
+    height: 7px
+    margin-right: 5px
+
+// add data fb-ed
+
+.fb-ed-add
+  border-bottom: 1px solid rgba(112, 112, 112, 0.1)
+  width: 90%
+  font-family: "Source Sans Pro"
+  padding: 5px
+
+  & > span
+    font-size: 12px
+    font-weight: 600
+    color: $primary-color-hex
+
+  ul
+    list-style-type: none
+
+    li
+      // border: 1px solid
+      margin-top: 10px
+      height: 20px
+      display: flex
+      align-items: center
+
+      img
+        margin-left: auto
+        margin-right: 12px
+        width: 7px
+        height: 7px
+
+        &:hover
+          cursor: pointer
+
+    span
+      font-size: 12px
+      margin-left: 5px
+
+.fb-ed-add-button
+  display: flex
+  margin-top: 20px
+  margin-bottom: 10px
+
+  input
+    border: 1px solid rgba(19, 29, 74, 0.3)
+    height: 25px
+    padding-left: 10px
+    outline: none
+    width: 100%
+
+  button
+    margin-left: 20px
+    outline: none
+    width: 50px
+    border: none
+    color: $second-primary-color-hex
+
+    &:hover
+      cursor: pointer

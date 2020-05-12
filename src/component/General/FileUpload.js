@@ -4,9 +4,17 @@ import React from "react";
 
 import PapaParse from "papaparse";
 
-const UploadFieldJSX = props => (
+/**
+ *
+ * @param {handleChange} props -- onChange for file upload
+ * @param {fileName} props -- fileName
+ * @param {helpText} props -- helpText
+ */
+const UploadFieldJSX = (props) => (
   <div style={uploadfieldstyle} id="file-drop-area">
-    <p style={addfont} ref={props.fileName}>click to choose to upload file</p>
+    <p style={addfont} ref={props.fileName}>
+      {props.helpText}
+    </p>
     <div>
       <input
         type="file"
@@ -27,12 +35,12 @@ const readCSVFile = (e, label, setData) => {
   if (e.target.files.length > 0) {
     const filename = e.target.files[0].name;
 
-    reader.onload = event => {
+    reader.onload = (event) => {
       const csvData = PapaParse.parse(event.target.result, {
-        header: true
+        header: true,
       });
 
-      label.innerText = filename
+      label.innerText = filename;
       setData(csvData.data);
     };
 
@@ -41,34 +49,38 @@ const readCSVFile = (e, label, setData) => {
 };
 
 class UploadField extends React.Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      fileData : undefined
-    }
+      fileData: undefined,
+    };
 
     this.fileName = React.createRef();
   }
 
-
-  handleFileUpload = e => {
+  handleFileUpload = (e) => {
     readCSVFile(e, this.fileName.current, this.setData);
   };
 
   setData = (data) => {
-    this.setState({fileData: data}, () => {
-      this.props.pushData(this.state.fileData)
-    })
-  }
+    this.setState({ fileData: data }, () => {
+      this.props.pushData(this.state.fileData);
+    });
+  };
   render() {
-    return <UploadFieldJSX handleChange={this.handleFileUpload} fileName={this.fileName}/>;
+    return (
+      <UploadFieldJSX
+        handleChange={this.handleFileUpload}
+        fileName={this.fileName}
+      />
+    );
   }
 }
 
 // styles
 const button = {
+  display: "inline-block",
   width: "100px",
   height: "30px",
   textAlign: "center",
@@ -76,7 +88,7 @@ const button = {
   marginTop: "10px",
   background: "rgba(80,125,240,0.2)",
   color: "rgba(80,125,240,1)",
-  cursor: "pointer"
+  cursor: "pointer",
 };
 
 const uploadfieldstyle = {
@@ -85,12 +97,13 @@ const uploadfieldstyle = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: "1px dotted rgba(80,125,240,0.2)"
+  border: "1px dotted rgba(80,125,240,0.2)",
 };
 
 const addfont = {
   fontSize: "12px",
-  fontFamily: "Source Sans Pro"
+  fontFamily: "Source Sans Pro",
 };
 
 export default UploadField;
+export { UploadFieldJSX };

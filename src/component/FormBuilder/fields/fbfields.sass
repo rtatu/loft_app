@@ -1,0 +1,131 @@
+@import "../../../static/theme.sass"
+
+.fbFields-container
+  box-sizing: border-box
+  width: 80%
+  background: white
+  display: flex
+  flex-direction: column
+  font-family: "Source Sans Pro"
+  padding: 20px
+  margin-top: 20px
+  border-radius: 4px
+  position: relative
+
+  &:hover
+    cursor: pointer
+
+  label
+    font-size: 14px
+    font-weight: 500
+    color: $primary-color-hex
+    margin-bottom: 10px
+
+  input
+    outline: none
+    border: none
+    height: 35px
+    background: rgba(137, 142, 162, 0.13)
+    padding-left: 10px
+    box-sizing: border-box
+
+    &:focus
+      border: 1px solid rgba(0,0,0,0.1)
+      border-radius: 2px
+      background: white
+
+// autoComplete || select
+
+.fb-select
+  box-sizing: border-box
+  list-style-type: none
+  font-family: "Source Sans Pro"
+  font-size: 12px
+  font-weight: 550
+  position: absolute
+  background: white
+  width: 100%
+  top: 100%
+  z-index: 1
+  max-height: 200px
+  overflow-y: scroll
+  color: #030411
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.09)
+  border-radius: 2px
+  user-select: none
+  & li
+    height: 40px
+    padding-left: 15px
+    line-height: 40px
+    border-bottom: 1px solid rgba(230,230,230,0.60)
+    border-radius: 2px
+
+    &:hover
+      cursor: pointer
+      background: rgba(89,136,255,0.06)
+
+      &.selected
+        background: rgba(89,136,255,0.1)
+
+.fb-select-down
+  width: 20px
+  height: 20px
+  position: absolute
+  right: 30px
+  background: none
+  user-select: none
+  transition: transform 0.2s
+  top: 55%
+
+  &:hover
+    cursor: pointer
+
+// checkbox
+
+.fb-check
+  position: relative
+  display: flex
+  box-sizing: border-box
+  align-items: center
+  margin-bottom: 10px
+  margin-right: 15px
+
+  & label
+    margin-left: 5px
+    margin-bottom: 0px
+
+.fb-custom-checkbox
+  position: absolute
+  width: 12px
+  height: 12px
+  background: white
+  border: 1px solid #ddd
+  border-radius: 2px
+  top: 50%
+  left: 2px
+  transform: translateY(-50%)
+  pointer-events: none
+
+.fb-check .fb-col-vis-check
+  width: 15px
+  height: 15px
+  margin-right: 2px
+  opacity: 0
+  cursor: pointer
+
+  &:focus ~ .fb-custom-checkbox
+    border: 1px solid $second-primary-color-hex
+
+  &:checked ~ .fb-custom-checkbox
+    background: $second-primary-color-hex
+    border: none
+
+  &:checked ~ .fb-custom-checkbox > svg
+    display: block
+
+  &:checked ~ label
+    color: $primary-color-hex
+
+.fb-svg > path
+  stroke: rgb(255, 255, 255)
+  fill: white

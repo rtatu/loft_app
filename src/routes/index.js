@@ -12,6 +12,7 @@ import Maintenance from "../screens/maintenance";
 import Login from "../component/Login/";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import PO from "../screens/po";
+import FormBuilderScreen from "../screens/FormBuilder";
 
 const Root = () => (
   <Router>
@@ -32,6 +33,11 @@ const Root = () => (
     <AuthenticatedRoute path="/fo" exact component={FuelOp} />
     <AuthenticatedRoute path="/maintenance" exact component={Maintenance} />
     <AuthenticatedRoute path="/po/:navigate?" exact component={PO} />
+    <AuthenticatedRoute
+      path="/formBuilder/:formId?"
+      exact
+      component={FormBuilderScreen}
+    />
   </Router>
 );
 

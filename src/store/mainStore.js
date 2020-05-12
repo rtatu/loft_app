@@ -1,7 +1,7 @@
 const {
   forwardToRenderer,
   replayActionMain,
-  triggerAlias
+  triggerAlias,
 } = require("../electron_redux/index.electron");
 
 const { createStore, combineReducers, applyMiddleware } = require("redux");
@@ -15,33 +15,41 @@ const ACTION = require("./actions");
 const userReducer = require("./reducers/userReducer");
 const listReducer = require("./reducers/listReducer");
 const poReducer = require("./reducers/poReducer");
+const formReducer = require("./reducers/formReducer");
 
 const initialState = {
   user: {
     data: null,
     token: null,
-    loading: true
+    loading: true,
   },
   dm: {
     list: {
       loading: true,
-      data: null
-    }
+      data: null,
+    },
   },
   purchase_order: {
     data: {
       inventory: null,
       issues: null,
-      po: null
+      po: null,
     },
-    loading: true
-  }
+    loading: true,
+  },
+  maintenance: {
+    forms: {
+      loading: true,
+      data: null,
+    },
+  },
 };
 
 const reducer = combineReducers({
   user: userReducer,
   dm: combineReducers({ list: listReducer }),
-  purchase_order: poReducer
+  maintenance: combineReducers({ forms: formReducer }),
+  purchase_order: poReducer,
 });
 
 const mainStore = createStore(

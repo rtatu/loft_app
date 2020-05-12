@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-const AuthenticatedRoute = props => {
+const AuthenticatedRoute = (props) => {
   const { state, component: Component, ...rest } = props;
   return state.loading ? (
     <div>
@@ -11,14 +11,14 @@ const AuthenticatedRoute = props => {
   ) : (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         state.token ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: props.location }
+              state: { from: props.location },
             }}
           />
         )
@@ -27,9 +27,9 @@ const AuthenticatedRoute = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    state: state.user
+    state: state.user,
   };
 };
 

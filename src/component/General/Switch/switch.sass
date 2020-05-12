@@ -1,0 +1,35 @@
+.custom-switch
+  position: relative
+  display: inline-block
+  width: 40px
+  height: 20px
+  background-color: rgba(80, 125, 240, 0.25)
+  border-radius: 20px
+  transition: all 0.3s
+
+  &:hover
+    cursor: pointer
+
+.custom-switch::after
+  content: ''
+  position: absolute
+  width: 18px
+  height: 18px
+  border-radius: 50%
+  background-color: white
+  top: 1px
+  left: 1px
+  transition: all 0.3s
+
+.cswitch
+  width: 20px
+  height: 20px
+
+.cswitch:checked + .custom-switch::after
+  left: 20px
+
+.cswitch:checked + .custom-switch
+  background-color: rgba(80, 125, 240, 1)
+
+.cswitch
+  display: none

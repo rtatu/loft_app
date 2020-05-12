@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29" height="31" viewBox="0 0 29 31">
+  <g id="back" transform="translate(-1537 -161)">
+    <g id="Rectangle_1604" data-name="Rectangle 1604" transform="translate(1537 161)" fill="#fff" stroke="rgba(19,29,74,0.3)" stroke-width="1">
+      <rect width="29" height="31" rx="1" stroke="none"/>
+      <rect x="0.5" y="0.5" width="28" height="30" rx="0.5" fill="none"/>
+    </g>
+    <g id="icon_chevron-forward" data-name="icon/chevron-forward" transform="translate(1549 172)">
+      <path id="lineart" d="M5,10,0,5,5,0" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

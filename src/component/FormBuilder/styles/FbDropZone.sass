@@ -1,0 +1,29 @@
+@import "../../../static/theme.sass"
+
+.fb-dropzone
+  height: 100%
+  width: 100%
+
+.fb-questions
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  overflow-y: scroll
+  padding-bottom: 100px
+  box-sizing: border-box
+
+  &:hover
+    cursor: pointer
+
+// customize scrollbar
+.fb-questions::-webkit-scrollbar
+  width: 3px
+  height: 3px
+.fb-questions::-webkit-scrollbar-track
+    background : white
+.fb-questions::-webkit-scrollbar-thumb
+    background : $primary-color-hex
+.fb-questions::-webkit-scrollbar-thumb:hover
+    background : $secondary-color-hex

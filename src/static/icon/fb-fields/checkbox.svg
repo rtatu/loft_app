@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+  <g id="checkbox" transform="translate(-1555 -354)">
+    <rect id="Rectangle_1605" data-name="Rectangle 1605" width="21" height="21" transform="translate(1555 354)" fill="#f3f3f3"/>
+    <g id="Group_220" data-name="Group 220" transform="translate(-9532 -5047)">
+      <g id="Group_219" data-name="Group 219">
+        <g id="Ellipse_40" data-name="Ellipse 40" transform="translate(11093 5407)" fill="#fff" stroke="#707070" stroke-width="1">
+          <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+          <circle cx="4.5" cy="4.5" r="4" fill="none"/>
+        </g>
+        <g id="Ellipse_41" data-name="Ellipse 41" transform="translate(11095 5409)" fill="#707070" stroke="#707070" stroke-width="1">
+          <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+          <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
