@@ -27,7 +27,7 @@ const Root = () => (
       path="/form/:navigate/:tableName/:id?"
       component={FormContainer}
     />
-    <AuthenticatedRoute path="/planner" component={Planner} />
+    <AuthenticatedRoute path="/planner" component={FuelOp} />
     <AuthenticatedRoute path="/order" exact component={Order} />
     <AuthenticatedRoute path="/tableform" exact component={TableForm} />
     <AuthenticatedRoute path="/fo" exact component={FuelOp} />

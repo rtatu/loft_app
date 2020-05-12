@@ -1,18 +1,20 @@
 let numberOfStation = 4;
 
-let tankCapacity = 12;
+let tankCapacity = 10;
 
 let totalDistance = 17;
 
 let currentFuel = 3;
 
-let gasStation = [[2, 40], [9, 15], [10, 12], [5, 7]];
+let gasStation = [[2, 40], [9, 15], [10, 6], [5, 7]];
+
+// let gasStation = [[2, 40], [5, 7], [9, 15], [10, 12]];
 
 let config = {};
 
 let totalCost = 0;
 
-let nextCheapestStation = new Array(gasStation.length);
+let nextCheapestStation = new Array(gasStation.length).fill(-1);
 
 let data = []
 
@@ -25,13 +27,24 @@ gasStation.sort(function(a, b) {
 let stack = [];
 
 // find nextCheapest corresponding to gasStation
-for (let i = gasStation.length - 1; i >= 0; i--) {
-  while (stack.length > 0 && gasStation[stack[0]][1] >= gasStation[i][1]) {
-    stack.pop();
+// for (let i = gasStation.length - 1; i >= 0; i--) {
+//   while (stack.length > 0 && gasStation[stack[0]][1] >= gasStation[i][1]) {
+//     stack.pop();
+//   }
+//   nextCheapestStation[i] = stack.length === 0 ? -1 : stack[0];
+//   stack.push(i);
+// }
+
+for(let i = 0; i < gasStation.length; i++){
+  for (let j = i+1; j < gasStation.length; j++){
+    if(gasStation[j][1] < gasStation[i][1]){
+      nextCheapestStation[i] = j;
+      break;
+    }
   }
-  nextCheapestStation[i] = stack.length === 0 ? -1 : stack[0];
-  stack.push(i);
 }
+
+console.log(nextCheapestStation)
 
 currentFuel -= gasStation[0][0];
 

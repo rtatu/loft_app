@@ -2,6 +2,7 @@ import RouteBoxer from "./RouterBox";
 import data from "./../../static/jsonFuel.json";
 
 export default function nearByMarker(distance, directions) {
+
   let containsMarker = [];
 
   let routeBoxer = new RouteBoxer();
@@ -20,7 +21,7 @@ export default function nearByMarker(distance, directions) {
           lng: gmarkers[j].getPosition().lng(),
           Street: gmarkers[j].Street,
           site_id: gmarkers[j].site_id,
-          brand: gmarkers[j].title
+          brand: gmarkers[j].title,
         });
       }
     }
@@ -43,7 +44,7 @@ const getMarkers = location => {
           parseFloat(gasStation.lng)
         ),
         site_id: gasStation.site_id,
-        Street: gasStation.Street
+        Street: `${gasStation.Street}, ${gasStation.City}`
       });
 
       gmarker.push(marker);

@@ -1,9 +1,9 @@
 import React from "react";
 import "./details.sass";
-import { Stack, Grid } from "../General/grid";
+import { Stack, Grid } from "../General/Grid";
 import LocationSearch from "./Location";
 import UploadField from "../General/FileUpload";
-import DetailsInput from "./DetailsInput";
+import DetailsInput, { DetailsInputWithUnit } from "./DetailsInput";
 import close from "../../static/icon/svg/delete.svg";
 import AddDestination from "./addDest";
 
@@ -12,7 +12,7 @@ const gridStyle = {
 };
 
 const FuelOpDetailsJSX = props => (
-  <div className="fo-details">
+  <div className="fo-details" style={{display : props.hide ? "none" : "block"}}>
     <Stack style={gridStyle}>
       {/* places */}
       <Stack style={{ gridGap: "10px", marginBottom: "20px" }}>
@@ -45,35 +45,38 @@ const FuelOpDetailsJSX = props => (
 
       {/* input details */}
       <Grid style={gridStyle}>
-        <DetailsInput
+        <DetailsInputWithUnit
           label="OffRoad Distance"
           name="offRoadDistance"
           type="number"
+          unit={"DISTANCE"}
           value={props.inputData["offRoadDistance"]}
           handleChange={props.handleChange}
         />
-        <DetailsInput
+
+        <DetailsInputWithUnit
           label="Fuel Tank Capacity"
           name="tankCapacity"
           type="number"
           value={props.inputData["tankCapacity"]}
           handleChange={props.handleChange}
         />
-        <DetailsInput
+        <DetailsInputWithUnit
           label="Truck Average"
           name="truckAverage"
           type="number"
           value={props.inputData["truckAverage"]}
           handleChange={props.handleChange}
+          unit={"AVERAGE"}
         />
-        <DetailsInput
+        <DetailsInputWithUnit
           label="Initial Fuel"
           name="initFuel"
           type="number"
           value={props.inputData["initFuel"]}
           handleChange={props.handleChange}
         />
-        <DetailsInput
+        <DetailsInputWithUnit
           label="Reserve"
           name="reserve"
           type="number"
@@ -85,8 +88,12 @@ const FuelOpDetailsJSX = props => (
       {/* gas statation data */}
 
       <div>
-        <label style={{ marginBottom: "5px" }}>Gas Station Data</label>
+        <label style={{ marginBottom: "5px" }}>Canada Gas Station Price List</label>
         <UploadField pushData={props.pushData} />
+      </div>
+      <div>
+        <label style={{ marginBottom: "5px" }}>US Gas Station Price List</label>
+        <UploadField pushData={props.pushData} usa={true}/>
       </div>
     </Stack>
     <div className="fuel-op-button">
@@ -111,7 +118,9 @@ class FuelOpDetails extends React.Component {
       initFuel: "100",
       fuelRateList: "",
       reserve: "",
-      pricelist: ""
+      pricelist: [],
+      usa: "",
+      canada: "",
     };
   }
 
@@ -130,28 +139,22 @@ class FuelOpDetails extends React.Component {
     }
   };
 
-  handlePriceList = data => {
-    this.setState({ pricelist: data }, () => {
-      console.log(this.state);
-    });
+  handlePriceList = (data, usa) => {
+    if(usa) {
+      this.setState({usa : data}, () => {
+        let pricelist = [...this.state.usa, ...this.state.canada];
+        this.setState({pricelist}, () => console.log(this.state));
+      })
+    } else {
+      this.setState({canada : data}, () => {
+        let pricelist = [...this.state.usa, ...this.state.canada];
+        this.setState({pricelist}, () => console.log(this.state));
+      })
+    }
   };
 
   // update state for rest of the component
-  handleChange = (e, name) => {
-    let val = e.target.value;
-    // validations
-    /**
-     * 1. value can not be less than zero
-     * 2. offRoad Distance can not be less than zero otherwise algorithm will crash
-     */
-    if (val < 0) {
-      return 0;
-    }
-
-    if (name == "offRoadDistance" && val < 5) {
-      return 0;
-    }
-
+  handleChange = (val, name) => {
     this.setState({ [name]: val });
   };
 
@@ -187,6 +190,7 @@ class FuelOpDetails extends React.Component {
         handleChange={this.handleChange}
         optimizedRoute={this.optimizedRoute}
         pushData={this.handlePriceList}
+        hide={this.props.hide}
       />
     );
   }
