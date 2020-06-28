@@ -3,14 +3,14 @@ import "./datatable_navigation.sass";
 import { NavLink } from "react-router-dom";
 import data from "./dtnav.json";
 
-const DtNavs = props =>
+const DtNavs = (props) =>
   Object.keys(data).includes(props.navigate) ? (
     <div className="dtnavs">
       <ul>
-        {data.list.map((item, index) => (
+        {data[props.navigate].map((item, index) => (
           <li key={index}>
             <NavLink
-              style={{ zIndex: `${data.list.length - index}` }}
+              style={{ zIndex: `${data[props.navigate].length - index}` }}
               to={`${props.baseLink}/${item.toLocaleLowerCase()}`}
               activeClassName="dtn-active"
               activeStyle={{ zIndex: 100 }}

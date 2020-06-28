@@ -6,7 +6,7 @@ const fetchList = async () => {
     let data = await new Database().getArchive();
     return { type: Action.FETCH_LIST, payload: data };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

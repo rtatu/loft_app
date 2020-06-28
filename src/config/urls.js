@@ -13,8 +13,9 @@ const DEV_URLS = {
   FORM_WINDOW: "http://localhost:8000/#/form",
 
   DATA_MAINTENANCE_WINDOW:
-    "http://localhost:8000/#/database-maintenance/list/class",
+    "http://localhost:8000/#/database-maintenance/lists/class",
   PURCHASE_ORDER_WINDOW: "http://localhost:8000/#/po",
+  MANAGE_CONTACT_WINDOW: "http://localhost:8000/#/manage-contact",
 };
 
 const DIST_URLS = {

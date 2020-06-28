@@ -1,0 +1,83 @@
+@import '../../static/theme'
+
+.mc-container
+  display: flex
+  flex-direction: column
+  font-family: "Source Sans Pro"
+  align-items: center
+  padding: 10px
+  box-sizing: border-box
+
+.mc-header
+  display: flex
+  height: 55px
+  width: 100%
+  align-items: center
+  font-family: 'Source Sans Pro'
+  font-size: 14px
+  border-radius: 2px
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.09 )
+
+.mc-head
+  display: flex
+  flex: 1
+  box-sizing: border-box
+  height: 100%
+  text-align: center
+  background: rgba(187,204,245,0.68)
+  color: #8991A2
+  border-right: 1px solid rgba(81,84,96,0.15)
+  font-weight: 500
+  align-items: center
+  justify-content: center
+  padding: 0px 10px
+
+  &:hover
+    cursor: pointer
+
+  &:last-child
+    border-right: none
+
+.mc-active
+  border-top: 3px solid #507DF0
+  border-right: none
+  background: white
+  color: #507DF0
+
+  &:hover
+    background: white
+
+.mc-container
+  display: flex
+.mc-hide
+  display: none
+
+.mc-section-header
+  display: flex
+  width: 100%
+  margin: 20px 0px
+
+.mc-add
+  margin-left: auto
+  display: flex
+  align-items: center
+
+  img
+    width: 10px
+    height: 10px
+    margin-right: 5px
+
+  span
+    font-size: 12px
+    color: #507DF0
+    font-weight: 600
+
+  &:hover
+    cursor: pointer
+
+.mc-section
+  // display: flex
+  flex: 1
+  width: 100%
+  max-height: 500px
+  min-height: 500px

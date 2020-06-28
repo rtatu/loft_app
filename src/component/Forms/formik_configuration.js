@@ -18,7 +18,6 @@ const config = {
       formHeader,
       props.data ? props.data : {}
     );
-    console.log(values, "starting values");
     return values;
   },
   validationSchema: (props) => {
@@ -34,11 +33,12 @@ const config = {
     let keys = Object.keys(values);
     let data = formikUtils.mapValuesToData(values);
     // check if the table is being edited
+
     formikBag.setSubmitting(true);
     if (formikBag.props.data) {
       data["id"] = formikBag.props.data.id;
       formikBag.props
-        .updateInList(data)
+        .update(data)
         .then((res) => {
           formikBag.setSubmitting(false);
           electronRemote.getCurrentWindow().close();
@@ -48,7 +48,7 @@ const config = {
         });
     } else {
       formikBag.props
-        .addToList(data)
+        .add(data)
         .then((res) => {
           formikBag.setSubmitting(false);
           electronRemote.getCurrentWindow().close();

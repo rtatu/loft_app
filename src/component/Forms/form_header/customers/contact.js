@@ -1,51 +1,51 @@
-import Fields from "../FormFields";
+import Fields from "../../FormFields";
 
 const Contact = {
   General: [
     {
       label: "Name",
       name: "name",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Position",
       name: "position",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Department",
       name: "department",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Billing Location",
       name: "billingLocation",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Phone",
       name: "phone",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Toll Free",
       name: "tollFree",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Fax",
       name: "fax",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Cell",
       name: "cell",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Email",
       name: "email",
-      component: Fields.Text
+      component: Fields.Text,
     },
     {
       label: "Status",
@@ -53,9 +53,9 @@ const Contact = {
       component: Fields.Select,
       data: ["ACTIVE", "INACTIVE"],
       readOnly: true,
-      defaultValue: "ACTIVE"
-    }
-  ]
+      defaultValue: "ACTIVE",
+    },
+  ],
 };
 
 export default Contact;

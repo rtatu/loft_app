@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import React from "react";
 import { addToList, updateInList } from "../store/actions/listAction";
 import PoForm from "../component/PoForm";
+import getActionForDispatch from "../store/mapDispatchProps";
+import getStoreForState from "../store/mapStateToProps";
 
 class Form extends React.Component {
   constructor(props) {
@@ -31,10 +33,10 @@ class Form extends React.Component {
         <FormContainer
           datastore={props.datastore}
           data={props.data}
-          name={props.match.params.tableName}
+          name={props.match.params.tableName || props.match.params.navigate}
           id={props.match.params.id}
-          addToList={props.addToList}
-          updateInList={props.updateInList}
+          add={props.add}
+          update={props.update}
           poType={this.state.po_type}
         />
       );
@@ -59,31 +61,21 @@ const setWindowTitle = (data, tableName) => {
 
 const mapStateToProps = (state, ownProps) => {
   let { navigate, tableName, id } = ownProps.match.params;
-  let cs = {
-    datastore:
-      (state.dm[navigate] && state.dm[navigate]["data"]) ||
-      (state.dm["list"] && state.dm["list"]["data"]),
-    data:
-      state.dm[navigate] &&
-      state.dm[navigate]["data"] &&
-      state.dm[navigate]["data"][tableName] &&
-      state.dm[navigate]["data"][tableName][id],
-  };
+  let cs = getStoreForState(state, navigate, tableName, id);
 
-  setWindowTitle(cs.data, tableName);
+  console.log(cs, navigate, tableName, "state for form store");
+
+  setWindowTitle(cs.data, tableName || navigate);
 
   return cs;
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  let { tableName } = ownProps.match.params;
+  let { tableName, navigate } = ownProps.match.params;
 
-  return {
-    addToList: (data) =>
-      dispatch((dispatch) => addToList(dispatch, tableName, data)),
-    updateInList: (data) =>
-      dispatch((dispatch) => updateInList(dispatch, tableName, data)),
-  };
+  console.log(tableName, navigate, "check for nothing");
+
+  return getActionForDispatch(dispatch, navigate, tableName);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

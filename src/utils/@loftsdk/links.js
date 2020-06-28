@@ -7,10 +7,8 @@ const lists = [
   "service",
   "subsidiary",
   "truck",
-  "contact",
-  "customer",
   "trailer",
-  "item"
+  "item",
 ];
 
 const po = ["inventory", "po", "issue"];

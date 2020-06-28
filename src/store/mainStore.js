@@ -16,6 +16,7 @@ const userReducer = require("./reducers/userReducer");
 const listReducer = require("./reducers/listReducer");
 const poReducer = require("./reducers/poReducer");
 const formReducer = require("./reducers/formReducer");
+const customerReducer = require("./reducers/customerReducer");
 
 const initialState = {
   user: {
@@ -24,7 +25,11 @@ const initialState = {
     loading: true,
   },
   dm: {
-    list: {
+    lists: {
+      loading: true,
+      data: null,
+    },
+    customers: {
       loading: true,
       data: null,
     },
@@ -47,7 +52,7 @@ const initialState = {
 
 const reducer = combineReducers({
   user: userReducer,
-  dm: combineReducers({ list: listReducer }),
+  dm: combineReducers({ lists: listReducer, customers: customerReducer }),
   maintenance: combineReducers({ forms: formReducer }),
   purchase_order: poReducer,
 });

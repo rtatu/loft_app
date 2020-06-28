@@ -1,7 +1,6 @@
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
 import React from "react";
 import Home from "../screens/home";
-import DataMaintenance from "../screens/data_maintenance";
 import Empty from "../component/Empty";
 import FormContainer from "../screens/form";
 import Planner from "../screens/planner";
@@ -13,6 +12,10 @@ import Login from "../component/Login/";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import PO from "../screens/po";
 import FormBuilderScreen from "../screens/FormBuilder";
+import OrderEntryScreen from "../screens/OrderEntryScreen";
+import DataMaintenanceScreen from "../screens/DataMaintenanceScreen";
+import ManageContactScreen from "../screens/ManageContactScreen";
+import UserManagementScreen from "../screens/UserManagementScreen";
 
 const Root = () => (
   <Router>
@@ -20,14 +23,14 @@ const Root = () => (
     <AuthenticatedRoute path="/" exact component={Home} />
     <AuthenticatedRoute
       path="/database-maintenance/:navigate/:tableName?"
-      component={DataMaintenance}
+      component={DataMaintenanceScreen}
     />
     <AuthenticatedRoute path="/empty" component={Empty} />
     <AuthenticatedRoute
-      path="/form/:navigate/:tableName/:id?"
+      path="/form/:navigate/:tableName?/:id?/:nestedId?"
       component={FormContainer}
     />
-    <AuthenticatedRoute path="/planner" component={FuelOp} />
+    <AuthenticatedRoute path="/planner" component={Planner} />
     <AuthenticatedRoute path="/order" exact component={Order} />
     <AuthenticatedRoute path="/tableform" exact component={TableForm} />
     <AuthenticatedRoute path="/fo" exact component={FuelOp} />
@@ -37,6 +40,22 @@ const Root = () => (
       path="/formBuilder/:formId?"
       exact
       component={FormBuilderScreen}
+    />
+    <AuthenticatedRoute
+      path="/order-entry"
+      exact
+      component={OrderEntryScreen}
+    />
+
+    <AuthenticatedRoute
+      path="/manage-contact/:customerId"
+      exact
+      component={ManageContactScreen}
+    />
+    <AuthenticatedRoute
+      path="/setting"
+      exact
+      component={UserManagementScreen}
     />
   </Router>
 );

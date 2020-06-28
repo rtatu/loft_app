@@ -4,16 +4,17 @@ import colResize from "../resize.js";
 import DtConfig from "./datatable_config";
 import DTHEADER from "./datatable_header";
 import DatatableEvents from "./datatable_renderer_events";
+import ContextMenu from "../ContextMenu/ContextMenu";
 
 // proto for sum
-Array.prototype.sum = function() {
+Array.prototype.sum = function () {
   return this.reduce((a, b) => a + b, 0);
 };
 
 // get the flex for calculated width
-Array.prototype.getFlex = function() {
+Array.prototype.getFlex = function () {
   let min = Math.min(...this);
-  return this.map(item => parseInt(item / min));
+  return this.map((item) => parseInt(item / min));
 };
 
 function getIn(data, prop) {
@@ -36,7 +37,7 @@ function getIn(data, prop) {
   return temp;
 }
 
-const DatatableJSX = props => (
+const DatatableJSX = (props) => (
   <div className="datatable">
     <div className="dthead">
       <ul className="dtr">
@@ -78,6 +79,15 @@ const DatatableJSX = props => (
                   ? props.styles[`col-${nested_index}`]
                   : {}
               }
+              onContextMenu={(e) =>
+                props.showContext(
+                  e,
+                  getIn(item, nested_item.prop),
+                  nested_item.prop,
+                  nested_item.label,
+                  getIn(item, "id")
+                )
+              }
             >
               {getIn(item, nested_item.prop)}
             </li>
@@ -91,17 +101,23 @@ const DatatableJSX = props => (
 class DatatableContainer extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      styles: {}
+      styles: {},
+      context: {
+        show: false,
+        x: 0,
+        y: 0,
+        idToBeSend: null,
+      },
     };
   }
 
   componentDidMount() {
-    console.log(this.props.fromDeco);
     if (this.props.data) {
       this.resizeEvent();
     }
+
+    document.addEventListener("click", this.hideContextMenu, false);
   }
 
   componentWillUnmount() {
@@ -109,6 +125,8 @@ class DatatableContainer extends React.Component {
     if (this.colResize) {
       this.colResize.removeEvent();
     }
+
+    document.removeEventListener("click", this.hideContextMenu, false);
   }
 
   resizeEvent = () => {
@@ -116,7 +134,11 @@ class DatatableContainer extends React.Component {
 
     // get all the coloumns
 
-    for (let i = 0; i < DTHEADER[this.props.tableName].length; i++) {
+    for (
+      let i = 0;
+      i < DTHEADER[this.props.navigate][this.props.tableName].length;
+      i++
+    ) {
       coloumns.push(document.getElementsByClassName(`col-${i}`));
     }
 
@@ -147,7 +169,7 @@ class DatatableContainer extends React.Component {
       style[`col-${ind}`] = {
         flexBasis: `${col}px`,
         minWidth: `${col + 16}px`,
-        flex: flexValues[ind]
+        flex: flexValues[ind],
       };
       ind++;
     }
@@ -173,7 +195,7 @@ class DatatableContainer extends React.Component {
     styles[`col-${col}`] = {
       ...styles[`col-${col}`],
       // flexBasis : data + 'px',
-      minWidth: data + "px"
+      minWidth: data + "px",
     };
 
     let thead = document.getElementsByClassName("dthead")[0];
@@ -188,7 +210,7 @@ class DatatableContainer extends React.Component {
   };
 
   // editMode - form
-  sendDataToEditMode = e => {
+  sendDataToEditMode = (e) => {
     let id = e.target.parentElement.dataset.id;
     DatatableEvents.editForm(
       `${this.props.navigate}/${this.props.tableName}`,
@@ -199,24 +221,59 @@ class DatatableContainer extends React.Component {
 
   render() {
     return (
-      <div className="dt_container">
-        {this.props.data ? (
-          <React.Fragment>
-            <DtConfig
-              name={this.props.tableName}
-              navigate={this.props.navigate}
-            />
-            <DatatableJSX
-              styles={this.state.styles}
-              datatable_head={DTHEADER[this.props.tableName]}
-              data={this.props.data}
-              sendDataToEditMode={this.sendDataToEditMode}
-            />
-          </React.Fragment>
+      <div
+        className="dt_container"
+        style={{
+          margin: !this.props.hideHeaderNav ? "0px 10px" : "0px",
+        }}
+      >
+        {!this.props.hideHeaderNav ? (
+          <DtConfig
+            name={this.props.tableName}
+            navigate={this.props.navigate}
+          />
+        ) : null}
+        <DatatableJSX
+          styles={this.state.styles}
+          datatable_head={DTHEADER[this.props.navigate][this.props.tableName]}
+          data={this.props.data}
+          sendDataToEditMode={this.sendDataToEditMode}
+          showContext={this.handleContextMenu}
+        />
+        {this.state.context.show && !this.props.hideContext ? (
+          <ContextMenu
+            X={this.state.context.x}
+            Y={this.state.context.y}
+            handleContextMenu={this.selectOptionFromContext}
+          />
         ) : null}
       </div>
     );
   }
+
+  handleContextMenu = (e, value, prop, label, customerId) => {
+    let context = { ...this.state.context };
+    context.x = e.pageX;
+    context.y = e.pageY;
+    context.show = true;
+    context.idToBeSend = customerId;
+    this.setState({ context });
+  };
+
+  hideContextMenu = (e) => {
+    let context = { ...this.state.context };
+    context.show = false;
+    this.setState({ context });
+    return true;
+  };
+
+  selectOptionFromContext = (e, type) => {
+    if (type == "manage_contact") {
+      let customerId = this.state.context.idToBeSend;
+      if (customerId === null) return;
+      DatatableEvents.manageContacts(customerId);
+    }
+  };
 }
 
 export default DatatableContainer;

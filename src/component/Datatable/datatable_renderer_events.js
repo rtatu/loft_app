@@ -18,6 +18,14 @@ const DatatableEvents = {
       id,
     });
   },
+
+  manageContacts: function (id) {
+    electronRenderer.send("create_new_window", {
+      url: `${URL.MANAGE_CONTACT_WINDOW}/${id}`,
+      name: "manageContact",
+      id,
+    });
+  },
 };
 
 export default DatatableEvents;

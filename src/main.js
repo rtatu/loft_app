@@ -5,10 +5,8 @@ const windowManager = require("./main/windowManager");
 const mainStore = require("./store/mainStore");
 const URL = require("./config/urls");
 const ACTION = require("./store/actions");
-// const dotenv = require("dotenv");
-// const env = dotenv.config().parsed;
-process.env.NODE_ENV = "dev";
-process.env.BASE_API_URL = "https://xplicitsoft.ca";
+const dotenv = require("dotenv");
+const env = dotenv.config().parsed;
 const EVENTS = require("./main/events");
 
 // @loftSdk
@@ -17,7 +15,7 @@ const mainListAction = require("./store/mainAction/fetchList");
 
 let appWindows = {};
 
-appWindows["allWindowClosed"] = false
+appWindows["allWindowClosed"] = false;
 
 class App {
   constructor() {
@@ -76,10 +74,10 @@ class App {
   };
 
   onWindowAllClosed = () => {
-    console.log("Callling all window closed")
-    console.dir(appWindows)
+    console.log("Callling all window closed");
+    console.dir(appWindows);
     if (process.platform !== "darwin" && appWindows.allWindowClosed) {
-      console.log("all windows are closed")
+      console.log("all windows are closed");
       app.quit();
     }
   };
@@ -124,6 +122,8 @@ class App {
         return URL.DATA_MAINTENANCE_WINDOW;
       case "purchaseOrder":
         return URL.PURCHASE_ORDER_WINDOW;
+      case "manageContact":
+        if (id) return `${URL.MANAGE_CONTACT_WINDOW}/${id}`;
       default:
         if (formName && id) return `${URL.FORM_WINDOW}/${formName}/${id}`;
         return `${URL.FORM_WINDOW}/${formName}`;

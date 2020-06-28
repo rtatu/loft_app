@@ -1,3 +1,3 @@
-import Planning from "./planner";
+import Planning from "./planner.old";
 
 export default Planning;

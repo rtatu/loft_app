@@ -37,6 +37,11 @@ class Select extends React.Component {
 
   UNSAFE_componentWillReceiveProps(props) {
     let value = props.value;
+
+    if (props.data) {
+      this.setState({ suggestions: Object.values(props.data) });
+    }
+
     if (value) {
       this.setState({ value });
     }
@@ -213,6 +218,7 @@ class Select extends React.Component {
           onKeyDown={this.onKeyDown}
           readOnly={this.props.readOnly}
           name={this.props.name}
+          disabled={this.props.disabled}
         />
         <img
           src={down}

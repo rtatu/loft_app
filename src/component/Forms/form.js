@@ -3,7 +3,15 @@ import "./form.sass";
 import getComponent from "../../utils/get_react_comp";
 import { Form, getIn } from "formik";
 import Loader from "../General/Loader";
-import get_In from "../../utils/data_functions";
+import get_In, {
+  checkDisable,
+  showOn,
+  retreiveDatastoreData,
+} from "../../utils/data_functions";
+
+const Component = (props) => {
+  return props.show ? { ...props.children } : null;
+};
 
 const showSections = (e) => {
   const sections = document.getElementsByClassName("form-section");
@@ -28,10 +36,11 @@ const showSections = (e) => {
 };
 
 const ConditionalWrapper = (data, item, props, values) =>
-  console.log(props.errors, "errors") || Array.isArray(data[item]) ? (
+  Array.isArray(data[item]) ? (
     <React.Fragment>
       {data[item].map((nested_item, nested_index) => (
-        <nested_item.component
+        <Component
+          show={showOn(nested_item.showOn, values[`${item}`])}
           key={
             nested_item.changeOn
               ? `${nested_index}.${
@@ -39,36 +48,45 @@ const ConditionalWrapper = (data, item, props, values) =>
                 }`
               : nested_index
           }
-          name={`${item}.${nested_item.name}`}
-          handleChange={props.handleChange}
-          value={values[`${item}`][`${nested_item.name}`]}
-          label={
-            nested_item.changeOn
-              ? nested_item.labelChange[values[item][nested_item.changeOn]]
-              : nested_item.label
-          }
-          defaultValue={nested_item.defaultValue}
-          data={
-            nested_item.readOnly
-              ? nested_item.data
-              : nested_item.autoprop
-              ? get_In({ datastore: props.datastore }, nested_item.autoprop)
-              : null
-          }
-          autofillProp={nested_item.autofillProp}
-          readOnly={nested_item.readOnly ? nested_item.readOnly : false}
-          setFieldsValue={props.setFieldValue}
-          country={values[`${item}`]["country"]}
-          fill={
-            nested_item.autoFillAnotherProps &&
-            `${item}.${nested_item.autoFillAnotherProps.fill}`
-          }
-          with={
-            nested_item.autoFillAnotherProps &&
-            nested_item.autoFillAnotherProps.with
-          }
-          error={getIn(props.errors, `${item}.${nested_item.name}`)}
-        />
+        >
+          <nested_item.component
+            key={
+              nested_item.changeOn
+                ? `${nested_index}.${
+                    nested_item.labelChange[values[item][nested_item.changeOn]]
+                  }`
+                : nested_index
+            }
+            name={`${item}.${nested_item.name}`}
+            handleChange={props.handleChange}
+            value={values[`${item}`][`${nested_item.name}`]}
+            label={
+              nested_item.changeOn
+                ? nested_item.labelChange[values[item][nested_item.changeOn]]
+                : nested_item.label
+            }
+            defaultValue={nested_item.defaultValue}
+            data={retreiveDatastoreData(
+              nested_item,
+              props.datastore,
+              values[`${item}`]
+            )}
+            autofillProp={nested_item.autofillProp}
+            readOnly={nested_item.readOnly ? nested_item.readOnly : false}
+            setFieldsValue={props.setFieldValue}
+            country={values[`${item}`]["country"]}
+            fill={
+              nested_item.autoFillAnotherProps &&
+              `${item}.${nested_item.autoFillAnotherProps.fill}`
+            }
+            with={
+              nested_item.autoFillAnotherProps &&
+              nested_item.autoFillAnotherProps.with
+            }
+            error={getIn(props.errors, `${item}.${nested_item.name}`)}
+            disabled={checkDisable(nested_item.disabledOn, values[`${item}`])}
+          />
+        </Component>
       ))}
     </React.Fragment>
   ) : item == "Notes" ? (

@@ -2,7 +2,6 @@ import React from "react";
 import PoBase from "../container/PoBase";
 import { fetchPO } from "../store/actions/poAction";
 import { connect } from "react-redux";
-import DataTableBase from "../container/DataTableBase";
 import Datatable from "../component/Datatable";
 
 class PoContainer extends React.Component {

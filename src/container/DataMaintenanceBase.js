@@ -9,24 +9,19 @@ const style = {
   flex: 1,
   overflow: "hidden",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 };
 
-const DataTableBase = props => {
+const DataMaintenanceBase = (props) => {
   return (
     <div style={{ display: "flex", height: "100%" }}>
       <ArchiveSidebarJSX />
       <div style={style}>
         <Header />
-        <DtNav
-          baseLink={`/database-maintenance/${props.navigate}`}
-          key={props.navigate}
-          navigate={props.navigate}
-        />
         {props.children}
       </div>
     </div>
   );
 };
 
-export default DataTableBase;
+export default DataMaintenanceBase;

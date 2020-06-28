@@ -1,64 +1,64 @@
 const Trailer = [
   {
     label: "Unit No",
-    prop: "unitNo"
+    prop: "unitNo",
   },
   {
     label: "Trailer Type",
-    prop: "trailerType"
+    prop: "trailerType",
   },
   {
     label: "Status",
-    prop: "status"
+    prop: "status",
   },
   {
     label: "Vin No",
-    prop: "trailerRegistration.vinNo"
+    prop: "trailerRegistration.vinNo",
   },
   {
     label: "Rin No",
-    prop: "trailerRegistration.rinNo"
+    prop: "trailerRegistration.rinNo",
   },
   {
     label: "Make",
-    prop: "trailerRegistration.make"
+    prop: "trailerRegistration.make",
   },
   {
     label: "No. of Axles",
-    prop: "trailerRegistration.noOfAxles"
+    prop: "trailerRegistration.noOfAxles",
   },
   {
     label: "Model",
-    prop: "trailerRegistration.model"
+    prop: "trailerRegistration.model",
   },
   {
     label: "Year",
-    prop: "trailerRegistration.year"
+    prop: "trailerRegistration.year",
   },
   {
     label: "Vehicle Weight",
-    prop: "trailerRegistration.vehicleWeight"
+    prop: "trailerRegistration.vehicleWeight",
   },
   {
     label: "Vehicle Weight Unit",
-    prop: "trailerRegistration.vehicleWeightUnit"
+    prop: "trailerRegistration.vehicleWeightUnit",
   },
   {
     lable: "Reefer Make",
-    props: "trailerRegistration.reeferMake"
+    prop: "trailerRegistration.reeferMake",
   },
   {
     label: "Reefer Model",
-    props: "trailerRegistration.reeferModel"
+    prop: "trailerRegistration.reeferModel",
   },
   {
     label: "Province / State",
-    props: "trailerRegistration.province_state"
+    prop: "trailerRegistration.province_state",
   },
   {
     label: "Plate No",
-    prop: "trailerRegistration.plateNo"
-  }
+    prop: "trailerRegistration.plateNo",
+  },
 ];
 
 export default Trailer;

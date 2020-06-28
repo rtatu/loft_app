@@ -5,10 +5,10 @@ import { nav_bar } from "./navbar_data";
 import Auth from "../../utils/@loftsdk/auth";
 import LogOut from "../General/Logout";
 
-String.prototype.image_format = function() {
+String.prototype.image_format = function () {
   let arr = this.split("_");
 
-  arr = arr.map(item =>
+  arr = arr.map((item) =>
     item.replace(item.charAt(0), item.charAt(0).toUpperCase())
   );
 
@@ -16,9 +16,9 @@ String.prototype.image_format = function() {
 };
 
 function importAll(r) {
-  let image_name = r.keys().map(item => item.slice(2).split(".")[0]); // remove './' from the image name
+  let image_name = r.keys().map((item) => item.slice(2).split(".")[0]); // remove './' from the image name
 
-  image_name = image_name.map(item => {
+  image_name = image_name.map((item) => {
     if (item == "ar_pr") {
       return "AR/PR";
     }
@@ -44,7 +44,7 @@ const images = importAll(
   require.context("../../static/icon/svg", false, /\.(png|jpe?g|svg)$/)
 );
 
-const SidebarJSX = props => (
+const SidebarJSX = (props) => (
   <div className="sidebar">
     <div className="sidebar_logo sidebar_hide">
       <h1>Logo</h1>
@@ -52,7 +52,7 @@ const SidebarJSX = props => (
     <div className="sidebar_navs">
       <ul>
         <li>
-          <NavLink to="#">
+          <NavLink to="/dashboard">
             <img src={images["Dashboard"]} />
             <span className="sidebar_hide">Dashboard</span>
           </NavLink>
@@ -84,7 +84,7 @@ const SidebarJSX = props => (
           <span className="sidebar_hide">Collapse Panel</span>
         </li>
         <li className="base_options">
-          <NavLink to="setting">
+          <NavLink to="/setting">
             <img src={images["Setting"]} />
             <span className="sidebar_hide">Setting</span>
           </NavLink>

@@ -8,15 +8,16 @@ import listReducer from "./reducers/listReducer";
 import userReducer from "./reducers/userReducer";
 import poReducer from "./reducers/poReducer";
 import formReducer from "./reducers/formReducer";
+import customerReducer from "./reducers/customerReducer";
 
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 const initialState = getInitialStateRenderer();
-console.log(initialState);
+
 const reducer = combineReducers({
   user: userReducer,
-  dm: combineReducers({ list: listReducer }),
+  dm: combineReducers({ lists: listReducer, customers: customerReducer }),
   maintenance: combineReducers({ forms: formReducer }),
   purchase_order: poReducer,
 });

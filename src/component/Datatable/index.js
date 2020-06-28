@@ -9,10 +9,10 @@ const style = {
   flex: 1,
   overflow: "hidden",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 };
 
-Array.prototype.toUppperCase = function() {
+Array.prototype.toUppperCase = function () {
   let tempArray = [];
   for (let string of this) {
     tempArray.push(string.charAt(0).toLocaleUpperCase() + string.slice(1));
@@ -20,21 +20,17 @@ Array.prototype.toUppperCase = function() {
   return tempArray;
 };
 
-const Datatable = props =>
-  !props.loading && !(Object.keys(props.data).length == 0) ? (
+const Datatable = (props) =>
+  !props.loading && props.data && !(Object.keys(props.data).length == 0) ? (
     <DatatableContainer
       data={Object.values(props.data)}
       tableName={props.tableName}
       key={props.tableName}
       navigate={props.navigate}
+      hideHeaderNav={props.hideHeaderNav}
+      hideContext={props.hideContext}
     />
   ) : !props.loading ? (
-    <Empty
-      tableName={props.tableName}
-      navigate={props.navigate}
-      link={
-        props.tableName.charAt(0).toLocaleUpperCase() + props.tableName.slice(1)
-      }
-    />
+    <Empty tableName={props.tableName} navigate={props.navigate} />
   ) : null;
 export default Datatable;

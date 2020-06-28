@@ -1,0 +1,37 @@
+@import '../../static/theme'
+
+#contextMenu
+  position: absolute
+  display: block
+  background: white
+  box-shadow: 0px 0px 19px -1px rgba(0,0,0,0.16)
+  min-width: 220px
+  border-radius: 5px
+
+  ul
+    display: flex
+    flex-direction: column
+    font-family: "Source Sans Pro"
+    list-style-type: none
+    justify-content: center
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+    padding: 10px 0px
+
+    li
+      font-size: 14px
+      height: 35px
+      box-sizing: border-box
+      padding: 0px 20px
+      display: flex
+      align-items: center
+      font-weight: 500
+
+      &:hover
+        cursor: pointer
+        background: rgba(89,136,255,0.06)
+
+      &:first-child
+        border: none
+
+    &:last-child
+      margin-bottom: 0
