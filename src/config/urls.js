@@ -30,6 +30,7 @@ const DIST_URLS = {
 
   DATA_MAINTENANCE_WINDOW: `${BASE}#/database-maintenance/lists`,
   PURCHASE_ORDER_WINDOW: `${BASE}#/po`,
+  MANAGE_CONTACT_WINDOW: `${BASE}#/manage-contact`,
 };
 
 module.exports = DEV_URLS;
