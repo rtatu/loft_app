@@ -1,14 +1,46 @@
-import React from 'react'
+import React from "react";
+import "./safety.scss";
+import { groups } from "./mockdata";
 
-class SafetyFooter extends React.Component{
-  constructor(props){
-    super(props)
+const SafetyFooter = (props) => {
+  return (
+    <div className="safetycontainer">
+      <SafetyGroup {...props} />
+    </div>
+  );
+};
+
+class SafetyGroup extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
-  render(){
+  render() {
     return (
-      <div style={{height:'300px',overflowY:'auto',alignItems:'center'}}>Foot er</div>
-    )
+      <div className="safetygroupwrapper">
+        <div className="safety-heading">{this.props.heading}</div>
+        <div className="groupswrapper">
+          {groups.map((group, index) => {
+            if (index != groups.length - 1) {
+              return (
+                <div className="safety-card" key={group.id}>
+                  <img className="safety-image" src={group.src} />
+                  <div className="safety-name">{group.name}</div>
+                  <div className="safety-items">{group.items} Safety Items</div>
+                </div>
+              );
+            }else{
+              return(
+                <div className="safety-card add-container" key={group.id}>
+                  <img className="safety-image" src={group.src} />
+                  <div className="safety-name">{group.name}</div>
+                </div>
+              )
+            }
+          })}
+        </div>
+      </div>
+    );
   }
 }
-export default SafetyFooter
+export default SafetyFooter;

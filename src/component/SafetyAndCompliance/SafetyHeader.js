@@ -14,7 +14,14 @@ import ActionContext from "../General/Buttons/ActionContext";
 class SafetyHeader extends React.Component {
   render() {
     return (
-      <div style={{display:'flex',alignItems:'center',justifyContent:'space-around'}}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+          marginLeft: '10px',
+        }}
+      >
         <Header label={this.props.title} />
         <SearchBar
           style={{
@@ -29,7 +36,7 @@ class SafetyHeader extends React.Component {
             marginLeft: "auto",
           }}
         >
-          <PrimaryButton text={"Add New Item"} onPress={()=>true} />
+          <PrimaryButton text={"Add New Item"} onPress={() => true} />
           <ActionContext />
         </div>
       </div>

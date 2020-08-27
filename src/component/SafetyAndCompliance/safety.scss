@@ -1,12 +1,105 @@
+.main-container{
+  padding: 20px 40px;
+  height: 100%;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #131d4a;
+    &:hover {
+      background: #8991a2;
+    }
+  }
+}
+.main-container::-webkit-scrollbar {
+  width: 3px;
+}
+.main-container::-webkit-scrollbar-track {
+  background: white;
+}
+.main-container::-webkit-scrollbar-thumb {
+  background: #131d4a;
+  &:hover {
+    background: #8991a2;
+  }
+}
+
 .safetywrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: visible;
   margin-top: 50px;
-  .safetyItem{
-    flex:1;
+  .safetyItem {
+    flex: 0.8;
     overflow-y: scroll;
+    border-bottom: 1px solid rgba(112,112,112,0.19);
+    border-top: 1px solid rgba(112,112,112,0.19);
+    margin-left: 10px;
+    &:nth-child(2) {
+      flex: 1;
+      border:none;
+      margin-left: 0;
+      padding-left: 10px;
+      overflow: visible;
+    }
+  }
+}
+
+.safetycontainer {
+  margin-top: 50px;
+  border-top: 1px solid rgba($color: #707070, $alpha: 0.21);
+  padding-top: 20px;
+}
+
+// Safety group component CSS
+
+.safetygroupwrapper {
+  flex: 1;
+  .safety-heading {
+    font-family: "Source Sans Pro";
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .groupswrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    .safety-card{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 220px;
+      margin-right: 50px;
+      font-family: "Source Sans Pro";
+      box-shadow: 0px 0px 7px rgba($color: #000000, $alpha: 0.08);
+      border-radius: 3px;
+      cursor: pointer;
+      .safety-image{
+        width: 70px;
+        height: 70px;
+      }
+      .safety-name{
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 20px;
+      }
+      .safety-items{
+        font-size: 0.7rem;
+        font-weight: 300;
+        margin-top: 5px;
+      }
+    }
+    .add-container{
+      color:#507df0;
+      border: 1px dashed #507df0;
+    }
   }
 }

@@ -8,12 +8,7 @@ import "./safety.scss";
 class SafetyAndCompliance extends React.Component {
   render() {
     return (
-      <div
-        style={{
-          padding: "20px 50px",
-          height: "100%",
-        }}
-      >
+      <div className="main-container">
         <SafetyHeader title={"Safety Items"} />
         <div className="safetywrapper">
           <div className="safetyItem">
@@ -27,7 +22,7 @@ class SafetyAndCompliance extends React.Component {
             />
           </div>
           <div className="safetyItem">
-            <SafetyFooter />
+            <SafetyFooter heading="Safety Groups" />
           </div>
         </div>
       </div>
