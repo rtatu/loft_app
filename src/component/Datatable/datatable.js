@@ -5,6 +5,7 @@ import DtConfig from "./datatable_config";
 import DTHEADER from "./datatable_header";
 import DatatableEvents from "./datatable_renderer_events";
 import ContextMenu from "../ContextMenu/ContextMenu";
+import { withRouter } from "react-router-dom";
 
 // proto for sum
 Array.prototype.sum = function () {
@@ -113,6 +114,8 @@ class DatatableContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props, "1111");
+
     if (this.props.data) {
       this.resizeEvent();
     }
@@ -220,6 +223,7 @@ class DatatableContainer extends React.Component {
   };
 
   render() {
+    console.log(this.props.tableName, "hellow");
     return (
       <div
         className="dt_container"
@@ -273,7 +277,13 @@ class DatatableContainer extends React.Component {
       if (customerId === null) return;
       DatatableEvents.manageContacts(customerId);
     }
+
+    if (type == "view") {
+      this.props.history.push(
+        `/database-maintenance/${this.props.navigate}/${this.props.tableName}/${this.state.context.idToBeSend}`
+      );
+    }
   };
 }
 
-export default DatatableContainer;
+export default withRouter(DatatableContainer);

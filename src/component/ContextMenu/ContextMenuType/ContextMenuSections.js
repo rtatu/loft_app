@@ -3,8 +3,8 @@ import { List } from "./Lists";
 
 const DataTableActions = [
   {
-    label: "Add New",
-    prop: "add",
+    label: "View",
+    prop: "view",
     icon: icons.add,
     params: "name",
     component: List,

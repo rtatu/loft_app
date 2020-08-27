@@ -110,17 +110,17 @@ const Truck = {
       component: Fields.Select,
     },
   ],
-  Notes: {
-    name: "notes",
-    defaultValue: [],
-    component: Fields.InputArrayHOC,
-    render: Fields.Notes,
-  },
-  History: {
-    name: "notes",
-    defaultValue: [],
-    component: Fields.Notes,
-  },
+  // Notes: {
+  //   name: "notes",
+  //   defaultValue: [],
+  //   component: Fields.InputArrayHOC,
+  //   render: Fields.Notes,
+  // },
+  // History: {
+  //   name: "notes",
+  //   defaultValue: [],
+  //   component: Fields.Notes,
+  // },
 };
 
 export default Truck;
