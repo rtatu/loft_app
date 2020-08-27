@@ -17,14 +17,21 @@ import DataMaintenanceScreen from "../screens/DataMaintenanceScreen";
 import ManageContactScreen from "../screens/ManageContactScreen";
 import UserManagementScreen from "../screens/UserManagementScreen";
 import SafetyScreen from "../screens/SafetyScreen"
+import DataTableViewScreen from "../screens/DataTableViewScreen";
 
 const Root = () => (
   <Router>
     <Route path="/login" exact component={Login} />
     <AuthenticatedRoute path="/" exact component={Home} />
     <AuthenticatedRoute
+      exact
       path="/database-maintenance/:navigate/:tableName?"
       component={DataMaintenanceScreen}
+    />
+    <AuthenticatedRoute
+      exact
+      path="/database-maintenance/:navigate/:tableName/:id"
+      component={DataTableViewScreen}
     />
     <AuthenticatedRoute path="/empty" component={Empty} />
     <AuthenticatedRoute

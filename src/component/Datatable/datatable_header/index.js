@@ -37,6 +37,7 @@ export default {
     truck: Truck,
     trailer: Trailer,
     item: Item,
+    itemPricing: Item,
   },
   customers: {
     customer: Customer,

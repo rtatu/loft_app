@@ -15,6 +15,7 @@ import PO from "./po/po";
 import { Customer, ManageContacts, BillTo, Contact } from "./customers";
 import User from "./UserManagement";
 import Order from "./OrderEntry";
+import ItemPricing from "./pricing";
 
 export default {
   class: Class,
@@ -28,6 +29,7 @@ export default {
   location: Location,
   trailer: Trailer,
   item: Item,
+  itemPricing: ItemPricing,
   // po
   inventory: Inventory,
   issues: Issues,
