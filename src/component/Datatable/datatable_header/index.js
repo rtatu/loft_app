@@ -16,7 +16,15 @@ import Item from "./item";
 import { Customer, Contact, Billing } from "./customers";
 import User from "./UserManagement";
 import Order from "./OrderEntry";
+import Safety from './Safety'
 
+
+/**
+ * 
+ * lists - navigate
+ * class/driver/department/ - tableName
+ * 
+ */
 export default {
   lists: {
     class: Class,
@@ -42,4 +50,8 @@ export default {
   orderEntry: {
     order: Order,
   },
+  safetyAndCompliance : {
+    safety : Safety
+  }
+
 };

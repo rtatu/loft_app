@@ -144,6 +144,10 @@ const nav_bar = [
         path: "/vendor-management",
       },
       {
+        label: "Safety & Compliance",
+        path: "/safety-and-compliance",
+      },
+      {
         label: "Database Maintenance",
         path: "/database-maintenance/lists",
         event: RouteEvents["database_maintenance"],

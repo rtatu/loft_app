@@ -16,6 +16,7 @@ import OrderEntryScreen from "../screens/OrderEntryScreen";
 import DataMaintenanceScreen from "../screens/DataMaintenanceScreen";
 import ManageContactScreen from "../screens/ManageContactScreen";
 import UserManagementScreen from "../screens/UserManagementScreen";
+import SafetyScreen from "../screens/SafetyScreen"
 
 const Root = () => (
   <Router>
@@ -41,6 +42,7 @@ const Root = () => (
       exact
       component={FormBuilderScreen}
     />
+    <AuthenticatedRoute path="/safety-and-compliance" exact component={SafetyScreen} />
     <AuthenticatedRoute
       path="/order-entry"
       exact
