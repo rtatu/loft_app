@@ -16,6 +16,7 @@ import { Customer, ManageContacts, BillTo, Contact } from "./customers";
 import User from "./UserManagement";
 import Order from "./OrderEntry";
 import ItemPricing from "./pricing";
+import Safety from "./Safety";
 
 export default {
   class: Class,
@@ -46,4 +47,5 @@ export default {
 
   // order entry
   order: Order,
+  "safety Item": Safety,
 };

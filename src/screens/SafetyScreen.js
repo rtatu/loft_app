@@ -1,5 +1,6 @@
 import React from "react";
 import SafetyAndCompliance from "../component/SafetyAndCompliance";
+import SafetyForm from "../component/SafetyAndCompliance/SafetyGroupForm";
 import Base from "../container/base";
 
 const SafetyScreen = (props) => {
@@ -10,4 +11,8 @@ const SafetyScreen = (props) => {
   );
 };
 
-export default SafetyScreen;
+const SafetyFormScreen = (props) => {
+  return <SafetyForm {...props} />;
+};
+
+export { SafetyScreen, SafetyFormScreen };

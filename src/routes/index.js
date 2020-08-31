@@ -16,7 +16,7 @@ import OrderEntryScreen from "../screens/OrderEntryScreen";
 import DataMaintenanceScreen from "../screens/DataMaintenanceScreen";
 import ManageContactScreen from "../screens/ManageContactScreen";
 import UserManagementScreen from "../screens/UserManagementScreen";
-import SafetyScreen from "../screens/SafetyScreen"
+import {SafetyScreen,SafetyFormScreen} from "../screens/SafetyScreen"
 import DataTableViewScreen from "../screens/DataTableViewScreen";
 
 const Root = () => (
@@ -50,6 +50,7 @@ const Root = () => (
       component={FormBuilderScreen}
     />
     <AuthenticatedRoute path="/safety-and-compliance" exact component={SafetyScreen} />
+    <AuthenticatedRoute path="/safety-group/:id?" exact component={SafetyFormScreen} />
     <AuthenticatedRoute
       path="/order-entry"
       exact

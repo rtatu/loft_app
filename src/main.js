@@ -116,7 +116,6 @@ class App {
   };
 
   urlResolver = (name, formName, id) => {
-    // console.log(formName, id);
     switch (name) {
       case "dataMaintenance":
         return URL.DATA_MAINTENANCE_WINDOW;
@@ -124,6 +123,9 @@ class App {
         return URL.PURCHASE_ORDER_WINDOW;
       case "manageContact":
         if (id) return `${URL.MANAGE_CONTACT_WINDOW}/${id}`;
+      case "safetyGroup":
+        if (id) return `${URL.SAFETY_GROUP}/${id}`;
+        return `${URL.SAFETY_GROUP}`;
       default:
         if (formName && id) return `${URL.FORM_WINDOW}/${formName}/${id}`;
         return `${URL.FORM_WINDOW}/${formName}`;

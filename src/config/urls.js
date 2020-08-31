@@ -16,6 +16,7 @@ const DEV_URLS = {
     "http://localhost:8000/#/database-maintenance/lists/class",
   PURCHASE_ORDER_WINDOW: "http://localhost:8000/#/po",
   MANAGE_CONTACT_WINDOW: "http://localhost:8000/#/manage-contact",
+  SAFETY_GROUP: "http://localhost:8000/#/safety-group",
 };
 
 const DIST_URLS = {
@@ -31,6 +32,7 @@ const DIST_URLS = {
   DATA_MAINTENANCE_WINDOW: `${BASE}#/database-maintenance/lists`,
   PURCHASE_ORDER_WINDOW: `${BASE}#/po`,
   MANAGE_CONTACT_WINDOW: `${BASE}#/manage-contact`,
+  SAFETY_GROUP: `${BASE}#/safety-group`,
 };
 
 module.exports = DEV_URLS;

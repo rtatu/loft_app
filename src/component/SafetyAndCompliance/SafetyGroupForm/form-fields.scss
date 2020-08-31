@@ -1,0 +1,17 @@
+.text-field{
+  padding:8px 0px;
+  width: 100%;
+  font-family:'Source Sans Pro';
+  font-weight: 400;
+  color: #131d4a;
+  position: relative;
+  .input-field{
+    width: 90%;
+    height: 100%;
+    outline:none;
+    border:none;
+    font-size: 0.7rem;
+    margin-left: 8px;
+    background:white;
+  }
+}

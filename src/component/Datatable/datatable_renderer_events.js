@@ -26,6 +26,14 @@ const DatatableEvents = {
       id,
     });
   },
+
+  addNewWindow: function (e,id) {
+    electronRenderer.send("create_new_window", {
+      url: `${URL.SAFETY_GROUP}/${id}`,
+      name: "safetyGroup",
+      id,
+    });
+  },
 };
 
 export default DatatableEvents;

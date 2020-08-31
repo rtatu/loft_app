@@ -1,19 +1,15 @@
 const Safety = [
   {
-    label: "Date",
-    prop: "date",
-  },
-  {
     label: "Safety Item",
     prop: "safetyItem",
   },
   {
-    label: "Description",
-    prop: "description",
+    label: "Status",
+    prop: "status",
   },
   {
-    label: "Associated With",
-    prop: "associatedWith",
+    label: "Affiliated With",
+    prop: "affiliatedWith",
   },
 ];
 

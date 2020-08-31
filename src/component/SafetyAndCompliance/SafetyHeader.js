@@ -36,7 +36,7 @@ class SafetyHeader extends React.Component {
             marginLeft: "auto",
           }}
         >
-          <PrimaryButton text={"Add New Item"} onPress={() => true} />
+          <PrimaryButton text={"Add New Item"} onPress={this.props.onPressAddNew} />
           <ActionContext />
         </div>
       </div>

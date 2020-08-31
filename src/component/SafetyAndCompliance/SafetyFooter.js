@@ -23,19 +23,27 @@ class SafetyGroup extends React.Component {
           {groups.map((group, index) => {
             if (index != groups.length - 1) {
               return (
-                <div className="safety-card" key={group.id}>
+                <div
+                  className="safety-card"
+                  key={group.id}
+                  onClick={(e) => this.props.manageGroup(e, group.id)}
+                >
                   <img className="safety-image" src={group.src} />
                   <div className="safety-name">{group.name}</div>
                   <div className="safety-items">{group.items} Safety Items</div>
                 </div>
               );
-            }else{
-              return(
-                <div className="safety-card add-container" key={group.id}>
+            } else {
+              return (
+                <div
+                  className="safety-card add-container"
+                  key={group.id}
+                  onClick={this.props.manageGroup}
+                >
                   <img className="safety-image" src={group.src} />
                   <div className="safety-name">{group.name}</div>
                 </div>
-              )
+              );
             }
           })}
         </div>

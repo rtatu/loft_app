@@ -1,0 +1,113 @@
+.tableWrapper {
+  margin: 50px auto;
+  width: 90%;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #131d4a;
+    &:hover {
+      background: #8991a2;
+    }
+  }
+}
+.table {
+  width: 100%;
+  max-width: 1114px;
+  border: 1px solid rgba(#707070, 0.13);
+  overflow: scroll;
+  max-height: 500px;
+  margin: auto;
+  .tablerow {
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    font-family: "Source Sans Pro";
+    .header-col {
+      font-size: 0.8rem;
+      color: #8991a2;
+      padding: 8px 0px 8px 8px;
+      text-transform: uppercase;
+      font-weight: 500;
+      background-color: #f6f8f9;
+      border-right: 1px solid rgba(#707070, 0.13);
+      border-bottom: 1px solid rgba(#707070, 0.13);
+      &:last-child {
+        border-right: none;
+      }
+    }
+    .add-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0px 8px 8px;
+      border-right: 1px solid rgba(#707070, 0.13);
+      height: 15px;
+      &:last-child {
+        border-right: none;
+      }
+      img {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+      }
+    }
+    .normal-col {
+      border-right: 1px solid rgba(#707070, 0.13);
+      border-bottom: 1px solid rgba(#707070, 0.13);
+      &:last-child {
+        border-right: none;
+      }
+    }
+    .small {
+      width: 70px;
+      min-width: 70px;
+      max-width: 70px;
+    }
+    .medium {
+      width: 140px;
+      min-width: 140px;
+      max-width: 140px;
+    }
+    .large {
+      width: 200px;
+      min-width: 200px;
+      max-width: 200px;
+    }
+    .col-small {
+      width: 78px;
+      min-width: 78px;
+      max-width: 78px;
+    }
+    .col-medium {
+      width: 148px;
+      min-width: 148px;
+      max-width: 148px;
+    }
+    .col-large {
+      width: 208px;
+      min-width: 208px;
+      max-width: 208px;
+    }
+  }
+}
+.tableWrapper::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+.tableWrapper::-webkit-scrollbar-track {
+  background: white;
+}
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #131d4a;
+  &:hover {
+    background: #8991a2;
+  }
+}
