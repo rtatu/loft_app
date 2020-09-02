@@ -9,6 +9,7 @@ import userReducer from "./reducers/userReducer";
 import poReducer from "./reducers/poReducer";
 import formReducer from "./reducers/formReducer";
 import customerReducer from "./reducers/customerReducer";
+import safetyReducer from "./reducers/safetyReducer";
 
 import logger from "redux-logger";
 import thunk from "redux-thunk";
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   dm: combineReducers({ lists: listReducer, customers: customerReducer }),
   maintenance: combineReducers({ forms: formReducer }),
   purchase_order: poReducer,
+  safety: safetyReducer,
 });
 const rendererStore = createStore(
   reducer,

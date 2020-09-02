@@ -18,7 +18,7 @@ const Empty = (props) => {
   return (
     <div className="empty">
       <div>
-        <img src={empty_data} />
+        <img src={empty_data} style={(props.tableName == 'safety Item')?{width:200,height:200}:{}} />
         <p>No data found here.</p>
 
         <NavLink

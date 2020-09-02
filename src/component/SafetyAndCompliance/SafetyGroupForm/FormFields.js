@@ -4,7 +4,7 @@ import Select from "./Select";
 
 const addBorder = (e) => {
   let parent = e.target.parentElement;
-  parent.style = "border: 1px solid #507df0;";
+  parent.style = "border-left: 3px solid #507df0;";
 };
 const removeBorder = (e) => {
   let parent = e.target.parentElement;
@@ -26,7 +26,6 @@ export const TextField = ({ ind, name, parentData, setData, change }) => {
         onChange={(e) => {
           setValue(e.target.value);
           parentData[ind][name] = e.target.value;
-          parentData[ind]["affiliatedWith"] = "TRAILER";
           setData(parentData);
         }}
         onFocus={addBorder}
@@ -92,26 +91,40 @@ export const SelectField = ({
   data,
   setData,
   change,
+  readOnly,
+  safetydata,
+  autofillProp,
+  disabled,
 }) => {
   const [value, setValue] = React.useState(parentData[ind][name]);
   React.useEffect(() => {
     setValue(parentData[ind][name]);
   }, [change]);
 
-  const changeValue = (val) => {
+  const changeValue = (val, aff = "TRUCK", id = null) => {
     setValue(val);
     parentData[ind][name] = val;
+    if (name == "safetyItem") {
+      parentData[ind]["affiliatedWith"] = aff;
+      parentData[ind]["safetyItemId"] = id;
+    }
     setData(parentData);
   };
+  const filledItem = Object.values(parentData)
+    .map((item, _) => item.safetyItem)
+    .filter((_, i) => i != ind);
   return (
     <div className="text-field" style={{ paddingTop: 0, paddingBottom: 0 }}>
       <Select
         label=""
         name={name}
-        readOnly
-        data={data}
+        readOnly={readOnly}
+        data={readOnly ? data : safetydata}
         value={value}
+        autofillProp={autofillProp}
         setValue={changeValue}
+        disabled={disabled}
+        filledItem={filledItem}
       />
     </div>
   );

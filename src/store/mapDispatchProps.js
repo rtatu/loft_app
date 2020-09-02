@@ -5,6 +5,8 @@ const {
   updateInCustomer,
 } = require("./actions/customerAction");
 
+const { addSafety, fetchSafety,updateSafety } = require("./actions/safetyAction");
+
 const getActionForDispatch = (dispatch, navigate, tableName) => {
   switch (navigate) {
     case "lists":
@@ -22,6 +24,13 @@ const getActionForDispatch = (dispatch, navigate, tableName) => {
         initFetch: () => dispatch(fetchCustomer),
         update: (data) =>
           dispatch((dispatch) => updateInCustomer(dispatch, tableName, data)),
+      };
+    case "safetyAndCompliance":
+      return {
+        add: (data) => dispatch((dispatch) => addSafety(dispatch, data)),
+        initFetch: () => dispatch(fetchSafety),
+        update: (data) =>
+          dispatch((dispatch) => updateSafety(dispatch, data)),
       };
     default:
       return {};

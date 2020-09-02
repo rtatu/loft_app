@@ -16,9 +16,14 @@
     }
   }
 }
+.name-wrapper{
+  width: 200px;
+  margin-bottom: 30px;
+  margin-left: 3px;
+}
 .table {
   width: 100%;
-  max-width: 1114px;
+  max-width: 1115px;
   border: 1px solid rgba(#707070, 0.13);
   overflow: scroll;
   max-height: 500px;
@@ -95,6 +100,21 @@
       width: 208px;
       min-width: 208px;
       max-width: 208px;
+    }
+    .delete-row{
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      z-index: 100;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+      visibility: hidden;
+    }
+    &:hover{
+      .delete-row{
+        visibility: visible;
+      }
     }
   }
 }

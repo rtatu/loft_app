@@ -8,7 +8,6 @@ class Select extends React.Component {
   constructor(props) {
     super(props);
     // create refs
-
     try {
       this.sug = this.props.readOnly
         ? this.props.data
@@ -87,12 +86,18 @@ class Select extends React.Component {
       left,
       width,
     } = e.target.parentElement.getBoundingClientRect();
-    document.getElementsByClassName('table')[0].style ='overflow:hidden;'
-    this.setState({ show: true, style: { top: top + height, left, width } });
+    document.getElementsByClassName("table")[0].style = "overflow:hidden;";
+    let suggestions = this.sug;
+    if (this.props.name == "safetyItem") {
+      suggestions = suggestions.filter(
+        (item) => this.props.filledItem.indexOf(item.safetyItem) < 0
+      );
+    }
+    this.setState({ show: true,suggestions, style: { top: top + height, left, width } });
   };
 
   onInputBlur = (e) => {
-    document.getElementsByClassName('table')[0].style ='overflow:scroll;'
+    document.getElementsByClassName("table")[0].style = "overflow:scroll;";
     this.setState(
       { show: false, select: -1 },
       this.pushChange(this.state.value)
@@ -120,6 +125,11 @@ class Select extends React.Component {
       });
     } else {
       suggestions = d.sort().filter((v) => regex.test(v));
+    }
+    if (this.props.name == "safetyItem") {
+      suggestions = suggestions.filter(
+        (item) => this.props.filledItem.indexOf(item.safetyItem) < 0
+      );
     }
 
     this.setState({ value, suggestions, select: 0, id, fillValue });
@@ -149,7 +159,13 @@ class Select extends React.Component {
     if (inputText != "") {
       this.handleSuggestions(inputText);
     } else {
-      this.setState({ value: "", select: -1, suggestions: this.sug });
+      let suggestions = this.sug;
+      if (this.props.name == "safetyItem") {
+        suggestions = suggestions.filter(
+          (item) => this.props.filledItem.indexOf(item.safetyItem) < 0
+        );
+      }
+      this.setState({ value: "", select: -1, suggestions });
     }
   };
 
@@ -205,6 +221,16 @@ class Select extends React.Component {
   };
 
   pushChange = (value) => {
+    const { name, suggestions } = this.state;
+    if (name == "safetyItem") {
+      let aff = suggestions.filter((item) => {
+        return item.safetyItem == value;
+      })[0];
+      let affiliated = aff && aff["affiliatedWith"];
+      let id = aff && aff.id;
+      this.props.setValue(value, affiliated, id);
+      return;
+    }
     this.props.setValue(value);
   };
 
@@ -224,14 +250,20 @@ class Select extends React.Component {
           name={this.props.name}
           disabled={this.props.disabled}
         />
-        <img
-          src={down}
-          className="safety-select-down"
-          onMouseDown={this.onDownClick}
-          ref={this.dropDown}
-        />
+        {this.props.name != "affiliatedWith" && (
+          <img
+            src={down}
+            className="safety-select-down"
+            onMouseDown={this.onDownClick}
+            ref={this.dropDown}
+          />
+        )}
         {this.state.show ? (
-          <ul className="safety-select" style={this.state.style} ref={this.list}>
+          <ul
+            className="safety-select"
+            style={this.state.style}
+            ref={this.list}
+          >
             {this.state.suggestions.map((value, index) => (
               <li
                 key={index}

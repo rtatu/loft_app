@@ -4,8 +4,23 @@ const Safety = {
   General: [
     {
       label: "Name",
-      name: "itemName",
+      name: "safetyItem",
       component: Fields.Text,
+      validation: [
+        {
+          type: "DEFAULT",
+          errorMessage: "It should be string.",
+        },
+        {
+          type: "UNIQUE_VALIDATION",
+          errorMessage: "Value should be unique.",
+          path: "data",
+        },
+        {
+          type: "REQUIRED",
+          errorMessage: "This field is required.",
+        },
+      ],
     },
     {
       label: "Affiliated With",

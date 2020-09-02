@@ -52,7 +52,7 @@ export default {
     order: Order,
   },
   safetyAndCompliance : {
-    safety : Safety
+    "safety Item" : Safety
   }
 
 };

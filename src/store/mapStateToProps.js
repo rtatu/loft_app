@@ -28,6 +28,11 @@ const getStoreForState = (store, navigate, tableName, id, nextId) => {
               store.dm[navigate]["data"]["customer"][id],
         lists: store.dm && store.dm["lists"] && store.dm["lists"]["data"],
       };
+    case "safetyAndCompliance":
+      return {
+        datastore:store.safety,
+        data: store.safety.data[id],
+      };
     default:
       return {};
   }

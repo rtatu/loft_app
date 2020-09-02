@@ -4,7 +4,9 @@ export const header = [
     label:'Safety Item',
     name:'safetyItem',
     style:'medium',
-    type:'text'
+    type:'select',
+    readOnly:false,
+    autofillProp:'safetyItem'
   },
   {
     id:2,
@@ -26,7 +28,8 @@ export const header = [
     name:'mileageUnit',
     style:'medium',
     type:'select',
-    data:['KM','MILES']
+    data:['KM','MILES'],
+    readOnly:true
   },
   {
     id:5,
@@ -41,7 +44,8 @@ export const header = [
     name:'periodUnit',
     style:'medium',
     type:'select',
-    data:['DAYS','WEEKS','MONTHS','YEARS']
+    data:['DAYS','WEEKS','MONTHS','YEARS'],
+    readOnly:true
   },
   {
     id:7,
@@ -56,7 +60,9 @@ export const header = [
     name:'affiliatedWith',
     style:'medium',
     type:'select',
-    data:['TRUCK','TRAILER','CHASIS','CONTAINER','DRIVER']
+    data:['TRUCK','TRAILER','CHASIS','CONTAINER','DRIVER'],
+    readOnly:true,
+    disabled:true
   },
 ]
 

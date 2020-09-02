@@ -17,6 +17,7 @@ const listReducer = require("./reducers/listReducer");
 const poReducer = require("./reducers/poReducer");
 const formReducer = require("./reducers/formReducer");
 const customerReducer = require("./reducers/customerReducer");
+const safetyReducer = require("./reducers/safetyReducer");
 
 const initialState = {
   user: {
@@ -48,6 +49,12 @@ const initialState = {
       data: null,
     },
   },
+  safety: {
+    data: null,
+    loading: true,
+    groups:null,
+    groupsloading:true
+  },
 };
 
 const reducer = combineReducers({
@@ -55,6 +62,7 @@ const reducer = combineReducers({
   dm: combineReducers({ lists: listReducer, customers: customerReducer }),
   maintenance: combineReducers({ forms: formReducer }),
   purchase_order: poReducer,
+  safety: safetyReducer,
 });
 
 const mainStore = createStore(
