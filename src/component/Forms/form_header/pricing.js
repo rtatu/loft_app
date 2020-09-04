@@ -4,32 +4,62 @@ const ItemPricing = {
   General: [
     {
       label: "Item",
-      name: "item",
+      name: "itemTitle",
       component: Fields.Select,
       autoprop: "datastore.item",
       autofillProp: "name",
+      validation: [
+        {
+          type: "DEFAULT_REQUIRED",
+          errorMessage: "This field is required.",
+        }
+      ],
     },
     {
       label: "Manufacturer",
       name: "manufacturer",
       component: Fields.Text,
+      validation: [
+        {
+          type: "DEFAULT_REQUIRED",
+          errorMessage: "This field is required.",
+        },
+      ],
     },
     {
       label: "Vendor",
-      name: "vendor",
+      name: "vendorName",
       component: Fields.Select,
       autoprop: "datastore.vendor",
       autofillProp: "name",
+      validation: [
+        {
+          type: "REQUIRED",
+          errorMessage: "This field is required.",
+        },
+      ],
     },
     {
-      label: "Quotation Data",
-      name: "quotationData",
+      label: "Quotation Date",
+      name: "quotationDate",
       component: Fields.Date,
+      validation: [
+        {
+          type: "REQUIRED",
+          errorMessage: "This field is required.",
+        },
+      ],
     },
     {
       label: "Price",
       name: "price",
       component: Fields.Text,
+      validation: [
+        {
+          type: "REQUIRED",
+          errorMessage: "This field is required.",
+        },
+      ],
     },
     {
       label: "Price Unit",
@@ -51,17 +81,21 @@ const ItemPricing = {
       defaultValue: "YES",
     },
     {
-      label: "WarrantyProvidedBy",
-      name: "warrantyProvidedBy",
+      label: "Warranty Provider",
+      name: "warrantyProvider",
       component: Fields.Select,
       data: ["VENDOR", "MANUFACTURER"],
       readOnly: true,
       defaultValue: "VENDOR",
+      disabledOn: ["warrantyAvailable"],
+      expectedValues:["NO"],
     },
     {
       label: "Period",
       name: "period",
       component: Fields.Text,
+      disabledOn: ["warrantyAvailable"],
+      expectedValues:["NO"],
     },
     {
       label: "Period Unit",
@@ -70,11 +104,15 @@ const ItemPricing = {
       data: ["DAYS", "WEEKS", "MONTHS", "YEARS"],
       readOnly: true,
       defaultValue: "DAYS",
+      disabledOn: ["warrantyAvailable"],
+      expectedValues:["NO"],
     },
     {
       label: "Mileage",
       name: "mileage",
       component: Fields.Text,
+      disabledOn: ["warrantyAvailable"],
+      expectedValues:["NO"],
     },
     {
       label: "Mileage Unit",
@@ -83,6 +121,8 @@ const ItemPricing = {
       data: ["KM", "MILES"],
       readOnly: true,
       defaultValue: "KM",
+      disabledOn: ["warrantyAvailable"],
+      expectedValues:["NO"],
     },
     {
       label: "Notes",

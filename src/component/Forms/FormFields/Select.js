@@ -242,6 +242,7 @@ class Select extends React.Component {
             ))}
           </ul>
         ) : null}
+        {this.props.error ? <p className="form-error">{error}</p> : null}
       </div>
     );
   }

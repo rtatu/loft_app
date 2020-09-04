@@ -84,7 +84,7 @@ const ConditionalWrapper = (data, item, props, values) =>
               nested_item.autoFillAnotherProps.with
             }
             error={getIn(props.errors, `${item}.${nested_item.name}`)}
-            disabled={checkDisable(nested_item.disabledOn, values[`${item}`])}
+            disabled={checkDisable(nested_item.disabledOn, values[`${item}`], nested_item.expectedValues)}
           />
         </Component>
       ))}

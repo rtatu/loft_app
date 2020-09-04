@@ -22,11 +22,11 @@ function retreiveDatastoreData(item, datastore, values) {
   }
 }
 
-function checkDisable(disabledProperties, values) {
+function checkDisable(disabledProperties, values, expectedValues = null) {
   let disabled = false;
   if (!disabledProperties) return false;
-  disabledProperties.forEach((item) => {
-    if (values[item] == "") {
+  disabledProperties.forEach((item, i) => {
+    if (values[item] == (expectedValues ? expectedValues[i] : "")) {
       disabled = true;
     }
   });

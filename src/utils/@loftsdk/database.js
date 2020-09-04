@@ -103,10 +103,11 @@ class Database {
           .then(
             axios.spread(function (...res) {
               let result = {};
-              let data = res.map((item, i) => {
+              res.map((item, i) => {
                 if (!item.data) reject("error occurred");
                 result[lists[i]] = normalize(item.data);
               });
+              console.log(result)
               resolve(result);
             })
           )

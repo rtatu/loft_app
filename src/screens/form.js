@@ -56,7 +56,7 @@ const setWindowTitle = (data, tableName) => {
 
   electronRemote
     .getCurrentWindow()
-    .setTitle(`Edit ${tb} :- ${data.name || data.unitNo || data.safetyItem}`);
+    .setTitle(`Edit ${tb} :- ${data.name || data.unitNo || data.safetyItem || data.itemTitle}`);
 };
 
 const mapStateToProps = (state, ownProps) => {

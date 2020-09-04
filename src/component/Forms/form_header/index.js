@@ -17,6 +17,7 @@ import User from "./UserManagement";
 import Order from "./OrderEntry";
 import ItemPricing from "./pricing";
 import Safety from "./Safety";
+import Vendor from "./vendor";
 
 export default {
   class: Class,
@@ -31,6 +32,7 @@ export default {
   trailer: Trailer,
   item: Item,
   itemPricing: ItemPricing,
+  vendor: Vendor,
   // po
   inventory: Inventory,
   issues: Issues,

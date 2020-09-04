@@ -9,6 +9,8 @@ const lists = [
   "truck",
   "trailer",
   "item",
+  "itemPricing",
+  "vendor"
 ];
 
 const po = ["inventory", "po", "issue"];

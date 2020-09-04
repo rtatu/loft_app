@@ -10,6 +10,7 @@ import Service from "./service";
 import Truck from "./truck";
 import Trailer from "./trailer";
 import Item from "./item";
+import ItemPricing from './itempricing'
 
 // import header for customer
 
@@ -17,6 +18,7 @@ import { Customer, Contact, Billing } from "./customers";
 import User from "./UserManagement";
 import Order from "./OrderEntry";
 import Safety from './Safety'
+import Vendor from "./vendor";
 
 
 /**
@@ -37,7 +39,8 @@ export default {
     truck: Truck,
     trailer: Trailer,
     item: Item,
-    itemPricing: Item,
+    itemPricing: ItemPricing,
+    vendor: Vendor
   },
   customers: {
     customer: Customer,

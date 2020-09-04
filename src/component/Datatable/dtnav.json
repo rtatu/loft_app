@@ -3,6 +3,7 @@
     "Class",
     "Department",
     "Driver",
+    "Vendor",
     "Location",
     "Payterm",
     "Item",
