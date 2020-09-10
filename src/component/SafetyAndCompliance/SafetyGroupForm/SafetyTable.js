@@ -26,13 +26,16 @@ class SafetyTable extends React.Component {
 
   componentDidMount() {
     this.resizeWindow("init");
-    this.setUpdateData()
+    this.setUpdateData();
+    console.log(this.props);
   }
 
   setUpdateData = () => {
     this.id = this.props.match.params.id;
     let editItem =
-      !!this.id && JSON.parse(JSON.stringify(this.props.groups[this.id]));
+      !!this.id &&
+      this.id != "truck" &&
+      JSON.parse(JSON.stringify(this.props.groups[this.id]));
     let row = [];
     let data = [];
     !!editItem &&
@@ -68,7 +71,7 @@ class SafetyTable extends React.Component {
       err = "Invalid Safety Item";
     } else if (data.description.trim() == "") {
       err = "Description can't be empty";
-    } else if (data.mileage <= 0 && period <=0) {
+    } else if (data.mileage <= 0 && period <= 0) {
       err = "Mileage or period should be greater than zero";
     }
     return err;
@@ -148,9 +151,9 @@ class SafetyTable extends React.Component {
       err = this.validateRow(i);
       if (err != "") {
         break;
-      }else{
-        this.data[i]['mileage']= parseFloat(this.data[i]['mileage'])
-        this.data[i]['period']= parseFloat(this.data[i]['period'])
+      } else {
+        this.data[i]["mileage"] = parseFloat(this.data[i]["mileage"]);
+        this.data[i]["period"] = parseFloat(this.data[i]["period"]);
       }
     }
     if (this.state.name == "") {
@@ -173,13 +176,23 @@ class SafetyTable extends React.Component {
           }
         });
       } else {
-        this.props
-          .updateSafetyGroup({ ...data, id: parseInt(this.id) })
-          .then((res) => {
+        let truckId = this.props.match.params.truckId;
+        if (truckId) {
+          data["truckId"] = truckId;
+          this.props.addSafetyGroup(data).then((res) => {
             if (res) {
               electronRemote.getCurrentWindow().close();
             }
           });
+        } else {
+          this.props
+            .updateSafetyGroup({ ...data, id: parseInt(this.id) })
+            .then((res) => {
+              if (res) {
+                electronRemote.getCurrentWindow().close();
+              }
+            });
+        }
       }
     }
   };

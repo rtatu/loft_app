@@ -49,6 +49,10 @@ class Form extends React.Component {
 
 const setWindowTitle = (data, tableName) => {
   let tb = tableName.charAt(0).toUpperCase() + tableName.slice(1);
+  if (tableName == "odometer") {
+    electronRemote.getCurrentWindow().setTitle(`Update odometer`);
+    return;
+  }
   if (!data) {
     electronRemote.getCurrentWindow().setTitle(`Add New ${tb}`);
     return;
@@ -56,7 +60,11 @@ const setWindowTitle = (data, tableName) => {
 
   electronRemote
     .getCurrentWindow()
-    .setTitle(`Edit ${tb} :- ${data.name || data.unitNo || data.safetyItem || data.itemTitle}`);
+    .setTitle(
+      `Edit ${tb} :- ${
+        data.name || data.unitNo || data.safetyItem || data.itemTitle
+      }`
+    );
 };
 
 const mapStateToProps = (state, ownProps) => {

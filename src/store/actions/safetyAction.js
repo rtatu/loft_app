@@ -39,6 +39,13 @@ const addSafetyGroup = async (dispatch, data) => {
     let result = await new Database().ref(safetyGroupPath).create(data);
     let res = normalize(result.response);
     dispatch({ type: Action.ADD_SAFETY_GROUP, payload: res });
+    if (data.truckId) {
+      let groupId = Object.keys(res)[0]
+      dispatch({
+        type: Action.ADD_SAFETY_GROUP_TO_TRUCK,
+        payload: { truckId: data.truckId, groupId },
+      });
+    }
     return true;
   } catch (error) {
     console.log(error);
@@ -80,5 +87,5 @@ module.exports = {
   updateSafety,
   fetchSafetyGroups,
   addSafetyGroup,
-  updateSafetyGroup
+  updateSafetyGroup,
 };

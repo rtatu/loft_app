@@ -104,10 +104,10 @@ class App {
 
   registerIpcChannels = () => {
     ipcMain.on("create_new_window", (event, data) => {
-      let { width, height, url, name, formName, id } = data;
+      let { width, height, url, name, formName, id,truckId } = data;
       if (!url) console.error("no url provided for creating window");
       if (!name) console.error("no name provided for window");
-      url = this.urlResolver(name, formName, id) || url;
+      url = this.urlResolver(name, formName, id,truckId) || url;
 
       this.createWindow(width, height, url, name);
     });
@@ -115,7 +115,7 @@ class App {
     EVENTS.keytarTokenEvent();
   };
 
-  urlResolver = (name, formName, id) => {
+  urlResolver = (name, formName, id, truckId) => {
     switch (name) {
       case "dataMaintenance":
         return URL.DATA_MAINTENANCE_WINDOW;
@@ -124,8 +124,13 @@ class App {
       case "manageContact":
         if (id) return `${URL.MANAGE_CONTACT_WINDOW}/${id}`;
       case "safetyGroup":
+        if (truckId) return `${URL.SAFETY_GROUP}/truck/${truckId}`;
         if (id) return `${URL.SAFETY_GROUP}/${id}`;
         return `${URL.SAFETY_GROUP}`;
+      case "assignSafety":
+        if (truckId) return `${URL.ASSIGN_SAFETY}/truck/${truckId}`;
+        if (id) return `${URL.ASSIGN_SAFETY}/${id}`;
+        return `${URL.ASSIGN_SAFETY}`;
       default:
         if (formName && id) return `${URL.FORM_WINDOW}/${formName}/${id}`;
         return `${URL.FORM_WINDOW}/${formName}`;

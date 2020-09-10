@@ -53,6 +53,35 @@ const removeFromList = async (dispatch, ref, data) => {
   }
 };
 
+const updateOdometer = async (dispatch, tableName, data) => {
+  try {
+    let result = await new Database()
+      .ref(archivePath + tableName + "/updateOdometer")
+      .set(data);
+    let payload = {
+      tableName,
+      data: result.response,
+    };
+    dispatch({ type: Action.UPDATE_IN_LIST, payload });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const addSafetyGroupsToTrucks = async (dispatch, data) => {
+  try {
+    await new Database().ref(archivePath + "truck" + "/linkGroups").create(data);
+    let payload = {
+      truckId: data.truckId,
+      ids: data.ids,
+    };
+    dispatch({ type: Action.ADD_MULTIPLE_SAFETY_GROUP_TO_TRUCK, payload });
+    return true;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const FormatDataForPricing = (data, add = false) => {
   for (let key in data.warranty) {
     data[key] = data.warranty[key];
@@ -76,4 +105,11 @@ const FormatDataForPricing = (data, add = false) => {
   return add ? arr : data;
 };
 
-module.exports = { fetchList, addToList, updateInList, removeFromList };
+module.exports = {
+  fetchList,
+  addToList,
+  updateInList,
+  removeFromList,
+  updateOdometer,
+  addSafetyGroupsToTrucks
+};

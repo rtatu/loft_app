@@ -1,0 +1,135 @@
+@import "../../static/theme";
+
+.choose-container {
+  width: 100%;
+  height: 100%;
+  font-family: "Source Sans Pro";
+
+  h1 {
+    color: $primary-color-hex;
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: 25px;
+  }
+}
+
+.choose-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+  margin-top: 25px;
+}
+
+.choose-block-child {
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 50px;
+  padding: 20px;
+  border: 1px solid rgba(80, 125, 240, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px -6px rgba(80, 125, 240, 0.1);
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  span {
+    font-size: 13px;
+    margin-top: 5px;
+    color: $primary-color-hex;
+    text-align: center;
+    font-weight: 600;
+    &:last-child {
+      font-size: 13px;
+      color: #707070;
+      font-weight: 300;
+    }
+  }
+
+  &:hover {
+    border: 1px solid rgba(80, 125, 240, 1);
+    cursor: pointer;
+  }
+}
+button.assigncontinue {
+  border: 1px solid rgba(80, 125, 240, 1);
+  color: #507df0;
+  outline: none;
+  width: 200px;
+  height: 40px;
+  -webkit-appearance: none;
+  background: white;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.listWrapper {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Source Sans Pro";
+  overflow-y: auto;
+  margin-left: 40px;
+  h1 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    color: #131d4a;
+  }
+  .selectRow {
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    padding-left: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+    .groupName {
+      font-size: 12px;
+      font-weight: 300;
+      color: #707070;
+      margin-left: 10px;
+    }
+  }
+}
+
+.buttonsave {
+  background: none;
+  border: none;
+  font-family: "Source Sans Pro";
+  font-weight: 500;
+  width: 160px;
+  border-radius: 2px;
+  height: 40px;
+  margin:0px 20px 0px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+  color: rgba(89, 136, 255, 1);
+  background: rgba(89, 136, 255, 0.2);
+
+  &:hover {
+    background: rgba(89, 136, 255, 0.3);
+  }
+  &:focus {
+    outline: none;
+    border: 1px solid rgba(89, 136, 255, 1);
+  }
+}

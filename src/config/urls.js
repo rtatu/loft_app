@@ -17,6 +17,7 @@ const DEV_URLS = {
   PURCHASE_ORDER_WINDOW: "http://localhost:8000/#/po",
   MANAGE_CONTACT_WINDOW: "http://localhost:8000/#/manage-contact",
   SAFETY_GROUP: "http://localhost:8000/#/safety-group",
+  ASSIGN_SAFETY: "http://localhost:8000/#/assign-safety"
 };
 
 const DIST_URLS = {
@@ -33,6 +34,7 @@ const DIST_URLS = {
   PURCHASE_ORDER_WINDOW: `${BASE}#/po`,
   MANAGE_CONTACT_WINDOW: `${BASE}#/manage-contact`,
   SAFETY_GROUP: `${BASE}#/safety-group`,
+  ASSIGN_SAFETY: `${BASE}#/assign-safety`
 };
 
 module.exports = DEV_URLS;

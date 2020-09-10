@@ -22,15 +22,21 @@ function retreiveDatastoreData(item, datastore, values) {
   }
 }
 
-function checkDisable(disabledProperties, values, expectedValues = null) {
-  let disabled = false;
+function checkDisable(
+  disabledProperties,
+  values,
+  expectedValues = null,
+  disabled
+) {
+  let tempdisabled = false;
+  if (disabled) return true;
   if (!disabledProperties) return false;
   disabledProperties.forEach((item, i) => {
     if (values[item] == (expectedValues ? expectedValues[i] : "")) {
-      disabled = true;
+      tempdisabled = true;
     }
   });
-  return disabled;
+  return tempdisabled;
 }
 
 function showOn(showOnProperties, values) {
@@ -45,6 +51,18 @@ function showOn(showOnProperties, values) {
 
   return show;
 }
+function formatDate(date){
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
 
 export default get_In;
-export { checkDisable, showOn, retreiveDatastoreData };
+export { checkDisable, showOn, retreiveDatastoreData,formatDate };

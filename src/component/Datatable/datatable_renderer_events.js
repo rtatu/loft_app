@@ -27,12 +27,31 @@ const DatatableEvents = {
     });
   },
 
-  addNewWindow: function (e,id) {
+  addNewWindow: function (e, id, truckId) {
     electronRenderer.send("create_new_window", {
-      url: `${URL.SAFETY_GROUP}/${id}`,
+      url: `${URL.SAFETY_GROUP}/${id}/${truckId}`,
       name: "safetyGroup",
       id,
+      truckId,
     });
+  },
+
+  assignSafetyGroups: function (e, id, truckId) {
+    if (truckId) {
+      electronRenderer.send("create_new_window", {
+        url: `${URL.ASSIGN_SAFETY}/truck/${truckId}`,
+        name: "assignSafety",
+        id,
+        truckId,
+      });
+    } else {
+      electronRenderer.send("create_new_window", {
+        url: `${URL.ASSIGN_SAFETY}/${id}/${truckId}`,
+        name: "assignSafety",
+        id,
+        truckId,
+      });
+    }
   },
 };
 

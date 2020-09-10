@@ -37,6 +37,9 @@ const config = {
     formikBag.setSubmitting(true);
     if (formikBag.props.data) {
       data["id"] = formikBag.props.data.id;
+      if(formikBag.props.formName == "odometer"){
+        data["truckId"] = formikBag.props.data.truckId;
+      }
       formikBag.props
         .update(data)
         .then((res) => {

@@ -30,8 +30,14 @@ const getStoreForState = (store, navigate, tableName, id, nextId) => {
       };
     case "safetyAndCompliance":
       return {
-        datastore:store.safety,
+        datastore: store.safety,
         data: store.safety.data[id],
+      };
+    case "truckOdometer":
+      let truck = store.dm.lists.data.truck[id];
+      let ob = { ...truck.truckOdometer, truckId: truck.id };
+      return {
+        data: ob,
       };
     default:
       return {};

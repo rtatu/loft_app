@@ -13,6 +13,8 @@ import event from "../static/dt-view/event.svg";
 // import
 import data from "./header/truck";
 import get_In from "../utils/data_functions";
+import DatatableEvents from "../component/Datatable/datatable_renderer_events";
+import Footer from "./footer";
 
 const ViewDetails = (props) => (
   <div className="vc-details">
@@ -32,51 +34,85 @@ const ViewDetails = (props) => (
   </div>
 );
 
-const ViewSummary = () => (
-  <div className="vcs-summary">
-    <h1>Log Audit Summary</h1>
+const ViewSummary = ({ data }) => {
+  const updateOdometer = () => {
+    DatatableEvents.editForm(
+      "truckOdometer/odometer",
+      "truckOdometer",
+      data.id
+    );
+  };
+  return (
+    <div className="vcs-summary">
+      <h1>Log Audit Summary</h1>
 
-    <div className="vcs-cards">
-      <div className="vcs-card">
-        <img src={compliance} />
-        <span>10 COMPLIANCE</span>
-      </div>
+      <div className="vcs-cards">
+        <div className="vcs-card">
+          <img src={compliance} />
+          <span>10 COMPLIANCE</span>
+        </div>
 
-      <div
-        className="vcs-card"
-        style={{
-          background: `linear-gradient(#2193b0 0%, #6dd5ed 100%)`,
-        }}
-      >
-        <img src={odometer} />
-        <span>300023 Miles</span>
-      </div>
+        <div
+          className="vcs-card"
+          style={{
+            background: `linear-gradient(#2193b0 0%, #6dd5ed 100%)`,
+          }}
+          onClick={updateOdometer}
+        >
+          <img src={odometer} />
+          <span>
+            {data.truckOdometer.odometer +
+              " " +
+              data.truckOdometer.odometerUnit}{" "}
+          </span>
+        </div>
 
-      <div
-        className="vcs-card"
-        style={{
-          background: `linear-gradient(#06beb6 0%, #48b1bf 100%)`,
-        }}
-      >
-        <img src={event} />
-        <span>10 EVENTS</span>
+        <div
+          className="vcs-card"
+          style={{
+            background: `linear-gradient(#06beb6 0%, #48b1bf 100%)`,
+          }}
+        >
+          <img src={event} />
+          <span>10 EVENTS</span>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const SafetyAndCompliance = () => (
-  <div>
-    <h1>Safety & Compliance</h1>
-  </div>
-);
 
 class DataTableView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount(){
+    this.props.fetchSafety()
+    this.props.fetchSafetyGroups()
+  }
+
+  manageGroup = (e,id) => {
+    if(id){
+      DatatableEvents.addNewWindow(e,id)
+      return
+    }
+    DatatableEvents.assignSafetyGroups(e,id,this.props.data.id)
+  }
   render() {
+    const { tableName } = this.props.match.params;
     return (
-      <div className="viewContainer">
+      <div className="viewContainer" style={{overflowY:"auto"}}>
         <ViewDetails data={this.props.data} />
-        <ViewSummary />
+        {tableName == "truck" ? <ViewSummary data={this.props.data} /> : null}
+        {tableName == "truck" ? (
+          <Footer
+            safety={this.props.safety}
+            heading={"Safety and Compliance"}
+            truckSafeties={this.props.data.truckSafeties}
+            manageGroup={this.manageGroup}
+          />
+        ) : null}
       </div>
     );
   }

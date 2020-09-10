@@ -18,12 +18,14 @@ import Order from "./OrderEntry";
 import ItemPricing from "./pricing";
 import Safety from "./Safety";
 import Vendor from "./vendor";
+import Odometer from './odometer'
 
 export default {
   class: Class,
   department: Department,
   payterm: PaymentTerm,
   truck: Truck,
+  odometer:Odometer,
   service: Service,
   terminal: Terminal,
   driver: Driver,
@@ -50,4 +52,5 @@ export default {
   // order entry
   order: Order,
   "safety Item": Safety,
+
 };

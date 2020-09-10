@@ -8,8 +8,11 @@ class SafetyForm extends React.Component{
 
   componentDidMount(){
     let id = this.props.match.params.id
-    let name = id && this.props.groups[id]['name']
+    let name = id && id!="truck" && this.props.groups[id]['name']
     if(!id){
+      electronRemote.getCurrentWindow().setTitle(`Add New Safety Group`)
+      return
+    }else if(id == 'truck'){
       electronRemote.getCurrentWindow().setTitle(`Add New Safety Group`)
       return
     }

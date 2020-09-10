@@ -1,11 +1,19 @@
-const { addToList, updateInList } = require("./actions/listAction");
+const {
+  addToList,
+  updateInList,
+  updateOdometer,
+} = require("./actions/listAction");
 const {
   createInCustomer,
   fetchCustomer,
   updateInCustomer,
 } = require("./actions/customerAction");
 
-const { addSafety, fetchSafety,updateSafety } = require("./actions/safetyAction");
+const {
+  addSafety,
+  fetchSafety,
+  updateSafety,
+} = require("./actions/safetyAction");
 
 const getActionForDispatch = (dispatch, navigate, tableName) => {
   switch (navigate) {
@@ -29,8 +37,12 @@ const getActionForDispatch = (dispatch, navigate, tableName) => {
       return {
         add: (data) => dispatch((dispatch) => addSafety(dispatch, data)),
         initFetch: () => dispatch(fetchSafety),
+        update: (data) => dispatch((dispatch) => updateSafety(dispatch, data)),
+      };
+    case "truckOdometer":
+      return {
         update: (data) =>
-          dispatch((dispatch) => updateSafety(dispatch, data)),
+          dispatch((dispatch) => updateOdometer(dispatch, 'truck', data)),
       };
     default:
       return {};

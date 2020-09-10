@@ -84,7 +84,9 @@ const ConditionalWrapper = (data, item, props, values) =>
               nested_item.autoFillAnotherProps.with
             }
             error={getIn(props.errors, `${item}.${nested_item.name}`)}
-            disabled={checkDisable(nested_item.disabledOn, values[`${item}`], nested_item.expectedValues)}
+            disabled={checkDisable(nested_item.disabledOn, values[`${item}`], nested_item.expectedValues,nested_item.disabled)}
+            min={nested_item.min}
+            max={nested_item.max}
           />
         </Component>
       ))}
